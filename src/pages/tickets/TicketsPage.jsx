@@ -27,7 +27,9 @@ export default function TicketsPage() {
           {!isLoading &&
             !error &&
             tickets.length > 0 &&
-            tickets.map((ticket) => <TicketCard ticket={ticket} />)}
+            tickets.map((ticket) => (
+              <TicketCard key={ticket.id} ticket={ticket} />
+            ))}
         </div>
       </div>
     </>

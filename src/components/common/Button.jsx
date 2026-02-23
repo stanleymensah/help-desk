@@ -1,4 +1,4 @@
-export const PrimaryButton = ({ name, type }) => {
+export const PrimaryButton = ({ name, type = "button" }) => {
   return (
     <>
       <button
@@ -11,7 +11,7 @@ export const PrimaryButton = ({ name, type }) => {
   );
 };
 
-export const SecondaryButton = ({ name , type}) => {
+export const SecondaryButton = ({ name, type = "button" }) => {
   return (
     <>
       <button

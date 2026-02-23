@@ -10,7 +10,7 @@ const initializeTickets = () => {
         description: "When I click the login button, nothing happens.",
         status: "open",
         priority: "high",
-        customerEmail: "john.doe@example.com",
+        email: "john.doe@example.com",
         createdAt: new Date().toISOString(),
       },
       {
@@ -19,7 +19,7 @@ const initializeTickets = () => {
         description: "It would be great to have a dark mode option.",
         status: "open",
         priority: "low",
-        customerEmail: "jane.smith@example.com",
+        email: "jane.smith@example.com",
         createdAt: new Date().toISOString(),
       },
       {
@@ -28,7 +28,7 @@ const initializeTickets = () => {
         description: "Requested a password reset 30 minutes ago.",
         status: "in-progress",
         priority: "high",
-        customerEmail: "mike.jones@example.com",
+        email: "mike.jones@example.com",
         createdAt: new Date().toISOString(),
       },
     ];
@@ -62,8 +62,8 @@ export const createTicket = async (newTicket) => {
   const ticket = {
     ...newTicket,
     id: Math.max(...allTickets.map((t) => t.id)) + 1,
-    createdAt: new Date.now().toISOString(),
-    updatedAt: new Date.now().toISOString(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
   allTickets.push(ticket);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(allTickets));
@@ -77,7 +77,7 @@ export const updateTicket = async (id, updates) => {
   const tickets = localStorage.getItem(STORAGE_KEY);
   const allTickets = JSON.parse(tickets);
 
-  const index = allTickets.find((t) => t.id === parseInt(id));
+  const index = allTickets.findIndex((t) => t.id === parseInt(id));
   if (index === -1) throw new Error("Ticket not found");
 
   allTickets[index] = {

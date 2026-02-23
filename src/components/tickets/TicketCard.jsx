@@ -6,7 +6,6 @@ export default function TicketCard({ ticket, onEdit, onDelete }) {
   return (
     <>
       <div
-        key={ticket.id}
         className="card flex items-center gap-4 border border-primary rounded-lg py-3 px-5 hover:shadow-md transition-shadow"
       >
         <div className="w-16 flex-shrink-0">
