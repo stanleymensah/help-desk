@@ -9,14 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function TicketsByStatusChart() {
-  //Sample Data
-  const data = [
-    { status: "Open", count: 430 },
-    { status: "In Progrss", count: 150 },
-    { status: "Resolved", count: 240 },
-  ];
-
+export default function TicketsByStatusChart({ data }) {
   return (
     <>
       <h2 className="text-xl font-bold mb-4">Tickets by Status</h2>

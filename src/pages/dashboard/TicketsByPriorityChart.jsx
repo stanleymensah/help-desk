@@ -7,14 +7,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function TicketsByPriorityChart() {
-  const data = [
-    { name: "Low", value: 15 },
-    { name: "Medium", value: 20 },
-    { name: "High", value: 10 },
-  ];
-
-  const COLORS = ["#3b82f6", "#fbbf24", "#f97316"];
+export default function TicketsByPriorityChart({ data }) {
+  const COLORS = ["teal", "red", "orange"];
 
   return (
     <>
@@ -42,6 +36,6 @@ export default function TicketsByPriorityChart() {
           <Legend />
         </PieChart>
       </ResponsiveContainer>
-      </>
+    </>
   );
 }

@@ -3,35 +3,7 @@ const STORAGE_KEY = "helpdesk_tickets";
 const initializeTickets = () => {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (!stored) {
-    const initialTickets = [
-      {
-        id: 1,
-        title: "Login button not working",
-        description: "When I click the login button, nothing happens.",
-        status: "open",
-        priority: "high",
-        email: "john.doe@example.com",
-        createdAt: new Date().toISOString(),
-      },
-      {
-        id: 2,
-        title: "Feature request: Dark mode",
-        description: "It would be great to have a dark mode option.",
-        status: "open",
-        priority: "low",
-        email: "jane.smith@example.com",
-        createdAt: new Date().toISOString(),
-      },
-      {
-        id: 3,
-        title: "Password reset email not received",
-        description: "Requested a password reset 30 minutes ago.",
-        status: "in-progress",
-        priority: "high",
-        email: "mike.jones@example.com",
-        createdAt: new Date().toISOString(),
-      },
-    ];
+    const initialTickets = [];
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initialTickets));
   }
