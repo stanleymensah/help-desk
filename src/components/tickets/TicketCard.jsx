@@ -5,9 +5,7 @@ import Badge from "../common/Badge";
 export default function TicketCard({ ticket, onEdit, onDelete }) {
   return (
     <>
-      <div
-        className="card flex items-center gap-4 border border-primary rounded-lg py-3 px-5 hover:shadow-md transition-shadow"
-      >
+      <div className="card flex items-center gap-4 border border-primary rounded-lg py-3 px-5 hover:shadow-md transition-shadow">
         <div className="w-16 flex-shrink-0">
           <span className="font-semibold text-gray-700">#{ticket.id}</span>
         </div>
@@ -29,7 +27,7 @@ export default function TicketCard({ ticket, onEdit, onDelete }) {
         </div>
 
         <div className="flex-shrink-0">
-            <Badge type="status" value={ticket.status} />
+          <Badge type="status" value={ticket.status} />
         </div>
 
         <div className="w-20 flex-shrink-0 text-right">
@@ -42,7 +40,10 @@ export default function TicketCard({ ticket, onEdit, onDelete }) {
           <button className="bg-green-50 hover:bg-green-100 p-2 rounded-lg text-green-600 transition-colors">
             <TbEdit size={18} />
           </button>
-          <button className="bg-red-50 hover:bg-red-100 p-2 rounded-lg text-red-600 transition-colors">
+          <button
+            onClick={() => onDelete(ticket.id)}
+            className="bg-red-50 hover:bg-red-100 p-2 rounded-lg text-red-600 transition-colors"
+          >
             <HiOutlineTrash size={18} />
           </button>
         </div>

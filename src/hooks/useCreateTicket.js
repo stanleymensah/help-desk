@@ -12,5 +12,5 @@ export default function useCreateTicket() {
     },
   });
 
-  return mutation; // returns { mutate, isLoading, error, etc. }
+  return mutation; // returns { mutate, isPending, error, etc. }
 }

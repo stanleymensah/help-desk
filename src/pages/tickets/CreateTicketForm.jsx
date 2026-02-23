@@ -4,6 +4,8 @@ import Input from "../../components/common/InputField";
 import Textarea from "../../components/common/Textarea";
 import Select from "../../components/common/Select";
 import useCreateTicket from "../../hooks/useCreateTicket";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function CreateTicketForm() {
   const {
@@ -13,7 +15,8 @@ export default function CreateTicketForm() {
     formState: { errors },
   } = useForm();
 
-  const { mutate: createTicket, isLoading, error } = useCreateTicket();
+  const { mutate: createTicket, isPending, error } = useCreateTicket();
+  const navigate = useNavigate();
 
   const priorityOptions = [
     { value: "low", label: "Low" },
@@ -29,10 +32,20 @@ export default function CreateTicketForm() {
         createdAt: new Date().toISOString(),
       },
       {
-        onSuccess: () => reset(),
+        onSuccess: async () => {
+          toast.success("Ticket created!", {
+            position: "top-center",
+            autoClose: 2000,
+          });
+          reset();
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          navigate("/tickets");
+        },
       },
     );
   };
+
+
   return (
     <>
       {error && <p className="text-red-500">{error.message}</p>}
@@ -46,7 +59,7 @@ export default function CreateTicketForm() {
                 type="text"
                 placeholder="Title"
                 register={register}
-                error={errors.ticketTitle}
+                error={errors.title}
                 required
                 validation={{
                   required: "Title is required",
@@ -65,7 +78,7 @@ export default function CreateTicketForm() {
                 type="text"
                 placeholder="Email"
                 register={register}
-                error={errors.ticketTitle}
+                error={errors.email}
                 required
                 validation={{
                   required: "Email is required",
@@ -85,7 +98,7 @@ export default function CreateTicketForm() {
                 name="priority"
                 options={priorityOptions}
                 register={register}
-                error={errors.ticketPriority}
+                error={errors.priority}
                 required
                 placeholder="Select priority level"
                 validation={{
@@ -101,7 +114,7 @@ export default function CreateTicketForm() {
               name="description"
               placeholder="Description"
               register={register}
-              error={errors.ticketDescription}
+              error={errors.description}
               required
               validation={{
                 required: "Description is required",
@@ -116,7 +129,7 @@ export default function CreateTicketForm() {
           <div className="buttons flex justify-end gap-3">
             <SecondaryButton name="Cancel" />
             <PrimaryButton
-              name={`${isLoading ? "Creating.." : "Create"}`}
+              name={`${isPending ? "Creating.." : "Create"}`}
               type="submit"
             />
           </div>

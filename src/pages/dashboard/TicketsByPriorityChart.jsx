@@ -8,7 +8,7 @@ import {
 } from "recharts";
 
 export default function TicketsByPriorityChart({ data }) {
-  const COLORS = ["teal", "red", "orange"];
+  const COLORS = [ "teal","orange","red"];
 
   return (
     <>

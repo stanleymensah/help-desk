@@ -13,7 +13,7 @@ import TicketStatCard from "./TicketStatCard";
 import useTickets from "../../hooks/useTickets";
 
 export default function Dashboard() {
-  const { data: tickets = [], isLoading, error } = useTickets();
+  const { data: tickets = [], isPending, error } = useTickets();
 
   // Memoize calculations so they only run when tickets change
   const stats = useMemo(() => {
@@ -90,9 +90,9 @@ export default function Dashboard() {
   ];
 
   const ticketsPrioritiesData = [
-    { name: "low", value: stats.lowPriority },
-    { name: "medium", value: stats.midPriority },
-    { name: "high", value: stats.highPriority },
+    { name: "Low", value: stats.lowPriority },
+    { name: "Medium", value: stats.midPriority },
+    { name: "High", value: stats.highPriority },
   ];
 
   return (
@@ -105,12 +105,12 @@ export default function Dashboard() {
           </span>
         </div>
 
-        {isLoading && <span>Loading...</span>}
+        {isPending && <span>Loading...</span>}
 
         {error && <span>Error: {error.message}</span>}
 
         {/* Ticket Essentials */}
-        {!isLoading && (
+        {!isPending && (
           <div className="flex flex-col gap-3">
             <div className="flex gap-1">
               {/* Ticket Stat Card */}

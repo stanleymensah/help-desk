@@ -33,7 +33,8 @@ export const createTicket = async (newTicket) => {
   const allTickets = JSON.parse(tickets);
   const ticket = {
     ...newTicket,
-    id: Math.max(...allTickets.map((t) => t.id)) + 1,
+    id:
+      allTickets.length > 0 ? Math.max(...allTickets.map((t) => t.id)) + 1 : 1,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
@@ -55,7 +56,7 @@ export const updateTicket = async (id, updates) => {
   allTickets[index] = {
     ...allTickets[index],
     ...updates,
-    updatedAt: new Date.toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(allTickets));
@@ -64,6 +65,7 @@ export const updateTicket = async (id, updates) => {
 
 // Delete Ticket
 export const deleteTicket = async (id) => {
+   console.log("Deleting ID:", id);
   initializeTickets();
   const tickets = localStorage.getItem(STORAGE_KEY);
   const allTickets = JSON.parse(tickets);

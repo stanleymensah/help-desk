@@ -12,12 +12,12 @@ export default function Layout() {
           <Sidebar />
         </div>
 
-        <div className="right w-85/100 p-3 bg-dim">
+        <div className="right overflow-auto w-85/100 p-3 bg-dim">
             <Outlet />
         </div>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
