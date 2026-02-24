@@ -6,6 +6,7 @@ import TicketHeader from "../../components/tickets/TicketHeader";
 import useDeleteTicket from "../../hooks/useDeleteTicket";
 import EditTicketForm from "../../components/tickets/EditTicketForm";
 import Modal from "../../components/common/Modal";
+import TicketDetailsModal from "../../components/tickets/TicketDetailModal";
 import { useUpdateTicket } from "../../hooks/useUpdateTicket";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -15,8 +16,18 @@ export default function TicketsPage() {
   const { data: tickets = [], isPending, error } = useTickets();
   const updateTicket = useUpdateTicket();
   const [editingTicket, setEditingTicket] = useState(null);
+  const [viewingTicket, setViewingTicket] = useState(null);
 
   const { mutate: deleteTicket } = useDeleteTicket();
+
+  // Handle view
+  const handleView = (ticket) => {
+    setViewingTicket(ticket);
+  };
+
+  const handleCloseView = () => {
+    setViewingTicket(null);
+  };
 
   const handleEdit = (ticket) => {
     console.log("Edit clicked!", ticket);
@@ -46,9 +57,7 @@ export default function TicketsPage() {
 
   const handleDelete = (id) => {
     deleteTicket(id);
-    toast(
-      <ErrorToast title="Ticket Deleted!" />
-    )
+    toast(<ErrorToast title="Ticket Deleted!" />);
   };
 
   return (
@@ -77,9 +86,17 @@ export default function TicketsPage() {
                 ticket={ticket}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
+                onView={handleView}
               />
             ))}
         </div>
+
+        {/* View Details Modal */}
+        <TicketDetailsModal
+          ticket={viewingTicket}
+          isOpen={!!viewingTicket}
+          onClose={handleCloseView}
+        />
 
         <Modal
           isOpen={!!editingTicket}
