@@ -29,7 +29,7 @@ export default function TicketsPage() {
         <SearchBar
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search ticket by title, email, description"
+          placeholder="Search ticket by title, email, description..."
         />
       </div>
 

@@ -42,7 +42,7 @@ export default function CreateTicketForm() {
             <SuccessToast title="Ticket Created!" />
           )
           reset();
-          await new Promise((resolve) => setTimeout(resolve, 2000));
+          await new Promise((resolve) => setTimeout(resolve, 1000));
           navigate("/tickets");
         },
       },

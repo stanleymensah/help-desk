@@ -21,7 +21,7 @@ export default function TicketsList({
 
   if (tickets.length === 0) {
     return (
-      <div className="p-6 text-center text-gray-500">
+      <div className="p-6 text-center text-gray-500 text-xs">
         {searchTerm
           ? `No tickets found for "${searchTerm}"`
           : "No tickets found."}

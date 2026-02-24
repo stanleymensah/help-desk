@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 export default function SearchBar({ value, onChange, placeholder="Search" }) {
   return (
     <>
-      <div className="w-2/3 justify-between flex border py-2 px-4 items-center rounded-full">
+      <div className="w-5/9 justify-between flex border py-2 px-4 items-center rounded-full">
         <input
           value={value}
           onChange={onChange}

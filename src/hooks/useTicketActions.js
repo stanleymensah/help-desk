@@ -2,7 +2,6 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useUpdateTicket } from "./useUpdateTicket";
 import useDeleteTicket from "./useDeleteTicket";
-import { ErrorToast } from "../components/ui/CustomToast";
 
 export function useTicketActions() {
   const updateTicket = useUpdateTicket();
@@ -40,14 +39,13 @@ export function useTicketActions() {
         onError: (error) => {
           toast.error("Failed to update ticket", error);
         },
-      }
+      },
     );
   };
 
   // Delete handler
   const handleDelete = (id) => {
     deleteTicket(id);
-    toast(<ErrorToast title="Ticket Deleted!" />);
   };
 
   return {

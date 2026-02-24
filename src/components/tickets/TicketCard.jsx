@@ -27,7 +27,7 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
 
       <div className="flex gap-2 justify-end">
         <button
-          className="bg-green-50 hover:bg-green-100 p-1.5 rounded-md text-green-600"
+          className="bg-green-50 hover:bg-green-100 p-1.5 rounded-md text-green-600 cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             onEdit(ticket);
@@ -40,7 +40,7 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
             e.stopPropagation();
             onDelete(ticket.id);
           }}
-          className="bg-red-50 hover:bg-red-100 p-1.5 rounded-md text-red-600"
+          className="bg-red-50 hover:bg-red-100 p-1.5 rounded-md text-red-600 cursor-pointer"
         >
           <HiOutlineTrash size={16} />
         </button>
