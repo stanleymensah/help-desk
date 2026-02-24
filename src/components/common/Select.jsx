@@ -10,12 +10,13 @@ export default function Select({
 }) {
   return (
     <>
+    <div className="flex flex-col gap-2 w-full">
       <label>
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <select
         {...register(name, validation)}
-        className="border p-2 focus:outline-none focus:border-primary"
+        className="border p-2 focus:outline-none focus:border-primary w-full"
       >
         <option value="">{placeholder}</option>
         {options.map((option) => (
@@ -25,6 +26,8 @@ export default function Select({
         ))}
       </select>
       {error && <span className="text-red-500">{error.message}</span>}
+    </div>
+      
     </>
   );
 }

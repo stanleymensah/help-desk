@@ -4,50 +4,41 @@ import Badge from "../common/Badge";
 
 export default function TicketCard({ ticket, onEdit, onDelete }) {
   return (
-    <>
-      <div className="card flex items-center gap-4 border border-primary rounded-lg py-3 px-5 hover:shadow-md transition-shadow">
-        <div className="w-16 flex-shrink-0">
-          <span className="font-semibold text-gray-700">#{ticket.id}</span>
-        </div>
+    <div className="grid grid-cols-[40px_130px_2fr_210px_110px_100px_60px_90px] items-center border border-primary rounded-lg py-3 px-5 hover:shadow-sm transition text-xs">
+      <span className="font-semibold text-gray-700">#{ticket.id}</span>
 
-        <div className="w-32 flex-shrink-0">
-          <span className="font-medium text-gray-900">{ticket.title}</span>
-        </div>
+      <span className="font-medium text-gray-900 truncate">{ticket.title}</span>
 
-        <div className="flex-1 min-w-0">
-          <span className="text-gray-600 line-clamp-1">
-            {ticket.description}
-          </span>
-        </div>
+      <span className="text-gray-600 truncate">{ticket.description}</span>
 
-        <div className="flex-shrink-0">
-          <span className="py-1.5 px-2 rounded-full">
-            <Badge type="priority" value={ticket.priority} />
-          </span>
-        </div>
+      <span className="text-gray-800 truncate">{ticket.email}</span>
 
-        <div className="flex-shrink-0">
-          <Badge type="status" value={ticket.status} />
-        </div>
+      <span className="text-center">
+        <Badge type="priority" value={ticket.priority} />
+      </span>
 
-        <div className="w-20 flex-shrink-0 text-right">
-          <span className="text-gray-500">
-            {new Date(ticket.createdAt).toLocaleDateString("en-GB")}
-          </span>
-        </div>
+      <span className="text-center">
+        <Badge type="status" value={ticket.status} />
+      </span>
 
-        <div className="flex gap-2 flex-shrink-0">
-          <button className="bg-green-50 hover:bg-green-100 p-2 rounded-lg text-green-600 transition-colors">
-            <TbEdit size={18} />
-          </button>
-          <button
-            onClick={() => onDelete(ticket.id)}
-            className="bg-red-50 hover:bg-red-100 p-2 rounded-lg text-red-600 transition-colors"
-          >
-            <HiOutlineTrash size={18} />
-          </button>
-        </div>
+      <span className="text-gray-500 text-right">
+        {new Date(ticket.createdAt).toLocaleDateString("en-GB")}
+      </span>
+
+      <div className="flex gap-2 justify-start">
+        <button
+          className="bg-green-50 hover:bg-green-100 p-1.5 rounded-md text-green-600"
+          onClick={() => onEdit(ticket)}
+        >
+          <TbEdit size={16} />
+        </button>
+        <button
+          onClick={() => onDelete(ticket.id)}
+          className="bg-red-50 hover:bg-red-100 p-1.5 rounded-md text-red-600"
+        >
+          <HiOutlineTrash size={16} />
+        </button>
       </div>
-    </>
+    </div>
   );
 }

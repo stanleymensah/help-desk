@@ -1,7 +1,8 @@
-import { AiOutlineUser } from "react-icons/ai";
+// import { AiOutlineUser } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
 import helpdeskLogo from "../../assets/icons/helpdesk.png";
 import { Link } from "react-router-dom";
+import { SecondaryButton } from "../common/Button";
 
 export default function Header() {
   return (
@@ -24,15 +25,11 @@ export default function Header() {
         </div>
 
         <div className="user w-2/10 flex gap-2 items-center justify-end">
-          <span className="userName">
-            Welcome, <strong>John</strong>
-          </span>
-          <div className="bg-accent p-2 rounded-full">
-            <Link to="/profile">
+            <Link to="/tickets/new">
               {/* <img src="#" alt="user profile" /> */}
-              <AiOutlineUser size={20} />
+              {/* <AiOutlineUser size={20} /> */}
+              <SecondaryButton name="Create Ticket" />
             </Link>
-          </div>
         </div>
       </div>
     </header>

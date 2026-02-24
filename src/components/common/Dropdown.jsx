@@ -34,7 +34,7 @@ const Dropdown = ({ name, items, icon, }) => {
       </div>
 
       {isOpen && (
-        <div className="bg-transparent overflow-hidden">
+        <div className="bg-transparent overflow-hidden text-[0.7rem]">
           <ul>
             {items.map((item, index) => {
               const isItemActive = location.pathname === item.path;
