@@ -9,7 +9,7 @@ export default function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <ToastContainer />
+        <ToastContainer position="top-center" autoClose={2000} />
         <RouterProvider router={router} />
       </QueryClientProvider>
     </>

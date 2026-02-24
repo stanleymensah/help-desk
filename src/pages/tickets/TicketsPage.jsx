@@ -8,6 +8,8 @@ import EditTicketForm from "../../components/tickets/EditTicketForm";
 import Modal from "../../components/common/Modal";
 import { useUpdateTicket } from "../../hooks/useUpdateTicket";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { ErrorToast } from "../../components/ui/CustomToast";
 
 export default function TicketsPage() {
   const { data: tickets = [], isPending, error } = useTickets();
@@ -44,6 +46,9 @@ export default function TicketsPage() {
 
   const handleDelete = (id) => {
     deleteTicket(id);
+    toast(
+      <ErrorToast title="Ticket Deleted!" />
+    )
   };
 
   return (

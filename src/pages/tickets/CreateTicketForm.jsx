@@ -6,6 +6,7 @@ import Select from "../../components/common/Select";
 import useCreateTicket from "../../hooks/useCreateTicket";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { SuccessToast } from "../../components/ui/CustomToast";
 
 export default function CreateTicketForm() {
   const {
@@ -13,7 +14,11 @@ export default function CreateTicketForm() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      status: "open"
+    }
+  });
 
   const { mutate: createTicket, isPending, error } = useCreateTicket();
   const navigate = useNavigate();
@@ -33,10 +38,9 @@ export default function CreateTicketForm() {
       },
       {
         onSuccess: async () => {
-          toast.success("Ticket created!", {
-            position: "top-center",
-            autoClose: 2000,
-          });
+          toast(
+            <SuccessToast title="Ticket Created!" />
+          )
           reset();
           await new Promise((resolve) => setTimeout(resolve, 2000));
           navigate("/tickets");
@@ -44,6 +48,10 @@ export default function CreateTicketForm() {
       },
     );
   };
+
+  const handleCancel = () => {
+    navigate("/tickets")
+  }
 
 
   return (
@@ -127,7 +135,7 @@ export default function CreateTicketForm() {
           </div>
 
           <div className="buttons flex justify-end gap-3">
-            <SecondaryButton name="Cancel" />
+            <SecondaryButton doWhat={handleCancel} name="Cancel" />
             <PrimaryButton
               name={`${isPending ? "Creating.." : "Create"}`}
               type="submit"
