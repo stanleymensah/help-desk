@@ -8,7 +8,7 @@ export default function TicketHeader() {
       <span>Priority</span>
       <span>Status</span>
       <span className="text-right">Date</span>
-      <span>Actions</span>
+      <span className="flex justify-end">Actions</span>
     </div>
   );
 }

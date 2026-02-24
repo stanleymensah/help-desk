@@ -25,7 +25,7 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
         {new Date(ticket.createdAt).toLocaleDateString("en-GB")}
       </span>
 
-      <div className="flex gap-2 justify-start">
+      <div className="flex gap-2 justify-end">
         <button
           className="bg-green-50 hover:bg-green-100 p-1.5 rounded-md text-green-600"
           onClick={(e) => {
