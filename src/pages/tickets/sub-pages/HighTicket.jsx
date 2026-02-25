@@ -1,33 +1,27 @@
-import { useState } from "react";
-import useDeleteTicket from "../../../hooks/useDeleteTicket";
+import { useMemo } from "react";
 import useTickets from "../../../hooks/useTickets";
+import { useTicketActions } from "../../../hooks/useTicketActions";
 import TicketHeader from "../../../components/tickets/TicketHeader";
-import TicketSkeleton from "../../../components/tickets/TicketSkeleton";
-import ErrorBoundary from "../../../components/common/ErrorBoundary";
-import TicketCard from "../../../components/tickets/TicketCard";
-import TicketDetailsModal from "../../../components/tickets/TicketDetailModal";
+import TicketsList from "../../../components/tickets/TicketsList";
+import TicketModals from "../../../components/tickets/TicketModals";
 
 export default function HighTicket() {
   const { data: tickets = [], isPending, error } = useTickets();
-  const { mutate: deleteTicket } = useDeleteTicket();
 
-  const [viewingTicket, setViewingTicket] = useState(null);
+  const {
+    viewingTicket,
+    editingTicket,
+    handleView,
+    handleCloseView,
+    handleEdit,
+    handleCloseEdit,
+    handleSubmit,
+    handleDelete,
+  } = useTicketActions();
 
-  // Delete
-  const handleDelete = (id) => {
-    deleteTicket(id);
-  };
-
-  // View
-  const handleView = (ticket) => {
-    setViewingTicket(ticket);
-  };
-
-  const handleCloseView = () => {
-    setViewingTicket(null);
-  };
-
-  const highTickets = tickets.filter((t) => t.priority === "high");
+  const highTickets = useMemo(() => {
+    return tickets.filter((t) => t.priority === "high");
+  }, [tickets]);
 
   return (
     <>
@@ -38,36 +32,23 @@ export default function HighTicket() {
 
         <TicketHeader />
 
-        <div className="flex flex-col gap-3 text-xs">
-          {isPending && <TicketSkeleton />}
-
-          {!isPending && error && <ErrorBoundary message={error.message} />}
-
-          {!isPending && !error && highTickets.length === 0 && (
-            <div className="p-6 text-center text-gray-500">
-              No tickets found.
-            </div>
-          )}
-
-          {!isPending &&
-            !error &&
-            highTickets.length > 0 &&
-            highTickets.map((ticket) => (
-              <TicketCard
-                key={ticket.id}
-                ticket={ticket}
-                onDelete={handleDelete}
-                onView={handleView}
-              />
-            ))}
-        </div>
+        <TicketsList
+          tickets={highTickets}
+          isPending={isPending}
+          error={error}
+          onView={handleView}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
       </div>
 
       {/* View Modal */}
-      <TicketDetailsModal
-        ticket={viewingTicket}
-        isOpen={!!viewingTicket}
-        onClose={handleCloseView}
+      <TicketModals
+        viewingTicket={viewingTicket}
+        editingTicket={editingTicket}
+        onCloseView={handleCloseView}
+        onCloseEdit={handleCloseEdit}
+        onSubmit={handleSubmit}
       />
     </>
   );

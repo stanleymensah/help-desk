@@ -1,76 +1,54 @@
-import { useState } from "react";
-import useDeleteTicket from "../../../hooks/useDeleteTicket";
+import { useMemo } from "react";
+import { useTicketActions } from "../../../hooks/useTicketActions";
+import TicketModals from "../../../components/tickets/TicketModals";
 import useTickets from "../../../hooks/useTickets";
+import TicketsList from "../../../components/tickets/TicketsList";
 import TicketHeader from "../../../components/tickets/TicketHeader";
-import TicketSkeleton from "../../../components/tickets/TicketSkeleton";
-import ErrorBoundary from "../../../components/common/ErrorBoundary";
-import TicketCard from "../../../components/tickets/TicketCard";
-import TicketDetailsModal from "../../../components/tickets/TicketDetailModal";
 
 export default function MediumTicket() {
   const { data: tickets = [], isPending, error } = useTickets();
-  const { mutate: deleteTicket } = useDeleteTicket();
+  const {
+    handleDelete,
+    handleView,
+    handleEdit,
+    handleCloseView,
+    handleCloseEdit,
+    viewingTicket,
+    editingTicket,
+    handleSubmit,
+  } = useTicketActions();
 
-  const [viewingTicket, setViewingTicket] = useState(null);
-
-  // Delete
-  const handleDelete = (id) => {
-    deleteTicket(id);
-  };
-
-  // View
-  const handleView = (ticket) => {
-    setViewingTicket(ticket);
-  };
-
-  const handleCloseView = () => {
-    setViewingTicket(null);
-  };
-
-  const mediumTickets = tickets.filter((t) => t.priority === "medium");
+  const mediumTickets = useMemo(() => {
+    return tickets.filter((t) => t.priority === "medium");
+  }, [tickets]);
 
   return (
     <>
       <div className="container flex flex-col gap-2">
         <div className="flex flex-col">
-          <span className="text-lg font-semibold">
-            Medium Priority tickets
-          </span>
+          <span className="text-lg font-semibold">Medium Priority tickets</span>
         </div>
 
         <TicketHeader />
 
-        <div className="flex flex-col gap-3 text-xs">
-          {isPending && <TicketSkeleton />}
+        <TicketsList
+          tickets={mediumTickets}
+          isPending={isPending}
+          error={error}
+          onView={handleView}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
 
-          {!isPending && error && <ErrorBoundary message={error.message} />}
-
-          {!isPending && !error && mediumTickets.length === 0 && (
-            <div className="p-6 text-center text-gray-500">
-              No tickets found.
-            </div>
-          )}
-
-          {!isPending &&
-            !error &&
-            mediumTickets.length > 0 &&
-            mediumTickets.map((ticket) => (
-              <TicketCard
-                key={ticket.id}
-                ticket={ticket}
-                onDelete={handleDelete}
-                onView={handleView} // <-- added
-              />
-            ))}
-        </div>
+        {/* View Modal */}
+        <TicketModals
+          viewingTicket={viewingTicket}
+          editingTicket={editingTicket}
+          onCloseView={handleCloseView}
+          onCloseEdit={handleCloseEdit}
+          onSubmit={handleSubmit}
+        />
       </div>
-
-      {/* View Modal */}
-      <TicketDetailsModal
-        ticket={viewingTicket}
-        isOpen={!!viewingTicket}
-        onClose={handleCloseView}
-      />
     </>
   );
 }

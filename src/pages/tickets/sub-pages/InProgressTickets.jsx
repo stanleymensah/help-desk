@@ -1,75 +1,60 @@
-import { useState } from "react";
-import useDeleteTicket from "../../../hooks/useDeleteTicket";
 import useTickets from "../../../hooks/useTickets";
+import { useTicketActions } from "../../../hooks/useTicketActions";
 import TicketHeader from "../../../components/tickets/TicketHeader";
-import TicketSkeleton from "../../../components/tickets/TicketSkeleton";
-import ErrorBoundary from "../../../components/common/ErrorBoundary";
-import TicketCard from "../../../components/tickets/TicketCard";
-import TicketDetailsModal from "../../../components/tickets/TicketDetailModal";
+import TicketsList from "../../../components/tickets/TicketsList";
+import TicketModals from "../../../components/tickets/TicketModals";
+import { useMemo } from "react";
 
 export default function InProgressTickets() {
   const { data: tickets = [], isPending, error } = useTickets();
-  const { mutate: deleteTicket } = useDeleteTicket();
+  
+  const {
+    viewingTicket,
+    editingTicket,
+    handleView,
+    handleCloseView,
+    handleEdit,
+    handleCloseEdit,
+    handleSubmit,
+    handleDelete,
+  } = useTicketActions();
 
-  const [viewingTicket, setViewingTicket] = useState(null);
-
-  // Delete
-  const handleDelete = (id) => {
-    deleteTicket(id);
-  };
-
-  // View
-  const handleView = (ticket) => {
-    setViewingTicket(ticket);
-  };
-
-  const handleCloseView = () => {
-    setViewingTicket(null);
-  };
-
-  const inprogressTickets = tickets.filter(
-    (t) => t.status === "in-progress"
+  // Filter for in-progress tickets
+  const inProgressTickets = useMemo(
+    () => tickets.filter((t) => t.status === "in-progress"),
+    [tickets]
   );
 
   return (
     <>
       <div className="container flex flex-col gap-2">
+        {/* Page Title */}
         <div className="flex flex-col">
-          <span className="text-lg font-semibold">In-Progress tickets</span>
+          <span className="text-lg font-semibold">In-Progress Tickets</span>
         </div>
 
+        {/* Header */}
         <TicketHeader />
 
-        <div className="flex flex-col gap-3 text-xs">
-          {isPending && <TicketSkeleton />}
-
-          {!isPending && error && <ErrorBoundary message={error.message} />}
-
-          {!isPending && !error && inprogressTickets.length === 0 && (
-            <div className="p-6 text-center text-gray-500">
-              No tickets found.
-            </div>
-          )}
-
-          {!isPending &&
-            !error &&
-            inprogressTickets.length > 0 &&
-            inprogressTickets.map((ticket) => (
-              <TicketCard
-                key={ticket.id}
-                ticket={ticket}
-                onDelete={handleDelete}
-                onView={handleView} // <-- added
-              />
-            ))}
-        </div>
+        {/* Tickets List */}
+        <TicketsList
+          tickets={inProgressTickets}
+          isPending={isPending}
+          error={error}
+          searchTerm=""
+          onView={handleView}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
       </div>
 
-      {/* View Modal */}
-      <TicketDetailsModal
-        ticket={viewingTicket}
-        isOpen={!!viewingTicket}
-        onClose={handleCloseView}
+      {/* Modals */}
+      <TicketModals
+        viewingTicket={viewingTicket}
+        editingTicket={editingTicket}
+        onCloseView={handleCloseView}
+        onCloseEdit={handleCloseEdit}
+        onSubmit={handleSubmit}
       />
     </>
   );
