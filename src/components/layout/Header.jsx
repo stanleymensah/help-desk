@@ -1,29 +1,49 @@
-// import { AiOutlineUser } from "react-icons/ai";
+// src/components/layout/Header.jsx
 import helpdeskLogo from "../../assets/icons/helpdesk.png";
 import { Link } from "react-router-dom";
 import { SecondaryButton } from "../common/Button";
 import { useTheme } from "../../context/ThemeContext";
 
 export default function Header() {
-  const {theme, toggleTheme} = useTheme();
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <header className="h-12 bg-primary text-white text-xs px-6 py-7 flex items-center justify-center">
-      <div className="container flex justify-between items-center">
-        <div className="brand flex gap-1 w-2/10 items-center">
+    <header className="h-12 bg-primary text-white text-xs px-4 md:px-6 flex items-center">
+      <div className="container flex justify-between items-center w-full">
+        {/* Logo */}
+        <div className="flex items-center gap-2">
           <img src={helpdeskLogo} alt="logo" className="w-5 h-5" />
-          <Link to='/'>
-          <h1 className="text-lg uppercase font-bold">HelpDesk</h1>
-          </Link>
+          <h1 className="hidden sm:block text-lg uppercase font-bold">
+            HelpDesk
+          </h1>
         </div>
 
-        <div className="user w-2/10 flex gap-2 items-center justify-end">
-        <button type="button" onClick={toggleTheme} className="px-4 py-2 rounded bg-white text-primary cursor-pointer">Switch to {theme === 'dark' ? 'Light' : 'Dark'}</button>
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          {/* Theme toggle button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="px-3 py-1 rounded bg-white text-primary text-xs sm:text-sm"
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
 
-            <Link to="/tickets/new">
-              {/* <img src="#" alt="user profile" /> */}
-              {/* <AiOutlineUser size={20} /> */}
-              <SecondaryButton name="Create Ticket" />
-            </Link>
+          {/* Create Ticket */}
+          <Link to="/tickets/new">
+            {/* Mobile "+" button */}
+            <button className="sm:hidden px-3 rounded bg-white text-primary font-bold text-lg">
+              +
+            </button>
+
+            {/* Desktop full button */}
+            <div className="hidden md:block">
+              <SecondaryButton
+                name="Create Ticket"
+                className="hidden sm:inline-block"
+              />
+            </div>
+          </Link>
         </div>
       </div>
     </header>

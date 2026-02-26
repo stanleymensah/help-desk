@@ -125,11 +125,11 @@ export default function Dashboard() {
               ))}
             </div>
 
-            <div className="min-h-30 rounded-lg w-full flex gap-2">
-              <div className="w-1/2 border border-gray-300 rounded-lg p-2">
+            <div className="min-h-30 rounded-lg w-full flex flex-col md:flex-row gap-2">
+              <div className="border border-gray-300 rounded-lg p-2  md:w-1/2">
                 <TicketsByStatusChart data={ticketStatusesData} />
               </div>
-              <div className="w-1/2 border bg-transparent border-gray-300 rounded-lg p-2">
+              <div className="border bg-transparent border-gray-300 rounded-lg p-2 md:w-1/2">
                 <TicketsByPriorityChart data={ticketsPrioritiesData} />
               </div>
             </div>

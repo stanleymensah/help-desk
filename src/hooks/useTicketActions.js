@@ -49,10 +49,8 @@ export function useTicketActions() {
   };
 
   return {
-    // State
     editingTicket,
     viewingTicket,
-    // Handlers
     handleView,
     handleCloseView,
     handleEdit,

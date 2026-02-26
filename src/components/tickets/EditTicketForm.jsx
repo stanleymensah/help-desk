@@ -36,7 +36,7 @@ export default function EditTicketForm({ ticket, onSubmit, onCancel }) {
       <Input
         label="Title"
         name="title"
-        register={register}
+        register={register} 
         error={errors.title}
         required
         validation={{
