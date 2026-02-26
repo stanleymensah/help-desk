@@ -42,7 +42,6 @@ export default function HighTicket() {
         />
       </div>
 
-      {/* View Modal */}
       <TicketModals
         viewingTicket={viewingTicket}
         editingTicket={editingTicket}

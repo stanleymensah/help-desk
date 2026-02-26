@@ -13,7 +13,7 @@ export default function Sidebar() {
             name="Dashboard"
             items={[
               { label: "Overview", path: "/" },
-              { label: "Settings", path: "/settings" },
+              // { label: "Settings", path: "/settings" },
             ]}
           />
 

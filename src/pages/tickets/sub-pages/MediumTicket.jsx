@@ -40,7 +40,6 @@ export default function MediumTicket() {
           onDelete={handleDelete}
         />
 
-        {/* View Modal */}
         <TicketModals
           viewingTicket={viewingTicket}
           editingTicket={editingTicket}

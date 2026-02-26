@@ -46,7 +46,6 @@ export const createTicket = async (newTicket) => {
 
 //Update Ticket
 export const updateTicket = async ({ id, updates }) => {
-  // Now it expects ONE object with id and updates properties
   initializeTickets();
   const tickets = localStorage.getItem(STORAGE_KEY);
   const allTickets = JSON.parse(tickets);
@@ -63,7 +62,7 @@ export const updateTicket = async ({ id, updates }) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(allTickets));
   await new Promise((resolve) => setTimeout(resolve, 300));
 
-  return allTickets[index]; // ← Also add this return statement
+  return allTickets[index];
 };
 
 // Delete Ticket

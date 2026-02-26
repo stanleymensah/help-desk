@@ -33,10 +33,8 @@ export default function InProgressTickets() {
           <span className="text-lg font-semibold">In-Progress Tickets</span>
         </div>
 
-        {/* Header */}
         <TicketHeader />
 
-        {/* Tickets List */}
         <TicketsList
           tickets={inProgressTickets}
           isPending={isPending}
@@ -48,7 +46,6 @@ export default function InProgressTickets() {
         />
       </div>
 
-      {/* Modals */}
       <TicketModals
         viewingTicket={viewingTicket}
         editingTicket={editingTicket}

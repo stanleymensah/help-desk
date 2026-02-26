@@ -38,7 +38,7 @@ export default function TicketsPage() {
 
   return (
     <div className="container flex gap-3 flex-col">
-      {/* Search Bar */}
+      
       <div className="flex justify-center text-xs">
         <SearchBar
           value={searchTerm}
@@ -47,10 +47,8 @@ export default function TicketsPage() {
         />
       </div>
 
-      {/* Header */}
       <TicketHeader />
 
-      {/* Tickets List */}
       <TicketsList
         tickets={currentItems}
         isPending={isPending}
