@@ -4,13 +4,17 @@ import Sidebar from "./Sidebar";
 
 export default function Layout() {
   return (
-    <div className="w-lvwh overflow-x-hidden">
+    <div className="w-full h-screen overflow-hidden flex flex-col">
+      {/* Fixed Header */}
       <Header />
 
-      <main className="flex min-h-screen">
+      {/* Main area - scrollable */}
+      <main className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
         <Sidebar />
 
-        <div className="overflow-x-none flex-1 p-3 bg-dim">
+        {/* Main Content - ONLY THIS SCROLLS */}
+        <div className="flex-1 p-3 bg-dim overflow-y-auto">
           <Outlet />
         </div>
       </main>

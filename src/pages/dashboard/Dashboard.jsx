@@ -15,16 +15,11 @@ import useTickets from "../../hooks/useTickets";
 export default function Dashboard() {
   const { data: tickets = [], isPending, error } = useTickets();
 
-  // Memoize calculations so they only run when tickets change
   const stats = useMemo(() => {
     const allTickets = tickets.length;
     const openTickets = tickets.filter((t) => t.status === "open").length;
-    const inProgressTickets = tickets.filter(
-      (t) => t.status === "in-progress",
-    ).length;
-    const resolvedTickets = tickets.filter(
-      (t) => t.status === "resolved",
-    ).length;
+    const inProgressTickets = tickets.filter((t) => t.status === "in-progress").length;
+    const resolvedTickets = tickets.filter((t) => t.status === "resolved").length;
     const lowPriority = tickets.filter((t) => t.priority === "low").length;
     const midPriority = tickets.filter((t) => t.priority === "medium").length;
     const highPriority = tickets.filter((t) => t.priority === "high").length;
@@ -98,45 +93,42 @@ export default function Dashboard() {
   ];
 
   return (
-    <>
-      <div className="container text-xs flex flex-col gap-6">
-        <div className="flex flex-col">
-          <span className="text-lg font-semibold">Dashboard</span>
-          <span>
-            Welcome back! Here's what is going on with your ticketing so far.
-          </span>
-        </div>
+    <div className="text-xs flex flex-col gap-6">
+      <div className="flex flex-col">
+        <span className="text-lg font-semibold">Dashboard</span>
+        <span>
+          Welcome back! Here's what is going on with your ticketing so far.
+        </span>
+      </div>
 
-        {isPending && <span>Loading...</span>}
+      {isPending && <span>Loading...</span>}
 
-        {error && <span>Error: {error.message}</span>}
+      {error && <span>Error: {error.message}</span>}
 
-        {/* Ticket Essentials */}
-        {!isPending && (
-          <div className="flex flex-col gap-3">
-            <div className="grid grid-cols-3 gap-1 md:flex md:overflow-hidden">
-              {ticketStats.map((stat) => (
-                <TicketStatCard
-                  key={stat.title}
-                  title={stat.title}
-                  number={stat.number}
-                  icon={stat.icon}
-                  color={stat.color}
-                />
-              ))}
+      {!isPending && (
+        <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-3 gap-1 md:flex md:overflow-hidden">
+            {ticketStats.map((stat) => (
+              <TicketStatCard
+                key={stat.title}
+                title={stat.title}
+                number={stat.number}
+                icon={stat.icon}
+                color={stat.color}
+              />
+            ))}
+          </div>
+
+          <div className="min-h-30 rounded-lg w-full flex flex-col md:flex-row gap-2">
+            <div className="border border-gray-300 rounded-lg p-2 md:w-1/2">
+              <TicketsByStatusChart data={ticketStatusesData} />
             </div>
-
-            <div className="min-h-30 rounded-lg w-full flex flex-col md:flex-row gap-2">
-              <div className="border border-gray-300 rounded-lg p-2  md:w-1/2">
-                <TicketsByStatusChart data={ticketStatusesData} />
-              </div>
-              <div className="border bg-transparent border-gray-300 rounded-lg p-2 md:w-1/2">
-                <TicketsByPriorityChart data={ticketsPrioritiesData} />
-              </div>
+            <div className="border bg-transparent border-gray-300 rounded-lg p-2 md:w-1/2">
+              <TicketsByPriorityChart data={ticketsPrioritiesData} />
             </div>
           </div>
-        )}
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 }

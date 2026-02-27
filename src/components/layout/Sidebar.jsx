@@ -11,76 +11,81 @@ import { HiMiniEquals } from "react-icons/hi2";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
 export default function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
+  
   const linkStyle = ({ isActive }) =>
-    `flex items-center gap-3 p-2 rounded-md text-xs transition
+    `flex items-center gap-3 p-2 rounded-md text-xs transition whitespace-nowrap
     ${isActive ? "bg-primary text-white" : "hover:bg-gray-200 text-gray-700"}`;
 
   return (
-    <div className="relative text-xs">
-      {/* Sidebar */}
+    <>
+      {/* Backdrop - only show when expanded */}
+      {!collapsed && (
+        <div 
+          className="fixed inset-0 bg-black/30 z-40 top-12"
+          onClick={() => setCollapsed(true)}
+        />
+      )}
+
+      {/* Sidebar - Fixed position, starts below header (top-12) */}
       <div
-        className={`bg-dim border-e border-e-primary h-full p-2 transition-all duration-300 ${
+        className={`fixed top-12 left-0 h-[calc(100vh-3rem)] bg-dim border-e border-e-primary p-2 transition-all duration-300 z-50 ${
           collapsed ? "w-16" : "w-64"
         }`}
       >
         <div className="flex flex-col gap-1 p-2">
-          {/* Dashboard */}
           <NavLink to="/" className={linkStyle}>
-            <RxDashboard size={18} />
+            <RxDashboard size={18} className="flex-shrink-0" />
             {!collapsed && <span>Overview</span>}
           </NavLink>
 
-          {/* All Tickets */}
           <NavLink to="/tickets" className={linkStyle}>
-            <IoLayersOutline size={18} />
+            <IoLayersOutline size={18} className="flex-shrink-0" />
             {!collapsed && <span>All Tickets</span>}
           </NavLink>
 
-          {/* Open */}
           <NavLink to="/tickets/open" className={linkStyle}>
-            <PiTicket size={18} />
+            <PiTicket size={18} className="flex-shrink-0" />
             {!collapsed && <span>Open Tickets</span>}
           </NavLink>
 
-          {/* In Progress */}
           <NavLink to="/tickets/in-progress" className={linkStyle}>
-            <LuRepeat size={18} />
+            <LuRepeat size={18} className="flex-shrink-0" />
             {!collapsed && <span>In-Progress</span>}
           </NavLink>
 
-          {/* Resolved */}
           <NavLink to="/tickets/resolved" className={linkStyle}>
-            <AiOutlineStop size={18} />
+            <AiOutlineStop size={18} className="flex-shrink-0" />
             {!collapsed && <span>Resolved</span>}
           </NavLink>
 
-          {/* High Priority */}
           <NavLink to="/tickets/high" className={linkStyle}>
-            <HiMiniChevronUp size={18} />
+            <HiMiniChevronUp size={18} className="flex-shrink-0" />
             {!collapsed && <span>High</span>}
           </NavLink>
 
-          {/* Medium Priority */}
           <NavLink to="/tickets/medium" className={linkStyle}>
-            <HiMiniEquals size={18} />
+            <HiMiniEquals size={18} className="flex-shrink-0" />
             {!collapsed && <span>Medium</span>}
           </NavLink>
 
-          {/* Low Priority */}
           <NavLink to="/tickets/low" className={linkStyle}>
-            <HiMiniChevronDown size={18} />
+            <HiMiniChevronDown size={18} className="flex-shrink-0" />
             {!collapsed && <span>Low</span>}
           </NavLink>
-
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="absolute -right-3 top-6 bg-primary text-white p-1 rounded-full cursor-pointer shadow-md hover:scale-105 transition"
-          >
-            {collapsed ? <HiOutlineChevronRight size={20} /> : <HiOutlineChevronLeft size={20} />}
-          </button>
         </div>
+
+        {/* Toggle button */}
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="absolute -right-3 top-6 bg-primary text-white p-1 rounded-full cursor-pointer shadow-md hover:scale-105 transition z-10"
+        >
+          {collapsed ? <HiOutlineChevronRight size={20} /> : <HiOutlineChevronLeft size={20} />}
+        </button>
       </div>
-    </div>
+
+      {/* Spacer - keeps content from going under collapsed sidebar */}
+      <div className="w-16 flex-shrink-0" />
+    </>
   );
 }

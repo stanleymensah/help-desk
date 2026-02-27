@@ -11,7 +11,7 @@ export default function TicketsByPriorityChart({ data }) {
   const COLORS = [ "teal","orange","red"];
 
   return (
-    <>
+    <div className="min-w-[300px]">
       <h2 className="text-xl font-bold mb-4">Tickets by Priority</h2>
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
@@ -36,6 +36,6 @@ export default function TicketsByPriorityChart({ data }) {
           <Legend />
         </PieChart>
       </ResponsiveContainer>
-    </>
+    </div>
   );
 }
