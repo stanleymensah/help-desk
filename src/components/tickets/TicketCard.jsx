@@ -6,13 +6,13 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
   return (
     <div
       onClick={() => onView(ticket)}
-      className="flex items-center border border-primary rounded-lg py-2 md:py-3 px-3 md:px-5 cursor-pointer hover:shadow-sm transition text-[10px] md:text-xs"
+      className="flex items-center justify-between border border-primary rounded-lg py-2 md:py-3 px-3 md:px-5 cursor-pointer hover:shadow-sm transition text-[10px] md:text-xs"
     >
       {/* ID */}
       <div className="w-[2.5rem] font-semibold text-gray-700">#{ticket.id}</div>
 
       {/* Title */}
-      <div className="flex-1 md:w-[8.125rem] font-medium text-gray-900 truncate">
+      <div className="flex md:w-[8.125rem] font-medium text-gray-900 truncate">
         {ticket.title}
       </div>
 
@@ -33,12 +33,12 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
         <Badge type="status" value={ticket.status} />
       </div>
 
-      <div className="hidden md:block w-[3.75rem] text-gray-500 text-right">
+      <div className="hidden md:block w-[5.75rem] text-gray-500 text-right">
         {new Date(ticket.createdAt).toLocaleDateString("en-GB")}
       </div>
 
       {/* Actions */}
-      <div className="w-[4.375rem] md:w-[5.625rem] flex gap-1 md:gap-2 justify-end">
+      <div className="w-[4.375rem] md:w-[4.625rem] flex  gap-1 md:gap-2 justify-end">
         <button
           className="bg-green-50 hover:bg-green-100 p-1 md:p-1.5 rounded-md text-green-600"
           onClick={(e) => {
