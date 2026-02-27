@@ -59,8 +59,8 @@ export default function CreateTicketForm() {
       {error && <p className="text-red-500">{error.message}</p>}
       {!error && (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-          <div className="flex gap-2 w-full">
-            <div className="flex flex-col gap-2 w-1/2">
+          <div className="flex flex-col gap-2 w-full md:flex-row">
+            <div className="flex flex-col gap-2 w-full md:w-1/2">
               <Input
                 label="Ticket Title"
                 name="title"
@@ -79,7 +79,7 @@ export default function CreateTicketForm() {
               />
             </div>
 
-            <div className="flex flex-col gap-2 w-1/2">
+            <div className="flex flex-col gap-2 w-full md:w-1/2">
               <Input
                 label="User Email"
                 name="email"
@@ -100,7 +100,7 @@ export default function CreateTicketForm() {
           </div>
 
           <div className="my-2">
-            <div className="flex flex-col gap-2 w-1/2">
+            <div className="flex flex-col gap-2 md:w-1/2">
               <Select
                 label="Ticket Priority"
                 name="priority"
@@ -134,7 +134,7 @@ export default function CreateTicketForm() {
             />
           </div>
 
-          <div className="buttons flex justify-end gap-3">
+          <div className="buttons flex justify-center gap-3 md:justify-end">
             <SecondaryButton doWhat={handleCancel} name="Cancel" />
             <PrimaryButton
               name={`${isPending ? "Creating.." : "Create"}`}

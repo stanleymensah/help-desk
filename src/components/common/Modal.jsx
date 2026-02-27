@@ -10,7 +10,7 @@ export default function Modal({ isOpen, onClose, title, children }) {
       />
       
       {/* Modal content */}
-      <div className="relative bg-white rounded-lg shadow-xl w-1/2 p-6 z-10 text-xs">
+      <div className="relative bg-white rounded-lg shadow-xl w-8/10 p-6 z-10 text-xs">
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">{title}</h2>

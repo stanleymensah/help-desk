@@ -4,7 +4,7 @@ export default function CreateTicketPage() {
   
 
   return (
-    <div className="container flex flex-col w-[50rem] min-h-[32rem]">
+    <div className="container flex flex-col md:w-[50rem] min-h-[32rem]">
       {/* 2. Top Header (Takes only the space it needs) */}
       <div className="flex flex-col gap-1 pb-4">
         <span className="text-lg font-semibold">Create a Ticket</span>
