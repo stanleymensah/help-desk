@@ -22,7 +22,9 @@ export default function Dashboard() {
     const inProgressTickets = tickets.filter(
       (t) => t.status === "in-progress",
     ).length;
-    const resolvedTickets = tickets.filter((t) => t.status === "resolved").length;
+    const resolvedTickets = tickets.filter(
+      (t) => t.status === "resolved",
+    ).length;
     const lowPriority = tickets.filter((t) => t.priority === "low").length;
     const midPriority = tickets.filter((t) => t.priority === "medium").length;
     const highPriority = tickets.filter((t) => t.priority === "high").length;
@@ -112,8 +114,7 @@ export default function Dashboard() {
         {/* Ticket Essentials */}
         {!isPending && (
           <div className="flex flex-col gap-3">
-            <div className="flex gap-1">
-              {/* Ticket Stat Card */}
+            <div className="grid grid-cols-3 gap-1 md:flex md:overflow-hidden">
               {ticketStats.map((stat) => (
                 <TicketStatCard
                   key={stat.title}

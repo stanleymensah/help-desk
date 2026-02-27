@@ -17,7 +17,7 @@ export default function Sidebar() {
     ${isActive ? "bg-primary text-white" : "hover:bg-gray-200 text-gray-700"}`;
 
   return (
-    <div className="relative h-screen text-xs">
+    <div className="relative text-xs">
       {/* Sidebar */}
       <div
         className={`bg-dim border-e border-e-primary h-full p-2 transition-all duration-300 ${
@@ -77,7 +77,7 @@ export default function Sidebar() {
             onClick={() => setCollapsed(!collapsed)}
             className="absolute -right-3 top-6 bg-primary text-white p-1 rounded-full cursor-pointer shadow-md hover:scale-105 transition"
           >
-            {collapsed ? <HiOutlineChevronRight /> : <HiOutlineChevronLeft />}
+            {collapsed ? <HiOutlineChevronRight size={20} /> : <HiOutlineChevronLeft size={20} />}
           </button>
         </div>
       </div>

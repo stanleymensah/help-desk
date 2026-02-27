@@ -37,8 +37,7 @@ export default function TicketsPage() {
   } = useTicketActions();
 
   return (
-    <div className="container flex gap-3 flex-col">
-      
+    <div className="container flex flex-col gap-3">
       <div className="flex justify-center text-xs">
         <SearchBar
           value={searchTerm}

@@ -4,16 +4,16 @@ import Sidebar from "./Sidebar";
 
 export default function Layout() {
   return (
-    <>
+    <div className="w-lvwh overflow-x-hidden">
       <Header />
 
-      <main className="flex h-[calc(100vh-64px)]">
+      <main className="flex min-h-screen">
         <Sidebar />
 
-        <div className="flex-1 overflow-auto p-3 bg-dim">
+        <div className="overflow-x-none flex-1 p-3 bg-dim">
           <Outlet />
         </div>
       </main>
-    </>
+    </div>
   );
 }

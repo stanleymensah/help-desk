@@ -11,11 +11,13 @@ export default function Header() {
     <header className="h-12 bg-primary text-white text-xs px-4 md:px-6 flex items-center">
       <div className="container flex justify-between items-center w-full">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <div>
+          <Link to="/"  className="flex items-center gap-2">
           <img src={helpdeskLogo} alt="logo" className="w-5 h-5" />
           <h1 className="hidden sm:block text-lg uppercase font-bold">
             HelpDesk
           </h1>
+          </Link>
         </div>
 
         {/* Actions */}
