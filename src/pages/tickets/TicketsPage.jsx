@@ -48,13 +48,13 @@ export default function TicketsPage() {
   return (
     <div className="container flex flex-col gap-3">
       <div className="flex justify-center gap-2 text-xs">
-        <FilterDropdown value={filterBy} onChange={setFilterBy} />
 
         <SearchBar
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search ticket by title, email, description..."
         />
+        <FilterDropdown value={filterBy} onChange={setFilterBy} />
 
         <SortDropdown value={sortBy} onChange={setSortBy} />
       </div>

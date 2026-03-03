@@ -36,7 +36,7 @@ export default function SortDropdown({ value, onChange }) {
       {isOpen && (
         <>
           {/* Backdrop */}
-          <div className="inset-0 z-10" onClick={() => setIsOpen(false)}></div>
+          <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)}></div>
 
           {/* Dropdown */}
           <div className="absolute top-full mt-1 right-0 bg-white border-mute rounded-lg shadow-lg z-20 min-w-[200px]">
