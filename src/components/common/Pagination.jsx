@@ -32,7 +32,7 @@ export default function Pagination({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex items-center justify-center gap-2 my-8 text-sm">
+    <div className="flex items-center justify-center gap-2 mt-4 mb-8 text-sm">
       {/* Previous Button */}
       <button
         onClick={onPrev}

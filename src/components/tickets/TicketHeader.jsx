@@ -1,6 +1,6 @@
 export default function TicketHeader() {
   return (
-    <div className="flex items-center justify-between border border-gray-200 rounded-lg py-2 md:py-3 px-3 md:px-5 bg-gray-50 font-semibold text-[10px] md:text-xs text-gray-700">
+    <div className="flex items-center justify-between border border-gray-200 rounded-lg py-3 md:py-3 px-3 md:px-5 bg-gray-50 font-semibold text-[10px] md:text-xs text-gray-700">
 
       {/* ID */}
       <div className="w-[40px]">ID</div>

@@ -23,7 +23,7 @@ export default function SortDropdown({ value, onChange }) {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 cursor-pointer border border-muted rounded-lg bg-white hover:bg-muted/20 text-xs"
+        className="flex rounded-full items-center gap-2 p-2 md:px-4 md:py-2 cursor-pointer border border-muted md:rounded-lg bg-white hover:bg-muted/20 text-xs"
       >
         
         <TbArrowsSort size={18} className="md:hidden" />
