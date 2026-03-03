@@ -396,6 +396,9 @@
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
+  .h-64 {
+    height: calc(var(--spacing) * 64);
+  }
   .h-\[calc\(100vh-3rem\)\] {
     height: calc(100vh - 3rem);
   }
@@ -760,6 +763,15 @@
   .bg-yellow-100 {
     background-color: var(--color-yellow-100);
   }
+  .bg-\[image\:repeating-linear-gradient\(45deg\,transparent\,transparent_10px\,theme\(colors\.slate\.100\)_10px\,theme\(colors\.slate\.100\)_20px\)\] {
+    background-image: repeating-linear-gradient(45deg,transparent,transparent 10px,oklch(96.8% 0.007 247.896) 10px,oklch(96.8% 0.007 247.896) 20px);
+  }
+  .bg-\[linear-gradient\(45deg\,\#e5e7eb_25\%\,transparent_25\%\,transparent_50\%\,\#e5e7eb_50\%\,\#e5e7eb_75\%\,transparent_75\%\,transparent\)\] {
+    background-image: linear-gradient(45deg,#e5e7eb 25%,transparent 25%,transparent 50%,#e5e7eb 50%,#e5e7eb 75%,transparent 75%,transparent);
+  }
+  .bg-\[length\:4px_4px\] {
+    background-size: 4px 4px;
+  }
   .object-cover {
     object-fit: cover;
   }
@@ -780,6 +792,9 @@
   }
   .p-6 {
     padding: calc(var(--spacing) * 6);
+  }
+  .p-8 {
+    padding: calc(var(--spacing) * 8);
   }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);

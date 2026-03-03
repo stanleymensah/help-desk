@@ -99,40 +99,46 @@ export default function Dashboard() {
 
   return (
     <div className="text-xs flex flex-col gap-6">
-      <div className="flex flex-col">
-        <span className="text-lg font-semibold">Dashboard</span>
-        <span>
-          Welcome back! Here's what is going on with your ticketing so far.
-        </span>
-      </div>
-
-      {isPending && <Loader name="Loading dashboard" />}
-
       {error && <span>Error: {error.message}</span>}
 
+      {isPending && (
+        <div className="w-full flex justify-center items-center">
+          <Loader name="Loading dashboard" />
+        </div>
+      )}
+
       {!isPending && (
-        <div className="flex flex-col gap-3">
-          <div className="grid grid-cols-3 gap-1 md:flex md:overflow-hidden">
-            {ticketStats.map((stat) => (
-              <TicketStatCard
-                key={stat.title}
-                title={stat.title}
-                number={stat.number}
-                icon={stat.icon}
-                color={stat.color}
-              />
-            ))}
+        <>
+          <div className="flex flex-col">
+            <span className="text-lg font-semibold">Dashboard</span>
+            <span>
+              Welcome back! Here's what is going on with your ticketing so far.
+            </span>
           </div>
 
-          <div className="min-h-30 rounded-lg w-full flex flex-col md:flex-row gap-2">
-            <div className="border border-gray-300 rounded-lg p-2 md:w-1/2">
-              <TicketsByStatusChart data={ticketStatusesData} />
+          <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-3 gap-1 md:flex md:overflow-hidden">
+              {ticketStats.map((stat) => (
+                <TicketStatCard
+                  key={stat.title}
+                  title={stat.title}
+                  number={stat.number}
+                  icon={stat.icon}
+                  color={stat.color}
+                />
+              ))}
             </div>
-            <div className="border bg-transparent border-gray-300 rounded-lg p-2 md:w-1/2">
-              <TicketsByPriorityChart data={ticketsPrioritiesData} />
+
+            <div className="min-h-30 rounded-lg w-full flex flex-col md:flex-row gap-2">
+              <div className="border border-gray-300 rounded-lg p-2 md:w-1/2">
+                <TicketsByStatusChart data={ticketStatusesData} />
+              </div>
+              <div className="border bg-transparent border-gray-300 rounded-lg p-2 md:w-1/2">
+                <TicketsByPriorityChart data={ticketsPrioritiesData} />
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
