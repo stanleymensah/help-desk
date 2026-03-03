@@ -3,28 +3,33 @@ import TicketHeader from "../../components/tickets/TicketHeader";
 import TicketsList from "../../components/tickets/TicketsList";
 import TicketModals from "../../components/tickets/TicketModals";
 import Pagination from "../../components/common/Pagination";
-import FilterDropdown from "../../components/common/FilterDropdown";
-import SortDropdown from "../../components/common/SortDropdown";
+import FilterDropdown from "../../components/common/FilterDropdown";  
 import useTickets from "../../hooks/useTickets";
+import DateRangeFilter from "../../components/common/DateRangeFilter";
 import { useTicketFilters } from "../../hooks/useTicketFilters";
 import { useTicketActions } from "../../hooks/useTicketActions";
 import usePagination from "../../hooks/usePagination";
 import useFilterTickets from "../../hooks/useFilterTickets";
-import useSortTickets from "../../hooks/useSortTickets";
 import { useState } from "react";
+import {useDateFilter} from "../../hooks/useDateFilter";
 
 export default function TicketsPage() {
   const { data: tickets = [], isPending, error } = useTickets();
-  const [sortBy, setSortBy] = useState("default");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
-  const [filterBy, setFilterBy] = useState("all");
   const { searchTerm, setSearchTerm, filteredTickets } =
     useTicketFilters(tickets);
+  const [filterBy, setFilterBy] = useState("all");
   const statusPriorityFiltered = useFilterTickets(filteredTickets, filterBy);
-  const sortedTickets = useSortTickets(statusPriorityFiltered, sortBy);
+  const dateFiltered = useDateFilter(
+    statusPriorityFiltered,
+    endDate,
+    startDate,
+  );
 
   const {
-    currentPage,
+    currentPage,  
     totalPages,
     currentItems,
     goToPage,
@@ -32,7 +37,7 @@ export default function TicketsPage() {
     prevPage,
     hasNextPage,
     hasPrevPage,
-  } = usePagination(sortedTickets, 10);
+  } = usePagination(dateFiltered, 10);
 
   const {
     editingTicket,
@@ -45,10 +50,14 @@ export default function TicketsPage() {
     handleDelete,
   } = useTicketActions();
 
+  const handleClearDateRange = () => {
+    setStartDate(null);
+    setEndDate(null);
+  };
+
   return (
     <div className="container flex flex-col gap-3">
       <div className="flex justify-center gap-2 text-xs">
-
         <SearchBar
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -56,7 +65,13 @@ export default function TicketsPage() {
         />
         <FilterDropdown value={filterBy} onChange={setFilterBy} />
 
-        <SortDropdown value={sortBy} onChange={setSortBy} />
+        <DateRangeFilter
+          startDate={startDate}
+          endDate={endDate}
+          onStartChange={setStartDate}
+          onEndChange={setEndDate}
+          onClear={handleClearDateRange}
+        />
       </div>
 
       <TicketHeader />
