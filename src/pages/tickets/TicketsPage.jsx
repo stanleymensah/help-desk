@@ -3,16 +3,21 @@ import TicketHeader from "../../components/tickets/TicketHeader";
 import TicketsList from "../../components/tickets/TicketsList";
 import TicketModals from "../../components/tickets/TicketModals";
 import Pagination from "../../components/common/Pagination";
+import SortDropdown from "../../components/common/SortDropdown";
 import useTickets from "../../hooks/useTickets";
 import { useTicketFilters } from "../../hooks/useTicketFilters";
 import { useTicketActions } from "../../hooks/useTicketActions";
 import usePagination from "../../hooks/usePagination";
+import useSortTickets from "../../hooks/useSortTickets";
+import { useState } from "react";
 
 export default function TicketsPage() {
   const { data: tickets = [], isPending, error } = useTickets();
+  const [sortBy, setSortBy] = useState("default");
 
   const { searchTerm, setSearchTerm, filteredTickets } =
     useTicketFilters(tickets);
+  const sortedTickets = useSortTickets(filteredTickets, sortBy);
 
   const {
     currentPage,
@@ -23,7 +28,7 @@ export default function TicketsPage() {
     prevPage,
     hasNextPage,
     hasPrevPage,
-  } = usePagination(filteredTickets, 10);
+  } = usePagination(sortedTickets, 10);
 
   const {
     editingTicket,
@@ -38,12 +43,14 @@ export default function TicketsPage() {
 
   return (
     <div className="container flex flex-col gap-3">
-      <div className="flex justify-center text-xs">
+      <div className="flex justify-center gap-2 text-xs">
         <SearchBar
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search ticket by title, email, description..."
         />
+
+        <SortDropdown value={sortBy} onChange={setSortBy} />
       </div>
 
       <TicketHeader />

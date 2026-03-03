@@ -11,7 +11,7 @@ export default function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <ToastContainer position="top-center" autoClose={2000} />
+          <ToastContainer hideProgressBar position="top-center" autoClose={2000} />
           <RouterProvider router={router} />
         </ThemeProvider>
       </QueryClientProvider>

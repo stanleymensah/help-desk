@@ -11,6 +11,7 @@ import TicketsByStatusChart from "./TicketsByStatusChart";
 import TicketsByPriorityChart from "./TicketsByPriorityChart";
 import TicketStatCard from "./TicketStatCard";
 import useTickets from "../../hooks/useTickets";
+import Loader from "../../components/common/Loader";
 
 export default function Dashboard() {
   const { data: tickets = [], isPending, error } = useTickets();
@@ -18,8 +19,12 @@ export default function Dashboard() {
   const stats = useMemo(() => {
     const allTickets = tickets.length;
     const openTickets = tickets.filter((t) => t.status === "open").length;
-    const inProgressTickets = tickets.filter((t) => t.status === "in-progress").length;
-    const resolvedTickets = tickets.filter((t) => t.status === "resolved").length;
+    const inProgressTickets = tickets.filter(
+      (t) => t.status === "in-progress",
+    ).length;
+    const resolvedTickets = tickets.filter(
+      (t) => t.status === "resolved",
+    ).length;
     const lowPriority = tickets.filter((t) => t.priority === "low").length;
     const midPriority = tickets.filter((t) => t.priority === "medium").length;
     const highPriority = tickets.filter((t) => t.priority === "high").length;
@@ -101,7 +106,7 @@ export default function Dashboard() {
         </span>
       </div>
 
-      {isPending && <span>Loading...</span>}
+      {isPending && <Loader name="Loading dashboard" />}
 
       {error && <span>Error: {error.message}</span>}
 
