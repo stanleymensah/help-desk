@@ -2,12 +2,6 @@ import { NavLink } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { PiTicket } from "react-icons/pi";
 import { useState } from "react";
-import { LuRepeat } from "react-icons/lu";
-import { AiOutlineStop } from "react-icons/ai";
-import { IoLayersOutline } from "react-icons/io5";
-import { HiMiniChevronUp } from "react-icons/hi2";
-import { HiMiniChevronDown } from "react-icons/hi2";
-import { HiMiniEquals } from "react-icons/hi2";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
 export default function Sidebar() {
@@ -40,38 +34,8 @@ export default function Sidebar() {
           </NavLink>
 
           <NavLink to="/tickets" className={linkStyle}>
-            <IoLayersOutline size={18} className="flex-shrink-0" />
-            {!collapsed && <span>All Tickets</span>}
-          </NavLink>
-
-          <NavLink to="/tickets/open" className={linkStyle}>
             <PiTicket size={18} className="flex-shrink-0" />
-            {!collapsed && <span>Open Tickets</span>}
-          </NavLink>
-
-          <NavLink to="/tickets/in-progress" className={linkStyle}>
-            <LuRepeat size={18} className="flex-shrink-0" />
-            {!collapsed && <span>In-Progress</span>}
-          </NavLink>
-
-          <NavLink to="/tickets/resolved" className={linkStyle}>
-            <AiOutlineStop size={18} className="flex-shrink-0" />
-            {!collapsed && <span>Resolved</span>}
-          </NavLink>
-
-          <NavLink to="/tickets/high" className={linkStyle}>
-            <HiMiniChevronUp size={18} className="flex-shrink-0" />
-            {!collapsed && <span>High</span>}
-          </NavLink>
-
-          <NavLink to="/tickets/medium" className={linkStyle}>
-            <HiMiniEquals size={18} className="flex-shrink-0" />
-            {!collapsed && <span>Medium</span>}
-          </NavLink>
-
-          <NavLink to="/tickets/low" className={linkStyle}>
-            <HiMiniChevronDown size={18} className="flex-shrink-0" />
-            {!collapsed && <span>Low</span>}
+            {!collapsed && <span>All Tickets</span>}
           </NavLink>
         </div>
 

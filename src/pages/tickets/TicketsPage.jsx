@@ -3,11 +3,13 @@ import TicketHeader from "../../components/tickets/TicketHeader";
 import TicketsList from "../../components/tickets/TicketsList";
 import TicketModals from "../../components/tickets/TicketModals";
 import Pagination from "../../components/common/Pagination";
+import FilterDropdown from "../../components/common/FilterDropdown";
 import SortDropdown from "../../components/common/SortDropdown";
 import useTickets from "../../hooks/useTickets";
 import { useTicketFilters } from "../../hooks/useTicketFilters";
 import { useTicketActions } from "../../hooks/useTicketActions";
 import usePagination from "../../hooks/usePagination";
+import useFilterTickets from "../../hooks/useFilterTickets";
 import useSortTickets from "../../hooks/useSortTickets";
 import { useState } from "react";
 
@@ -15,9 +17,11 @@ export default function TicketsPage() {
   const { data: tickets = [], isPending, error } = useTickets();
   const [sortBy, setSortBy] = useState("default");
 
+  const [filterBy, setFilterBy] = useState("all");
   const { searchTerm, setSearchTerm, filteredTickets } =
     useTicketFilters(tickets);
-  const sortedTickets = useSortTickets(filteredTickets, sortBy);
+  const statusPriorityFiltered = useFilterTickets(filteredTickets, filterBy);
+  const sortedTickets = useSortTickets(statusPriorityFiltered, sortBy);
 
   const {
     currentPage,
@@ -44,6 +48,8 @@ export default function TicketsPage() {
   return (
     <div className="container flex flex-col gap-3">
       <div className="flex justify-center gap-2 text-xs">
+        <FilterDropdown value={filterBy} onChange={setFilterBy} />
+
         <SearchBar
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
