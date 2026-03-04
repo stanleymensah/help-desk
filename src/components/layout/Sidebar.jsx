@@ -28,12 +28,12 @@ export default function Sidebar() {
         }`}
       >
         <div className="flex flex-col gap-1 p-2">
-          <NavLink to="/" className={linkStyle}>
+          <NavLink to="/" className={linkStyle} onClick={() => setCollapsed(true)}>
             <RxDashboard size={18} className="flex-shrink-0" />
             {!collapsed && <span>Overview</span>}
           </NavLink>
 
-          <NavLink to="/tickets" className={linkStyle}>
+          <NavLink to="/tickets" className={linkStyle} onClick={() => setCollapsed(true)}>
             <PiTicket size={18} className="flex-shrink-0" />
             {!collapsed && <span>All Tickets</span>}
           </NavLink>
