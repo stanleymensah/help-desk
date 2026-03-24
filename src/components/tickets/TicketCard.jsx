@@ -6,7 +6,7 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
   return (
     <div
       onClick={() => onView(ticket)}
-      className="flex items-center justify-between border border-primary rounded-lg py-3 md:py-3 px-3 md:px-5 cursor-pointer hover:shadow-sm transition text-[10px] md:text-xs"
+      className="flex items-center justify-between border border-gray-300 rounded-lg py-3 md:py-3 px-3 md:px-5 cursor-pointer hover:shadow-sm transition text-[10px] md:text-xs"
     >
       {/* ID */}
       <div className="w-[2.5rem] font-semibold text-gray-700">#{ticket.id}</div>
@@ -52,7 +52,7 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            onDelete(ticket.id);
+            onDelete(ticket);
           }}
           className="bg-red-50 hover:bg-red-100 p-1 md:p-1.5 rounded-md text-red-600"
         >

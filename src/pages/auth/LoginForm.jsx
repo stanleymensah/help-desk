@@ -7,9 +7,7 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm();
 
-   const onSubmit = (data) => {
-    console.log("Login Data: ", data);
-  };
+  const onSubmit = () => {};
 
   return (
     <>
@@ -27,9 +25,8 @@ export default function LoginForm() {
                 {...register("logEmail", {required: "Email is required"})}
                   type="email"
                   placeholder="Enter your email address"
-                  className="p-3 border border-primary/50 rounded-lg focus:outline-none focus:border-primary"
+                  className={`p-3 border rounded-lg focus:outline-none focus:border-primary ${errors.logEmail ? "border-red-500" : "border-primary/50"}`}
                 />
-                {errors.logEmail && <span className="text-red-500">{errors.logEmail?.message}</span> }
               </div>
 
               <div className="flex flex-col gap-2">
@@ -38,9 +35,8 @@ export default function LoginForm() {
                 {...register("logPassword", {required: "Password is required!"})}
                   type="password"
                   placeholder="Enter your password"
-                  className="p-3 border border-primary/50 rounded-lg focus:outline-none focus:border-primary"
+                  className={`p-3 border rounded-lg focus:outline-none focus:border-primary ${errors.logPassword ? "border-red-500" : "border-primary/50"}`}
                 />
-                {errors.logPassword && <span className="text-red-500">{errors.logPassword?.message}</span> }
               </div>
 
               <button

@@ -4,7 +4,7 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
   if (!ticket) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Ticket Details">
+    <Modal isOpen={isOpen} onClose={onClose} title="Ticket Details" size="md">
       <div className="space-y-4">
         {/* ID and Title */}
         <div>
@@ -94,10 +94,10 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2 pt-4 border-t">
+        <div className="flex items-center justify-center gap-2 pt-4 border-t">
           <button
             onClick={onClose}
-            className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300"
+            className="flex bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300 w-32 justify-center transition cursor-pointer text-base"
           >
             Close
           </button>

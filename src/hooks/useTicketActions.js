@@ -9,6 +9,9 @@ export function useTicketActions() {
 
   const [editingTicket, setEditingTicket] = useState(null);
   const [viewingTicket, setViewingTicket] = useState(null);
+  const [deletingTicket, setDeletingTicket] = useState(null);
+  const [isEditDirty, setIsEditDirty] = useState(false);
+  const [confirmDiscardEditOpen, setConfirmDiscardEditOpen] = useState(false);
 
   // View handlers
   const handleView = (ticket) => {
@@ -22,10 +25,36 @@ export function useTicketActions() {
   // Edit handlers
   const handleEdit = (ticket) => {
     setEditingTicket(ticket);
+    setIsEditDirty(false);
+    setConfirmDiscardEditOpen(false);
   };
 
   const handleCloseEdit = () => {
     setEditingTicket(null);
+    setIsEditDirty(false);
+    setConfirmDiscardEditOpen(false);
+  };
+
+  const handleRequestCloseEdit = () => {
+    if (isEditDirty) {
+      setConfirmDiscardEditOpen(true);
+      return;
+    }
+
+    handleCloseEdit();
+  };
+
+  const handleKeepEditing = () => {
+    setConfirmDiscardEditOpen(false);
+  };
+
+  const handleDiscardChanges = () => {
+    setConfirmDiscardEditOpen(false);
+    handleCloseEdit();
+  };
+
+  const handleEditDirtyChange = (dirtyState) => {
+    setIsEditDirty(dirtyState);
   };
 
   const handleSubmit = (formData) => {
@@ -44,18 +73,44 @@ export function useTicketActions() {
   };
 
   // Delete handler
-  const handleDelete = (id) => {
-    deleteTicket(id);
+  const handleDelete = (ticket) => {
+    setDeletingTicket(ticket);
+  };
+
+  const handleCancelDelete = () => {
+    setDeletingTicket(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (!deletingTicket) return;
+
+    deleteTicket(deletingTicket.id, {
+      onSuccess: () => {
+        toast.success("Ticket deleted successfully!");
+        setDeletingTicket(null);
+      },
+      onError: () => {
+        toast.error("Failed to delete ticket");
+      },
+    });
   };
 
   return {
     editingTicket,
     viewingTicket,
+    deletingTicket,
+    confirmDiscardEditOpen,
     handleView,
     handleCloseView,
     handleEdit,
     handleCloseEdit,
+    handleRequestCloseEdit,
+    handleKeepEditing,
+    handleDiscardChanges,
+    handleEditDirtyChange,
     handleSubmit,
     handleDelete,
+    handleCancelDelete,
+    handleConfirmDelete,
   };
 }

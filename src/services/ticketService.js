@@ -67,7 +67,6 @@ export const updateTicket = async ({ id, updates }) => {
 
 // Delete Ticket
 export const deleteTicket = async (id) => {
-  console.log("Deleting ID:", id);
   initializeTickets();
   const tickets = localStorage.getItem(STORAGE_KEY);
   const allTickets = JSON.parse(tickets);

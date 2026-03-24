@@ -8,7 +8,16 @@ import {
 } from "recharts";
 
 export default function TicketsByPriorityChart({ data }) {
-  const COLORS = [ "teal","orange","red"];
+  const COLORS = ["#14b8a6", "#f59e0b", "#ef4444"];
+  const hasData = data.some((item) => item.value > 0);
+
+  if (!hasData) {
+    return (
+      <div className="min-w-[300px] h-[300px] flex items-center justify-center text-gray-500 text-sm">
+        No priority data yet.
+      </div>
+    );
+  }
 
   return (
     <div className="min-w-[300px]">
@@ -20,19 +29,16 @@ export default function TicketsByPriorityChart({ data }) {
             cx="50%"
             cy="50%"
             labelLine={false}
-            label={(entry) => entry.name}
+            label={({ name, value }) => `${name}: ${value}`}
             outerRadius={80}
-            fill="#8884d8"
+            innerRadius={45}
             dataKey="value"
           >
             {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
+              <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip formatter={(value) => [`${value}`, "Tickets"]} />
           <Legend />
         </PieChart>
       </ResponsiveContainer>

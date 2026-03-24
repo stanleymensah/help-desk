@@ -5,6 +5,7 @@ import StatsCards from "../../components/dashboard/StatsCards";
 import ChartsSection from "../../components/dashboard/ChartsSection";
 
 export default function Dashboard() {
+
   const { data: tickets = [], isPending, error } = useTickets();
   const stats = useTicketStats(tickets);
 

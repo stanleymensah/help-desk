@@ -42,12 +42,19 @@ export default function TicketsPage() {
   const {
     editingTicket,
     viewingTicket,
+    deletingTicket,
+    confirmDiscardEditOpen,
     handleView,
     handleCloseView,
     handleEdit,
-    handleCloseEdit,
+    handleRequestCloseEdit,
+    handleKeepEditing,
+    handleDiscardChanges,
+    handleEditDirtyChange,
     handleSubmit,
     handleDelete,
+    handleCancelDelete,
+    handleConfirmDelete,
   } = useTicketActions();
 
   const handleClearDateRange = () => {
@@ -103,9 +110,16 @@ export default function TicketsPage() {
       <TicketModals
         viewingTicket={viewingTicket}
         editingTicket={editingTicket}
+        deletingTicket={deletingTicket}
+        confirmDiscardEditOpen={confirmDiscardEditOpen}
         onCloseView={handleCloseView}
-        onCloseEdit={handleCloseEdit}
-        onSubmit={handleSubmit}
+        onRequestCloseEdit={handleRequestCloseEdit}
+        onKeepEditing={handleKeepEditing}
+        onDiscardChanges={handleDiscardChanges}
+        onCancelDelete={handleCancelDelete}
+        onConfirmDelete={handleConfirmDelete}
+        onEditDirtyChange={handleEditDirtyChange}
+        onEditSubmit={handleSubmit}
       />
     </div>
   );

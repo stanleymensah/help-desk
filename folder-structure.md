@@ -74,12 +74,6 @@ helpdesk-app/
 │   │   │
 │   │   └── NotFound.jsx
 │   │
-│   ├── context/
-│   │   ├── AuthContext.jsx
-│   │   ├── TicketContext.jsx
-│   │   ├── NotificationContext.jsx
-│   │   └── ThemeContext.jsx
-│   │
 │   ├── hooks/
 │   │   ├── useForm.js
 │   │   ├── useTickets.js
@@ -146,9 +140,6 @@ Full page views that map to routes:
 - **tickets/** - Ticket management pages
 - **settings/** - User settings and preferences
 
-### `src/context/`
-Global state management using React Context API (auth, tickets, notifications, theme)
-
 ### `src/hooks/`
 Custom React hooks for reusable logic (forms, API calls, auth, etc.)
 
@@ -166,7 +157,7 @@ Global CSS files, variables, and utility classes
 
 ## Key Files
 
-- **App.jsx** - Main app component with providers and router
+- **App.jsx** - Main app component with router, query client, and toasts
 - **main.jsx** - Entry point that renders App into the DOM
 - **vite.config.js** - Vite configuration (aliases, plugins)
 - **tailwind.config.js** - Tailwind CSS configuration
@@ -177,8 +168,7 @@ Global CSS files, variables, and utility classes
 
 1. Start with routes and basic pages
 2. Build layout components (navbar, sidebar, footer)
-3. Create context providers for global state
-4. Build service functions for API calls
-5. Create custom hooks for state management
-6. Build page-specific components
-7. Add reusable common components as needed
+3. Build service functions for API calls
+4. Create custom hooks for state management
+5. Build page-specific components
+6. Add reusable common components as needed

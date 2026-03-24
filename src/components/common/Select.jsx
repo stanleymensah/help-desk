@@ -9,14 +9,13 @@ export default function Select({
   placeholder = "Select an option",
 }) {
   return (
-    <>
-    <div className="flex flex-col gap-2 w-full">
-      <label>
+    <div className="flex flex-col gap-1 w-full">
+      <label className="text-xs font-medium text-gray-700">
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <select
         {...register(name, validation)}
-        className="border p-2 focus:outline-none focus:border-primary w-full"
+        className={`w-full h-9 border rounded-md px-3 text-xs focus:outline-none focus:border-primary ${error ? "error-border" : "border-gray-300"}`}
       >
         <option value="">{placeholder}</option>
         {options.map((option) => (
@@ -25,9 +24,6 @@ export default function Select({
           </option>
         ))}
       </select>
-      {error && <span className="text-red-500">{error.message}</span>}
     </div>
-      
-    </>
   );
 }

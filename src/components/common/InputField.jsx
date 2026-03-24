@@ -9,8 +9,8 @@ export default function Input({
   validation = {},
 }) {
   return (
-    <div className="flex flex-col">
-      <label className="text-xs mb-2">
+    <div className="flex flex-col gap-1 w-full">
+      <label className="text-xs font-medium text-gray-700">
         {label}
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
@@ -18,11 +18,8 @@ export default function Input({
         {...register(name, validation)}
         type={type}
         placeholder={placeholder}
-        className="border p-2 mb-4 focus:outline-none focus:border-primary"
+        className={`w-full h-9 border rounded-md px-3 text-xs focus:outline-none focus:border-primary ${error ? "error-border" : "border-gray-300"}`}
       />
-      {error && (
-        <span className="text-red-500 text-xs -mt-3 mb-4">{error.message}</span>
-      )}
     </div>
   );
 }

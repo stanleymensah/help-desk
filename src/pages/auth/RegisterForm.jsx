@@ -8,9 +8,7 @@ export default function RegisterForm() {
         formState: { errors },
       } = useForm();
 
-      const onSubmit = (data) => {
-    console.log("Signup Data: ",data);
-  };
+  const onSubmit = () => {};
 
   return (
     <>
@@ -32,18 +30,13 @@ export default function RegisterForm() {
                     required: "Username is required!",
                     minLength: {
                       value: 3,
-                      message: "Nig, your name ain't 2 letters",
+                      message: "Username must be at least 3 characters",
                     },
                   })}
                   type="text"
                   placeholder="Enter a username"
-                  className="p-3 border border-primary/50 rounded-lg focus:outline-none focus:border-primary"
+                  className={`p-3 border rounded-lg focus:outline-none focus:border-primary ${errors.username ? "border-red-500" : "border-primary/50"}`}
                 />
-                {errors.username && (
-                  <span className="text-red-500">
-                    {errors.username.message}
-                  </span>
-                )}
               </div>
 
               <div className="flex flex-col gap-2">
@@ -53,16 +46,13 @@ export default function RegisterForm() {
                     required: "Email is required!",
                     minLength: {
                       value: 8,
-                      message: "Nig, this email too short!",
+                      message: "Email must be at least 8 characters",
                     },
                   })}
                   type="email"
                   placeholder="Enter your email address"
-                  className="p-3 border border-primary/50 rounded-lg focus:outline-none focus:border-primary"
+                  className={`p-3 border rounded-lg focus:outline-none focus:border-primary ${errors.email ? "border-red-500" : "border-primary/50"}`}
                 />
-                {errors.email && (
-                  <span className="text-red-500">{errors.email.message}</span>
-                )}
               </div>
 
               <div className="flex flex-col gap-2">
@@ -72,18 +62,13 @@ export default function RegisterForm() {
                     required: "Password is required!",
                     minLength: {
                       value: 8,
-                      message: "Too short homie, giime more than 8",
+                      message: "Password must be at least 8 characters",
                     },
                   })}
                   type="password"
                   placeholder="Enter your password"
-                  className="p-3 border border-primary/50 rounded-lg focus:outline-none focus:border-primary"
+                  className={`p-3 border rounded-lg focus:outline-none focus:border-primary ${errors.password ? "border-red-500" : "border-primary/50"}`}
                 />
-                {errors.password && (
-                  <span className="text-red-500">
-                    {errors.password.message}
-                  </span>
-                )}
               </div>
 
               <div className="flex flex-col gap-2">
@@ -100,13 +85,8 @@ export default function RegisterForm() {
                   })}
                   type="password"
                   placeholder="Confirm your password"
-                  className="p-3 border border-primary/50 rounded-lg focus:outline-none focus:border-primary"
+                  className={`p-3 border rounded-lg focus:outline-none focus:border-primary ${errors.confirmPassword ? "border-red-500" : "border-primary/50"}`}
                 />
-                {errors.confirmPassword && (
-                  <span className="text-red-500">
-                    {errors.confirmPassword.message}
-                  </span>
-                )}
               </div>
 
               <button

@@ -9,8 +9,8 @@ export default function Textarea({
   rows = 4,
 }) {
   return (
-    <>
-      <label>
+    <div className="flex flex-col gap-1">
+      <label className="text-xs font-medium text-gray-700">
         {label}
         {required && <span className="text-red-500">*</span>}
       </label>
@@ -18,10 +18,8 @@ export default function Textarea({
         {...register(name, validation)}
         placeholder={placeholder}
         rows={rows}
-        className="border focus:outline-none focus:border-primary w-full p-2 h-40 line-clamp-1"
+        className={`w-full border rounded-md px-3 py-2 text-xs min-h-24 max-h-40 resize-y focus:outline-none focus:border-primary ${error ? "error-border" : "border-gray-300"}`}
       ></textarea>
-
-      {error && <span className="text-red-500">{error.message}</span>}
-    </>
+    </div>
   );
 }
