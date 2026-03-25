@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { HiMiniChevronDown } from "react-icons/hi2";
+import { ChevronDown } from "lucide-react";
 
 const Dropdown = ({ name, items, icon, }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,7 @@ const Dropdown = ({ name, items, icon, }) => {
           {icon}
           {name}
         </span>
-        <HiMiniChevronDown
+        <ChevronDown
           size={16}
           className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { HiMiniChevronDown } from "react-icons/hi2";
-import { TbArrowsSort } from "react-icons/tb";
+import { ArrowUpDown, ChevronDown } from "lucide-react";
 
 export default function SortDropdown({ value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,9 +25,9 @@ export default function SortDropdown({ value, onChange }) {
         className="flex rounded-full items-center gap-2 p-2 md:px-4 md:py-2 cursor-pointer border border-muted md:rounded-lg bg-white hover:bg-muted/20 text-xs"
       >
         
-        <TbArrowsSort size={18} className="md:hidden" />
+        <ArrowUpDown size={18} className="md:hidden" />
         <span className="hidden md:inline">{selectedLabel}</span>
-        <HiMiniChevronDown
+        <ChevronDown
           className={`hidden md:block transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
       </button>

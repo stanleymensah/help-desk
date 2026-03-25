@@ -1,5 +1,4 @@
-import { TbEdit } from "react-icons/tb";
-import { HiOutlineTrash } from "react-icons/hi";
+import { Pencil, Trash2 } from "lucide-react";
 import Badge from "../common/Badge";
 
 export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
@@ -46,7 +45,7 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
             onEdit(ticket);
           }}
         >
-          <TbEdit size={14} />
+          <Pencil size={14} />
         </button>
 
         <button
@@ -56,7 +55,7 @@ export default function TicketCard({ ticket, onEdit, onDelete, onView }) {
           }}
           className="bg-red-50 hover:bg-red-100 p-1 md:p-1.5 rounded-md text-red-600"
         >
-          <HiOutlineTrash size={14} />
+          <Trash2 size={14} />
         </button>
       </div>
     </div>

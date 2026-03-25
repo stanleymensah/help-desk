@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HiCalendar, HiX } from "react-icons/hi";
+import { Calendar, X } from "lucide-react";
 
 export default function DateRangeFilter({ startDate, endDate, onStartChange, onEndChange, onClear }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function DateRangeFilter({ startDate, endDate, onStartChange, onE
             : "border-gray-300 bg-white hover:bg-gray-50"
         }`}
       >
-        <HiCalendar size={18} />
+        <Calendar size={18} />
         <span className="hidden md:inline">
           {hasDateRange ? "Date Filtered" : "Filter by Date"}
         </span>
@@ -38,7 +38,7 @@ export default function DateRangeFilter({ startDate, endDate, onStartChange, onE
                 onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-gray-600"
               >
-                <HiX size={18} />
+                <X size={18} />
               </button>
             </div>
 

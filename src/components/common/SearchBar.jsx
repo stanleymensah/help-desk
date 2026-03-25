@@ -1,4 +1,4 @@
-import { CiSearch } from "react-icons/ci";
+import { Search } from "lucide-react";
 
 export default function SearchBar({ value, onChange, placeholder="Search" }) {
   return (
@@ -11,7 +11,7 @@ export default function SearchBar({ value, onChange, placeholder="Search" }) {
           placeholder={placeholder}
           className="outline-none ring-0 border-none focus:ring-0 focus:outline-none focus:border-transparent active:border-none w-full"
         />
-        <CiSearch />
+        <Search size={16} />
       </div>
     </>
   );

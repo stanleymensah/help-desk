@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { RxDashboard } from "react-icons/rx";
-import { PiTicket } from "react-icons/pi";
+import { ChevronLeft, ChevronRight, LayoutDashboard, Ticket } from "lucide-react";
 import { useState } from "react";
-import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(true);
@@ -29,12 +27,12 @@ export default function Sidebar() {
       >
         <div className="flex flex-col gap-1 p-2">
           <NavLink to="/" className={linkStyle} onClick={() => setCollapsed(true)}>
-            <RxDashboard size={18} className="flex-shrink-0" />
+            <LayoutDashboard size={18} className="flex-shrink-0" />
             {!collapsed && <span>Overview</span>}
           </NavLink>
 
           <NavLink to="/tickets" className={linkStyle} onClick={() => setCollapsed(true)}>
-            <PiTicket size={18} className="flex-shrink-0" />
+            <Ticket size={18} className="flex-shrink-0" />
             {!collapsed && <span>All Tickets</span>}
           </NavLink>
         </div>
@@ -44,7 +42,7 @@ export default function Sidebar() {
           onClick={() => setCollapsed(!collapsed)}
           className="absolute -right-3 top-6 bg-primary text-white p-1 rounded-full cursor-pointer shadow-md hover:scale-105 transition z-10"
         >
-          {collapsed ? <HiOutlineChevronRight size={20} /> : <HiOutlineChevronLeft size={20} />}
+          {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
       </div>
 

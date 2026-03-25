@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { HiMiniChevronDown } from "react-icons/hi2";
-import { RxMixerHorizontal } from "react-icons/rx";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 
 export default function FilterDropdown({value, onChange}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,9 +28,9 @@ export default function FilterDropdown({value, onChange}) {
           className="flex rounded-full items-center gap-2 p-2 md:px-4 md:py-2 cursor-pointer border border-gray-300 md:rounded-lg bg-white hover:bg-muted/20 text-xs"
         >
           
-          <RxMixerHorizontal size={18} className="md:hidden" />
+          <SlidersHorizontal size={18} className="md:hidden" />
           <span className="hidden md:inline">{selectedLabel}</span>
-          <HiMiniChevronDown
+          <ChevronDown
             className={`hidden md:block transition-transform ${isOpen ? "rotate-180" : ""}`}
           />
         </button>

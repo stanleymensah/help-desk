@@ -1,51 +1,55 @@
-import { PiTicket } from "react-icons/pi";
-import { LuRepeat } from "react-icons/lu";
-import { AiOutlineStop } from "react-icons/ai";
-import { IoLayersOutline } from "react-icons/io5";
-import { HiMiniChevronUp, HiMiniChevronDown, HiMiniEquals } from "react-icons/hi2";
+import {
+  ChevronDown,
+  ChevronUp,
+  Layers,
+  Minus,
+  RefreshCw,
+  Ticket,
+  CircleCheckBig,
+} from "lucide-react";
 import TicketStatCard from "../../pages/dashboard/TicketStatCard";
 
 const STAT_CONFIG = [
   {
     key: "allTickets",
     title: "All Tickets",
-    icon: <IoLayersOutline />,
+    icon: <Layers />,
     color: { bg: "bg-blue-100", text: "text-blue-600" },
   },
   {
     key: "openTickets",
     title: "Open Tickets",
-    icon: <PiTicket />,
+    icon: <Ticket />,
     color: { bg: "bg-orange-100", text: "text-orange-600" },
   },
   {
     key: "inProgressTickets",
     title: "In Progress",
-    icon: <LuRepeat />,
+    icon: <RefreshCw />,
     color: { bg: "bg-purple-100", text: "text-purple-600" },
   },
   {
     key: "resolvedTickets",
     title: "Resolved Tickets",
-    icon: <AiOutlineStop />,
+    icon: <CircleCheckBig />,
     color: { bg: "bg-green-100", text: "text-green-600" },
   },
   {
     key: "lowPriority",
     title: "Low Priority",
-    icon: <HiMiniChevronDown />,
+    icon: <ChevronDown />,
     color: { bg: "bg-teal-100", text: "text-teal-600" },
   },
   {
     key: "midPriority",
     title: "Mid Priority",
-    icon: <HiMiniEquals />,
+    icon: <Minus />,
     color: { bg: "bg-yellow-100", text: "text-yellow-600" },
   },
   {
     key: "highPriority",
     title: "High Priority",
-    icon: <HiMiniChevronUp />,
+    icon: <ChevronUp />,
     color: { bg: "bg-red-100", text: "text-red-600" },
   },
 ];
