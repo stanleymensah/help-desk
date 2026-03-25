@@ -50,9 +50,13 @@ export default function TicketForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="w-full max-w-md mx-auto space-y-3">
-
-      <div className="text-gray-500">(<span className="text-red-500">*</span>) Fields are required</div>
+    <form
+      onSubmit={handleSubmit(handleFormSubmit)}
+      className="w-full max-w-md mx-auto space-y-3"
+    >
+      <div className="text-gray-500">
+        (<span className="text-red-500">*</span>) Fields are required
+      </div>
 
       <Input
         label="Title"
@@ -70,35 +74,34 @@ export default function TicketForm({
         }}
       />
 
-<div className="flex justify-between gap-2">
+      <div className="flex justify-between gap-2">
+        <Input
+          label="User Email"
+          name="email"
+          type="email"
+          register={register}
+          error={errors.email}
+          placeholder="Enter a valid email"
+          required
+          validation={{
+            required: "Email is required",
+            pattern: {
+              value: /^\S+@\S+\.\S+$/,
+              message: "Enter a valid email",
+            },
+          }}
+        />
 
-      <Input
-        label="User Email"
-        name="email"
-        type="email"
-        register={register}
-        error={errors.email}
-         placeholder="Enter a valid email"
-        required
-        validation={{
-          required: "Email is required",
-          pattern: {
-            value: /^\S+@\S+\.\S+$/,
-            message: "Enter a valid email",
-          },
-        }}
-      />
-
-      <Select
-        label="Priority"
-        name="priority"
-        options={priorityOptions}
-        register={register}
-        error={errors.priority}
-        required
-        validation={{ required: "Priority is required" }}
-      />
-</div>
+        <Select
+          label="Priority"
+          name="priority"
+          options={priorityOptions}
+          register={register}
+          error={errors.priority}
+          required
+          validation={{ required: "Priority is required" }}
+        />
+      </div>
 
       {isEdit && (
         <Select
@@ -130,12 +133,17 @@ export default function TicketForm({
 
       <div className="flex justify-end gap-2 pt-1">
         <SecondaryButton name="Cancel" doWhat={onCancel} />
-        <PrimaryButton
-          name={isEdit ? "Save Changes" : "Create Ticket"}
+        <button
           type="submit"
-          className={isEdit && !isDirty ? "opacity-50 cursor-not-allowed hover:bg-primary" : ""}
+          className={
+            isEdit && !isDirty
+              ? "opacity-50 cursor-not-allowed hover:bg-primary"
+              : "text-xs bg-primary text-white p-2 rounded-md m-1 cursor-pointer hover:bg-primary-dark"
+          }
           disabled={isEdit && !isDirty}
-        />
+        >
+          {isEdit ? "Save Changes" : "Create Ticket"}
+        </button>
       </div>
     </form>
   );

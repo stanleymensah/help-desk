@@ -9,6 +9,8 @@ import useCreateTicket from "../../hooks/useCreateTicket";
 
 export default function Layout() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isCreateDirty, setIsCreateDirty] = useState(false);
+  const [confirmDiscardCreateOpen, setConfirmDiscardCreateOpen] = useState(false);
   const { mutate: createTicket } = useCreateTicket();
   const navigate = useNavigate();
   const mainContentRef = useRef(null);
@@ -19,6 +21,30 @@ export default function Layout() {
 
   const closeCreateTicket = () => {
     setIsCreateModalOpen(false);
+    setIsCreateDirty(false);
+    setConfirmDiscardCreateOpen(false);
+  };
+
+  const handleRequestCloseCreate = () => {
+    if (isCreateDirty) {
+      setConfirmDiscardCreateOpen(true);
+      return;
+    }
+
+    closeCreateTicket();
+  };
+
+  const handleKeepCreating = () => {
+    setConfirmDiscardCreateOpen(false);
+  };
+
+  const handleDiscardCreateChanges = () => {
+    setConfirmDiscardCreateOpen(false);
+    closeCreateTicket();
+  };
+
+  const handleCreateDirtyChange = (dirtyState) => {
+    setIsCreateDirty(dirtyState);
   };
 
   const handleCreateSubmit = (formData) => {
@@ -45,15 +71,15 @@ export default function Layout() {
 
   return (
     <div className="w-full h-screen overflow-hidden flex flex-col">
-      {/* Fixed Header */}
+      
       <Header creatingTicket={openCreateTicket} />
 
-      {/* Main area - scrollable */}
+
       <main className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
+        
         <Sidebar />
 
-        {/* Main Content - ONLY THIS SCROLLS */}
+
         <div ref={mainContentRef} className="flex-1 p-3 bg-dim overflow-y-auto">
           <Outlet />
         </div>
@@ -61,15 +87,43 @@ export default function Layout() {
 
       <Modal
         isOpen={isCreateModalOpen}
-        onClose={closeCreateTicket}
+        onClose={handleRequestCloseCreate}
         title="Create Ticket"
         size="lg"
       >
         <TicketForm
           mode="create"
           onSubmit={handleCreateSubmit}
-          onCancel={closeCreateTicket}
+          onCancel={handleRequestCloseCreate}
+          onDirtyChange={handleCreateDirtyChange}
         />
+      </Modal>
+
+      <Modal
+        isOpen={confirmDiscardCreateOpen}
+        onClose={handleKeepCreating}
+        title="Discard Changes?"
+        size="sm"
+      >
+        <div className="space-y-4 text-sm">
+          <p>You have unsaved changes. Close without saving?</p>
+          <div className="flex justify-end gap-2 pt-1">
+            <button
+              type="button"
+              onClick={handleKeepCreating}
+              className="text-xs bg-transparent text-secondary p-2 rounded-md m-1 border border-secondary cursor-pointer hover:bg-secondary hover:text-white"
+            >
+              Keep Creating
+            </button>
+            <button
+              type="button"
+              onClick={handleDiscardCreateChanges}
+              className="text-xs p-2 rounded-md m-1 border cursor-pointer danger-btn"
+            >
+              Discard
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
