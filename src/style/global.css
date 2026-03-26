@@ -2,11 +2,15 @@
 
 @import "tailwindcss";
 
+@import "tw-animate-css";
+
+@import "shadcn/tailwind.css";
+
 @import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
+/* @theme {
   --color-black: #222;
   --color-primary: #0046FF;
   --color-primary-dark: #012894;
@@ -14,7 +18,7 @@
   --color-accent: #73C8D2;
   --color-tertiary: #F5F1DC;
   --color-dim: #F5F5F7;
-}
+} */
 
 * {
   font-family: "Poppins", sans-serif;

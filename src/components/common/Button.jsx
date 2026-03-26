@@ -10,7 +10,7 @@ export const PrimaryButton = ({
       onClick={doWhat}
       type={type}
       disabled={disabled}
-      className={`text-xs bg-primary text-white p-2 rounded-md m-1 cursor-pointer hover:bg-primary-dark ${className}`}
+      className={`text-xs bg-transparent text-secondary border border-secondary p-2 rounded-md m-1 cursor-pointer hover:bg-secondary hover:text-primary ${className}`}
     >
       {name}
     </button>
@@ -29,7 +29,7 @@ export const SecondaryButton = ({
       onClick={doWhat}
       type={type}
       disabled={disabled}
-      className={`text-xs bg-transparent text-secondary p-2 rounded-md m-1 border border-secondary cursor-pointer hover:bg-secondary hover:text-white ${className}`}
+      className={`text-xs bg-transparent text-primary p-2 rounded-md m-1 border border-primary cursor-pointer hover:bg-primary hover:text-white ${className}`}
     >
       {name}
     </button>

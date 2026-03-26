@@ -15,7 +15,7 @@ export default function ChartsSection({ stats }) {
   ];
 
   return (
-    <div className="min-h-30 rounded-lg w-full flex flex-col md:flex-row gap-2">
+    <div className="max-h-80 rounded-lg w-full flex flex-col md:flex-row gap-2">
       <div className="border border-gray-300 rounded-lg p-2 md:w-1/2">
         <TicketsByStatusChart data={statusData} />
       </div>

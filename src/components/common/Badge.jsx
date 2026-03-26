@@ -23,7 +23,7 @@ const Badge = ({ type, value }) => {
   }
 
   return (
-    <span className={`${classes} py-1.5 px-2 rounded-full`}>
+    <span className={`${classes} py-1.5 px-2 rounded-sm`}>
       {value}
     </span>
   );

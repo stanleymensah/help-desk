@@ -14,7 +14,7 @@ export default function TicketsByStatusChart({ data }) {
 
   if (!hasData) {
     return (
-      <div className="min-w-[300px] h-[300px] flex items-center justify-center text-gray-500 text-sm">
+      <div className="min-w-[300px] flex items-center justify-center text-gray-500 text-sm">
         No status data yet.
       </div>
     );
@@ -23,7 +23,7 @@ export default function TicketsByStatusChart({ data }) {
   return (
     <div className="min-w-[300px]">
       <h2 className="text-xl font-bold mb-4">Tickets by Status</h2>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={270}>
         <BarChart data={data}>
           <XAxis dataKey="status" tick={{ fontSize: 12 }} />
           <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />

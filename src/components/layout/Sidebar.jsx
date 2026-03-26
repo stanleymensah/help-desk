@@ -1,53 +1,64 @@
 import { NavLink } from "react-router-dom";
-import { ChevronLeft, ChevronRight, LayoutDashboard, Ticket } from "lucide-react";
-import { useState } from "react";
+import { LayoutDashboard, Ticket } from "lucide-react";
+import {
+  Sidebar as AppSidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
+} from "../ui/sidebar";
+
+const NAV_ITEMS = [
+  {
+    to: "/",
+    label: "Overview",
+    icon: LayoutDashboard,
+    end: true,
+  },
+  {
+    to: "/tickets",
+    label: "All Tickets",
+    icon: Ticket,
+  },
+];
 
 export default function Sidebar() {
-  const [collapsed, setCollapsed] = useState(true);
-  
-  const linkStyle = ({ isActive }) =>
-    `flex items-center gap-3 p-2 rounded-md text-xs transition whitespace-nowrap
-    ${isActive ? "bg-primary text-white" : "hover:bg-gray-200 text-gray-700"}`;
-
   return (
-    <>
-      {/* Backdrop - only show when expanded */}
-      {!collapsed && (
-        <div 
-          className="fixed inset-0 bg-black/30 z-40 top-12"
-          onClick={() => setCollapsed(true)}
-        />
-      )}
+    <AppSidebar
+      collapsible="icon"
+      className="top-12 h-[calc(100svh-3rem)] border-r border-primary"
+    >
+      <SidebarContent className="bg-[#212529]">
+        <SidebarGroup className="pt-3">
+          <SidebarMenu>
+            {NAV_ITEMS.map((item) => {
+              const Icon = item.icon;
 
-      {/* Sidebar - Fixed position, starts below header (top-12) */}
-      <div
-        className={`fixed top-12 left-0 h-[calc(100vh-3rem)] bg-dim border-e border-e-primary p-2 transition-all duration-300 z-50 ${
-          collapsed ? "w-16" : "w-64"
-        }`}
-      >
-        <div className="flex flex-col gap-1 p-2">
-          <NavLink to="/" className={linkStyle} onClick={() => setCollapsed(true)}>
-            <LayoutDashboard size={18} className="flex-shrink-0" />
-            {!collapsed && <span>Overview</span>}
-          </NavLink>
-
-          <NavLink to="/tickets" className={linkStyle} onClick={() => setCollapsed(true)}>
-            <Ticket size={18} className="flex-shrink-0" />
-            {!collapsed && <span>All Tickets</span>}
-          </NavLink>
-        </div>
-
-        {/* Toggle button */}
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-6 bg-primary text-white p-1 rounded-full cursor-pointer shadow-md hover:scale-105 transition z-10"
-        >
-          {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
-        </button>
-      </div>
-
-      {/* Spacer - keeps content from going under collapsed sidebar */}
-      <div className="w-16 flex-shrink-0" />
-    </>
+              return (
+                <SidebarMenuItem key={item.to}>
+                  <SidebarMenuButton asChild tooltip={item.label} className="text-sm bg-transparent hover:bg-gray-200 mb-1 py-5">
+                    <NavLink
+                      to={item.to}
+                      end={item.end}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "bg-primary text-white hover:bg-primary"
+                          : "text-gray-700 hover:bg-gray-200"
+                      }
+                    >
+                      <Icon size={18} className="shrink-0" />
+                      <span>{item.label}</span>
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
+          </SidebarMenu>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarRail />
+    </AppSidebar>
   );
 }

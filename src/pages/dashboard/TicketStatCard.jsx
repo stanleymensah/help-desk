@@ -2,6 +2,7 @@ export default function TicketStatCard({ title, number, icon, color }) {
   return (
     <div
       className="
+      flex-1
       border border-gray-300
       w-28 h-20 sm:w-40 sm:h-28
       rounded-lg

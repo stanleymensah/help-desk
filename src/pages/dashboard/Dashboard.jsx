@@ -22,7 +22,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="text-xs flex flex-col gap-6">
+    <div className="text-xs flex flex-col gap-4">
       <div className="flex flex-col">
         <span className="text-lg font-semibold">Dashboard</span>
         <span>

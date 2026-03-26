@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import Modal from "../common/Modal";
 import TicketForm from "../tickets/TicketForm";
 import useCreateTicket from "../../hooks/useCreateTicket";
+import { SidebarProvider } from "../ui/sidebar";
 
 export default function Layout() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -70,61 +71,59 @@ export default function Layout() {
   };
 
   return (
-    <div className="w-full h-screen overflow-hidden flex flex-col">
-      
-      <Header creatingTicket={openCreateTicket} />
+    <SidebarProvider defaultOpen>
+      <div className="w-full h-screen overflow-hidden flex flex-col">
+        <Header creatingTicket={openCreateTicket} />
 
+        <main className="flex flex-1 overflow-hidden">
+          <Sidebar />
 
-      <main className="flex flex-1 overflow-hidden">
-        
-        <Sidebar />
-
-
-        <div ref={mainContentRef} className="flex-1 p-3 bg-dim overflow-y-auto">
-          <Outlet />
-        </div>
-      </main>
-
-      <Modal
-        isOpen={isCreateModalOpen}
-        onClose={handleRequestCloseCreate}
-        title="Create Ticket"
-        size="lg"
-      >
-        <TicketForm
-          mode="create"
-          onSubmit={handleCreateSubmit}
-          onCancel={handleRequestCloseCreate}
-          onDirtyChange={handleCreateDirtyChange}
-        />
-      </Modal>
-
-      <Modal
-        isOpen={confirmDiscardCreateOpen}
-        onClose={handleKeepCreating}
-        title="Discard Changes?"
-        size="sm"
-      >
-        <div className="space-y-4 text-sm">
-          <p>You have unsaved changes. Close without saving?</p>
-          <div className="flex justify-end gap-2 pt-1">
-            <button
-              type="button"
-              onClick={handleKeepCreating}
-              className="text-xs bg-transparent text-secondary p-2 rounded-md m-1 border border-secondary cursor-pointer hover:bg-secondary hover:text-white"
-            >
-              Keep Creating
-            </button>
-            <button
-              type="button"
-              onClick={handleDiscardCreateChanges}
-              className="text-xs p-2 rounded-md m-1 border cursor-pointer danger-btn"
-            >
-              Discard
-            </button>
+          <div ref={mainContentRef} className="flex-1 bg-dim overflow-y-auto p-3">
+            <Outlet />
           </div>
-        </div>
-      </Modal>
-    </div>
+        </main>
+
+        <Modal
+          isOpen={isCreateModalOpen}
+          onClose={handleRequestCloseCreate}
+          title="Create Ticket"
+          size="lg"
+        >
+          <TicketForm
+            mode="create"
+            onSubmit={handleCreateSubmit}
+            onCancel={handleRequestCloseCreate}
+            onDirtyChange={handleCreateDirtyChange}
+          />
+        </Modal>
+
+        <Modal
+          isOpen={confirmDiscardCreateOpen}
+          onClose={handleKeepCreating}
+          title="Discard Changes?"
+          size="sm"
+        >
+          <div className="space-y-4 text-sm">
+            <p>You have unsaved changes. Close without saving?</p>
+            <div className="flex justify-end gap-2 pt-1">
+              <button
+                type="button"
+                onClick={handleKeepCreating}
+                className="text-xs bg-transparent text-secondary p-2 rounded-md m-1 border border-secondary cursor-pointer hover:bg-secondary hover:text-white"
+              >
+                Keep Creating
+              </button>
+              <button
+                type="button"
+                onClick={handleDiscardCreateChanges}
+                className="text-xs p-2 rounded-md m-1 border cursor-pointer danger-btn"
+              >
+                Discard
+              </button>
+            </div>
+          </div>
+        </Modal>
+      </div>
+    </SidebarProvider>
   );
 }

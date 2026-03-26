@@ -1,5 +1,4 @@
 import SearchBar from "../../components/common/SearchBar";
-import TicketHeader from "../../components/tickets/TicketHeader";
 import TicketsList from "../../components/tickets/TicketsList";
 import TicketModals from "../../components/tickets/TicketModals";
 import Pagination from "../../components/common/Pagination";
@@ -37,7 +36,7 @@ export default function TicketsPage() {
     prevPage,
     hasNextPage,
     hasPrevPage,
-  } = usePagination(dateFiltered, 10);
+  } = usePagination(dateFiltered, 7);
 
   const {
     editingTicket,
@@ -63,8 +62,8 @@ export default function TicketsPage() {
   };
 
   return (
-    <div className="container flex flex-col gap-3">
-      <div className="flex justify-between items-center px-3 gap-2 text-xs">
+    <div className="container flex flex-col gap-3 justify-center items-center">
+      <div className="flex w-full justify-between text-xs items-center lg:w-[1000px] ">
         <div className="flex items-center">
           <SearchBar
             value={searchTerm}
@@ -84,8 +83,6 @@ export default function TicketsPage() {
           />
         </div>
       </div>
-
-      <TicketHeader />
 
       <TicketsList
         tickets={currentItems}

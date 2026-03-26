@@ -1,7 +1,8 @@
 // src/components/layout/Header.jsx
 import helpdeskLogo from "../../assets/icons/helpdesk.png";
 import { Link } from "react-router-dom";
-import { SecondaryButton } from "../common/Button";
+import { PrimaryButton } from "../common/Button";
+import { SidebarTrigger } from "../ui/sidebar";
 
 export default function Header({creatingTicket}) {
   const handleCreateTicket = () => {
@@ -9,10 +10,11 @@ export default function Header({creatingTicket}) {
   };
 
   return (
-    <header className="h-12 bg-primary text-white text-xs px-4 md:px-6 flex items-center">
+    <header className="h-12 bg-primary text-white text-xs w-full px-4 flex items-center">
       <div className="container flex justify-between items-center w-full">
         {/* Logo */}
-        <div>
+        <div className="flex items-center gap-2">
+          <SidebarTrigger className="text-white hover:bg-primary-dark hover:text-white" />
           <Link to="/" className="flex items-center gap-2">
             <img src={helpdeskLogo} alt="logo" className="w-5 h-5" />
             <h1 className="hidden sm:block text-lg uppercase font-bold">
@@ -32,7 +34,7 @@ export default function Header({creatingTicket}) {
             </button>
 
             <div className="hidden md:block">
-              <SecondaryButton
+              <PrimaryButton
                 name="Create Ticket"
                 doWhat={handleCreateTicket}
                 className="hidden sm:inline-block"
