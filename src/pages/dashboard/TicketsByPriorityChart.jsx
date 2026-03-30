@@ -20,8 +20,8 @@ export default function TicketsByPriorityChart({ data }) {
   }
 
   return (
-    <div className="min-w-[300px]">
-      <h2 className="text-xl font-bold mb-4">Tickets by Priority</h2>
+    <div className="w-full flex flex-col items-start">
+      <h2 className="text-lg font-medium mb-2">Tickets by Priority</h2>
       <ResponsiveContainer width="100%" height={260}>
         <PieChart>
           <Pie

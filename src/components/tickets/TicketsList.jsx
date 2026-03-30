@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { formatDate } from "@/lib/date";
 
 export default function TicketsList({
   tickets,
@@ -102,9 +103,7 @@ export default function TicketsList({
                 {ticket.assignedTo || "-"}
               </TableCell>
               <TableCell className="hidden md:table-cell text-start text-gray-500 px-2 py-2">
-                {ticket.createdAt
-                  ? new Date(ticket.createdAt).toLocaleDateString("en-GB")
-                  : "-"}
+                {formatDate(ticket.createdAt)}
               </TableCell>
               <TableCell className="text-right px-2 py-3.5 md:py-2">
                 <div className="inline-flex gap-1 md:gap-2">

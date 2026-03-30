@@ -4,8 +4,11 @@ import TicketsByPriorityChart from "../../pages/dashboard/TicketsByPriorityChart
 export default function ChartsSection({ stats }) {
   const statusData = [
     { status: "Open", count: stats.openTickets },
+    { status: "Assigned", count: stats.assignedTickets },
     { status: "In Progress", count: stats.inProgressTickets },
     { status: "Resolved", count: stats.resolvedTickets },
+    { status: "Closed", count: stats.closedTickets },
+    { status: "Reopened", count: stats.reopenedTickets },
   ];
 
   const priorityData = [
@@ -15,7 +18,7 @@ export default function ChartsSection({ stats }) {
   ];
 
   return (
-    <div className="max-h-80 rounded-lg w-full flex flex-col md:flex-row gap-2">
+    <div className="min-h-80 rounded-lg w-full flex flex-col md:flex-row gap-2">
       <div className="border border-gray-300 rounded-lg p-2 md:w-1/2">
         <TicketsByStatusChart data={statusData} />
       </div>

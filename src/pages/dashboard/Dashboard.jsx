@@ -23,12 +23,13 @@ export default function Dashboard() {
 
   return (
     <div className="text-xs flex flex-col gap-4">
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <span className="text-lg font-semibold">Dashboard</span>
         <span>
           Welcome back! Here's what is going on with your ticketing so far.
         </span>
-      </div>
+      </div> */}
+      
       <StatsCards stats={stats} />
       <ChartsSection stats={stats} />
     </div>

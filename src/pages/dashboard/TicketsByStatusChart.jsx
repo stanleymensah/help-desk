@@ -9,7 +9,7 @@ import {
 } from "recharts";
 
 export default function TicketsByStatusChart({ data }) {
-  const COLORS = ["#3b82f6", "#f59e0b", "#22c55e"];
+  const COLORS = ["#eab308", "#3b82f6", "#f97316", "#22c55e", "#6b7280", "#a855f7"];
   const hasData = data.some((item) => item.count > 0);
 
   if (!hasData) {
@@ -21,12 +21,12 @@ export default function TicketsByStatusChart({ data }) {
   }
 
   return (
-    <div className="min-w-[300px]">
-      <h2 className="text-xl font-bold mb-4">Tickets by Status</h2>
-      <ResponsiveContainer width="100%" height={270}>
-        <BarChart data={data}>
+    <div className="w-full flex flex-col items-start">
+      <h2 className="text-lg font-medium mb-2">Tickets by Status</h2>
+      <ResponsiveContainer height={300} width="100%">
+        <BarChart data={data} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
           <XAxis dataKey="status" tick={{ fontSize: 12 }} />
-          <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
+          <YAxis allowDecimals={false} tick={{ fontSize: 12 }} width={35} />
           <Tooltip formatter={(value) => [`${value}`, "Tickets"]} />
           <Bar dataKey="count" radius={[6, 6, 0, 0]}>
             {data.map((entry, index) => (

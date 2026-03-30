@@ -18,21 +18,39 @@ const STAT_CONFIG = [
   },
   {
     key: "openTickets",
-    title: "Open Tickets",
+    title: "Open",
     icon: <Ticket />,
-    color: { bg: "bg-orange-100", text: "text-orange-600" },
+    color: { bg: "bg-yellow-100", text: "text-yellow-600" },
+  },
+  {
+    key: "assignedTickets",
+    title: "Assigned",
+    icon: <Layers />,
+    color: { bg: "bg-blue-100", text: "text-blue-600" },
   },
   {
     key: "inProgressTickets",
     title: "In Progress",
     icon: <RefreshCw />,
-    color: { bg: "bg-purple-100", text: "text-purple-600" },
+    color: { bg: "bg-orange-100", text: "text-orange-600" },
   },
   {
     key: "resolvedTickets",
-    title: "Resolved Tickets",
+    title: "Resolved",
     icon: <CircleCheckBig />,
     color: { bg: "bg-green-100", text: "text-green-600" },
+  },
+  {
+    key: "closedTickets",
+    title: "Closed",
+    icon: <CircleCheckBig />,
+    color: { bg: "bg-gray-100", text: "text-gray-600" },
+  },
+  {
+    key: "reopenedTickets",
+    title: "Reopened",
+    icon: <RefreshCw />,
+    color: { bg: "bg-purple-100", text: "text-purple-600" },
   },
   {
     key: "lowPriority",
@@ -56,7 +74,7 @@ const STAT_CONFIG = [
 
 export default function StatsCards({ stats }) {
   return (
-    <div className="grid grid-cols-3 gap-1 md:flex md:overflow-hidden">
+    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 lg:flex lg:flex-wrap">
       {STAT_CONFIG.map((config) => (
         <TicketStatCard
           key={config.key}
