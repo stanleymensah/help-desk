@@ -9,8 +9,42 @@ import { useTicketFilters } from "../../hooks/useTicketFilters";
 import { useTicketActions } from "../../hooks/useTicketActions";
 import usePagination from "../../hooks/usePagination";
 import useFilterTickets from "../../hooks/useFilterTickets";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDateFilter } from "../../hooks/useDateFilter";
+import { Button } from "@/components/ui/button";
+
+const FILTER_STORAGE_KEY = "tickets:filters";
+
+const DEFAULT_FILTERS = {
+  status: "all",
+  priority: "all",
+  assignee: "all",
+};
+
+const getInitialFilters = () => {
+  try {
+    const storedFilters = localStorage.getItem(FILTER_STORAGE_KEY);
+    if (!storedFilters) return DEFAULT_FILTERS;
+
+    const parsedFilters = JSON.parse(storedFilters);
+    if (
+      typeof parsedFilters === "object" &&
+      parsedFilters !== null &&
+      "status" in parsedFilters &&
+      "priority" in parsedFilters &&
+      "assignee" in parsedFilters
+    ) {
+      return {
+        ...DEFAULT_FILTERS,
+        ...parsedFilters,
+      };
+    }
+
+    return DEFAULT_FILTERS;
+  } catch {
+    return DEFAULT_FILTERS;
+  }
+};
 
 export default function TicketsPage() {
   const { tickets, isLoading, users } = useTickets();
@@ -19,13 +53,17 @@ export default function TicketsPage() {
 
   const { searchTerm, setSearchTerm, filteredTickets } =
     useTicketFilters(tickets);
-  const [filterBy, setFilterBy] = useState("all");
+  const [filterBy, setFilterBy] = useState(getInitialFilters);
   const statusPriorityFiltered = useFilterTickets(filteredTickets, filterBy);
   const dateFiltered = useDateFilter(
     statusPriorityFiltered,
     endDate,
     startDate,
   );
+  const hasActiveFilters =
+    filterBy.status !== "all" ||
+    filterBy.priority !== "all" ||
+    filterBy.assignee !== "all";
 
   const {
     currentPage,
@@ -61,6 +99,15 @@ export default function TicketsPage() {
     setEndDate(null);
   };
 
+  useEffect(() => {
+    localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(filterBy));
+  }, [filterBy]);
+
+  const handleClearFilters = () => {
+    setFilterBy(DEFAULT_FILTERS);
+    localStorage.removeItem(FILTER_STORAGE_KEY);
+  };
+
   return (
     <div className="container flex flex-col gap-3 justify-center items-center">
       <div className="flex w-full justify-between text-xs items-center lg:w-[1000px] ">
@@ -73,6 +120,14 @@ export default function TicketsPage() {
         </div>
         <div className="flex items-center justify-end gap-2">
           <FilterDropdown value={filterBy} onChange={setFilterBy} users={users} />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleClearFilters}
+            disabled={!hasActiveFilters}
+          >
+            Clear Filters
+          </Button>
 
           <DateRangeFilter
             startDate={startDate}
