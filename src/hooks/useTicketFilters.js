@@ -13,7 +13,8 @@ export function useTicketFilters(tickets) {
       (ticket) =>
         ticket.title.toLowerCase().includes(search) ||
         ticket.email?.toLowerCase().includes(search) ||
-        ticket.description.toLowerCase().includes(search)
+        ticket.description.toLowerCase().includes(search) ||
+        ticket.assignedTo?.toLowerCase().includes(search)
     );
   }, [tickets, debouncedSearch]);
 

@@ -1,25 +1,36 @@
 import { useState } from "react";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 
-export default function FilterDropdown({value, onChange}) {
+export default function FilterDropdown({ value, onChange, users = [] }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const filterOptions = [
+  const statusAndPriorityOptions = [
     { label: "All", value: "all" },
     { label: "Open", value: "open" },
+    { label: "Assigned", value: "assigned" },
+    { label: "Reopened", value: "reopened" },
+    { label: "Closed", value: "closed" },
     { label: "Resolved", value: "resolved" },
-    {label: "In Progress", value: "in-progress" },
+    { label: "In Progress", value: "in-progress" },
     { label: "High", value: "high" },
     { label: "Medium", value: "medium" },
     { label: "Low", value: "low" },
   ];
+
+  const assigneeOptions = users.map((user) => ({
+    label: `Assigned: ${user}`,
+    value: `assignee:${user}`,
+  }));
+
+  const filterOptions = [...statusAndPriorityOptions, ...assigneeOptions];
 
   const handleSelect = (optionValue) => {
     onChange(optionValue);
     setIsOpen(false);
   };
 
-  const selectedLabel = filterOptions.find((option) => option.value === value)?.label || "Filter by";
+  const selectedLabel =
+    filterOptions.find((option) => option.value === value)?.label || "Filter by";
 
   return (
       <div className="relative">

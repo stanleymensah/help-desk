@@ -52,7 +52,7 @@ export default function Layout() {
     createTicket(
       {
         ...formData,
-        status: "open",
+        status: formData.assignedTo?.trim() ? "assigned" : "open",
       },
       {
         onSuccess: () => {

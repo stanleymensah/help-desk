@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useDateFilter } from "../../hooks/useDateFilter";
 
 export default function TicketsPage() {
-  const {tickets, isLoading} = useTickets();
+  const { tickets, isLoading, users } = useTickets();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -68,11 +68,11 @@ export default function TicketsPage() {
           <SearchBar
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search ticket by title, email, description..."
+            placeholder="Search by title, email, description, assignee..."
           />
         </div>
         <div className="flex items-center justify-end gap-2">
-          <FilterDropdown value={filterBy} onChange={setFilterBy} />
+          <FilterDropdown value={filterBy} onChange={setFilterBy} users={users} />
 
           <DateRangeFilter
             startDate={startDate}

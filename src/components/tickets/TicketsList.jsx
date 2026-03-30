@@ -43,24 +43,31 @@ export default function TicketsList({
       <Table className="table-fixed text-sm md:text-[11px]">
         <TableHeader className="bg-gray-50">
           <TableRow className="hover:bg-gray-50">
-            <TableHead className="text-gray-700 font-semibold px-2 py-3.5 md:py-2.5 w-[58px]">ID</TableHead>
-            <TableHead className="text-gray-700 font-semibold px-2 py-3.5 md:py-2.5 w-[150px]">Title</TableHead>
+            <TableHead className="text-gray-700 font-semibold px-2 py-3.5 md:py-2.5 w-[58px]">
+              ID
+            </TableHead>
+            <TableHead className="text-gray-700 font-semibold px-2 py-3.5 md:py-2.5 w-[150px]">
+              Title
+            </TableHead>
             <TableHead className="text-gray-700 font-semibold hidden md:table-cell px-2 py-2.5">
               Description
             </TableHead>
             <TableHead className="text-gray-700 font-semibold hidden md:table-cell w-[180px] px-2 py-2.5">
               Email
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-center w-[80px] px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[80px] px-2 py-2.5">
               Priority
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-center w-[80px] px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[80px] px-2 py-2.5">
               Status
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-right w-[88px] px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell w-[150px] px-2 py-2.5">
+              Assigned To
+            </TableHead>
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[88px] px-2 py-2.5">
               Date
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold text-right w-[74px] px-2 py-3.5 md:py-2.5">
+            <TableHead className="text-gray-700 font-semibold text-start w-[74px] px-2 py-3.5 md:py-2.5">
               Actions
             </TableHead>
           </TableRow>
@@ -73,7 +80,9 @@ export default function TicketsList({
               onClick={() => onView(ticket)}
               className="cursor-pointer min-h-[56px] md:min-h-[46px]"
             >
-              <TableCell className="font-semibold text-gray-700 px-2 py-3.5 md:py-2">#{ticket.id}</TableCell>
+              <TableCell className="font-semibold text-gray-700 px-2 py-3.5 md:py-2">
+                #{ticket.id}
+              </TableCell>
               <TableCell className="font-medium text-gray-900 max-w-[100px] truncate px-2 py-3.5 md:py-2">
                 {ticket.title}
               </TableCell>
@@ -83,13 +92,16 @@ export default function TicketsList({
               <TableCell className="hidden md:table-cell text-gray-800 max-w-[180px] truncate px-2 py-2">
                 {ticket.email}
               </TableCell>
-              <TableCell className="hidden md:table-cell text-end px-2 py-[18px]">
+              <TableCell className="hidden md:table-cell text-start px-2 py-[18px]">
                 <Badge type="priority" value={ticket.priority} />
               </TableCell>
-              <TableCell className="hidden md:table-cell text-start px-2 py-2">
+              <TableCell className="hidden md:table-cell text-start py-2">
                 <Badge type="status" value={ticket.status} />
               </TableCell>
-              <TableCell className="hidden md:table-cell text-end text-gray-500 px-2 py-2">
+              <TableCell className="hidden md:table-cell text-gray-800 max-w-[150px] truncate px-2 py-2">
+                {ticket.assignedTo || "-"}
+              </TableCell>
+              <TableCell className="hidden md:table-cell text-start text-gray-500 px-2 py-2">
                 {ticket.createdAt
                   ? new Date(ticket.createdAt).toLocaleDateString("en-GB")
                   : "-"}

@@ -58,15 +58,21 @@ export function useTicketActions() {
   };
 
   const handleSubmit = (formData) => {
+    const nextAssignedTo = formData.assignedTo?.trim() ?? "";
+    const updates =
+      editingTicket?.status === "open" && nextAssignedTo
+        ? { ...formData, assignedTo: nextAssignedTo, status: "assigned" }
+        : { ...formData, assignedTo: nextAssignedTo };
+
     updateTicket.mutate(
-      { id: editingTicket.id, updates: formData },
+      { id: editingTicket.id, updates },
       {
         onSuccess: () => {
           handleCloseEdit();
           toast.success("Ticket updated successfully!");
         },
         onError: (error) => {
-          toast.error("Failed to update ticket", error);
+          toast.error(error?.message || "Failed to update ticket");
         },
       },
     );

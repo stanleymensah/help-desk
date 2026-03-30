@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import Input from "../common/InputField";
 import Textarea from "../common/Textarea";
 import Select from "../common/Select";
-import { PrimaryButton, SecondaryButton } from "../common/Button";
+import { SecondaryButton } from "../common/Button";
+import { useTickets } from "@/context/TicketContext";
 
 export default function TicketForm({
   ticket = null,
@@ -13,10 +14,12 @@ export default function TicketForm({
   onDirtyChange,
 }) {
   const isEdit = mode === "edit";
+  const { users } = useTickets();
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isDirty },
   } = useForm({
     defaultValues: {
@@ -25,6 +28,7 @@ export default function TicketForm({
       email: ticket?.email ?? "",
       priority: ticket?.priority ?? "",
       status: ticket?.status ?? "open",
+      assignedTo: ticket?.assignedTo ?? "",
     },
   });
 
@@ -34,11 +38,51 @@ export default function TicketForm({
     { value: "high", label: "High" },
   ];
 
-  const statusOptions = [
-    { value: "open", label: "Open" },
-    { value: "in-progress", label: "In Progress" },
-    { value: "resolved", label: "Resolved" },
-  ];
+  const assignedToValue = useWatch({ control, name: "assignedTo" });
+  const canSetAssigned = Boolean(assignedToValue?.trim());
+  const currentStatus = ticket?.status ?? "open";
+  const statusOptionsForForm = (() => {
+    if (!isEdit) return [];
+
+    switch (currentStatus) {
+      case "open":
+        return canSetAssigned
+          ? [
+              { value: "open", label: "Open" },
+              { value: "assigned", label: "Assigned" },
+            ]
+          : [{ value: "open", label: "Open" }];
+      case "assigned":
+        return [
+          { value: "assigned", label: "Assigned" },
+          { value: "in-progress", label: "In Progress" },
+        ];
+      case "in-progress":
+        return [
+          { value: "in-progress", label: "In Progress" },
+          { value: "resolved", label: "Resolved" },
+        ];
+      case "resolved":
+        return [
+          { value: "resolved", label: "Resolved" },
+          { value: "closed", label: "Closed" },
+          { value: "reopened", label: "Reopened" },
+        ];
+      case "reopened":
+        return [
+          { value: "reopened", label: "Reopened" },
+          { value: "in-progress", label: "In Progress" },
+        ];
+      case "closed":
+      default:
+        return [{ value: "closed", label: "Closed" }];
+    }
+  })();
+
+  const userOptions = (users ?? []).map((name) => ({
+    value: name,
+    label: name,
+  }));
 
   useEffect(() => {
     onDirtyChange?.(isDirty);
@@ -101,13 +145,21 @@ export default function TicketForm({
           required
           validation={{ required: "Priority is required" }}
         />
+        <Select
+          label="Assign To"
+          name="assignedTo"
+          options={userOptions}
+          register={register}
+          error={errors.assignedTo}
+          validation={{}}
+        />
       </div>
 
       {isEdit && (
         <Select
           label="Status"
           name="status"
-          options={statusOptions}
+          options={statusOptionsForForm}
           register={register}
           error={errors.status}
           required
