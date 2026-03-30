@@ -1,13 +1,30 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteTicket as deleteTicketService } from "../services/ticketService";
+import { useCallback, useState } from "react";
+import { useTickets as useTicketContext } from "../context/TicketContext";
 
 export default function useDeleteTicket() {
-  const queryClient = useQueryClient();
+  const { deleteTicket } = useTicketContext();
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
 
-  return useMutation({
-    mutationFn: (id) => deleteTicketService(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tickets"] });
-    }
-  });
+  const mutate = useCallback(
+    async (id, options = {}) => {
+      setIsPending(true);
+      setError(null);
+
+      try {
+        const result = await deleteTicket(id);
+        options.onSuccess?.(result);
+        return result;
+      } catch (err) {
+        setError(err);
+        options.onError?.(err);
+        throw err;
+      } finally {
+        setIsPending(false);
+      }
+    },
+    [deleteTicket],
+  );
+
+  return { mutate, isPending, error };
 }

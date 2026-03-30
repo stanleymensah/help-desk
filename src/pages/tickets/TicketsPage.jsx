@@ -3,7 +3,7 @@ import TicketsList from "../../components/tickets/TicketsList";
 import TicketModals from "../../components/tickets/TicketModals";
 import Pagination from "../../components/common/Pagination";
 import FilterDropdown from "../../components/common/FilterDropdown";
-import useTickets from "../../hooks/useTickets";
+import { useTickets } from "@/context/TicketContext";
 import DateRangeFilter from "../../components/common/DateRangeFilter";
 import { useTicketFilters } from "../../hooks/useTicketFilters";
 import { useTicketActions } from "../../hooks/useTicketActions";
@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useDateFilter } from "../../hooks/useDateFilter";
 
 export default function TicketsPage() {
-  const { data: tickets = [], isPending, error } = useTickets();
+  const {tickets, isLoading} = useTickets();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -86,8 +86,8 @@ export default function TicketsPage() {
 
       <TicketsList
         tickets={currentItems}
-        isPending={isPending}
-        error={error}
+        isPending={isLoading}
+        // error={error}
         searchTerm={searchTerm}
         onView={handleView}
         onEdit={handleEdit}

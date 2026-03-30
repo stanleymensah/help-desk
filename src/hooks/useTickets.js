@@ -1,9 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchTickets } from "../services/ticketService";
+import { useMemo } from "react";
+import { useTickets as useTicketContext } from "../context/TicketContext";
 
 export default function useTickets() {
-  return useQuery({
-    queryKey: ["tickets"],
-    queryFn: fetchTickets,
-  });
+  const { tickets, isLoading } = useTicketContext();
+
+  return useMemo(
+    () => ({
+      data: tickets,
+      isPending: isLoading,
+      error: null,
+    }),
+    [tickets, isLoading],
+  );
 }

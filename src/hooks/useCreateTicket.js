@@ -1,16 +1,30 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createTicket } from "../services/ticketService";
+import { useCallback, useState } from "react";
+import { useTickets as useTicketContext } from "../context/TicketContext";
 
 export default function useCreateTicket() {
-  const queryClient = useQueryClient();
+  const { createTicket } = useTicketContext();
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
 
-  const mutation = useMutation({
-    mutationFn: createTicket,
-    onSuccess: (newTicket) => {
-      // Update the tickets cache so the list refreshes automatically
-      queryClient.setQueryData(["tickets"], (old = []) => [newTicket, ...old]);
+  const mutate = useCallback(
+    async (newTicket, options = {}) => {
+      setIsPending(true);
+      setError(null);
+
+      try {
+        const created = await createTicket(newTicket);
+        options.onSuccess?.(created);
+        return created;
+      } catch (err) {
+        setError(err);
+        options.onError?.(err);
+        throw err;
+      } finally {
+        setIsPending(false);
+      }
     },
-  });
+    [createTicket],
+  );
 
-  return mutation; // returns { mutate, isPending, error, etc. }
+  return { mutate, isPending, error };
 }
