@@ -1,10 +1,10 @@
 import Modal from "../common/Modal";
-import Badge from "../common/Badge";
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useState } from "react";
 import { useTickets } from "@/context/TicketContext";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import TicketWorkflowActions from "./TicketWorkflowActions";
 import TicketCommentsSection from "./TicketCommentsSection";
 import { formatDateTime } from "@/lib/date";
@@ -123,7 +123,9 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
               Status
             </label>
             <div>
-              <Badge type="status" value={activeTicket.status} />
+              <Badge variant="outline" className="capitalize">
+                {activeTicket.status}
+              </Badge>
             </div>
           </div>{" "}
           <div className="space-y-1 flex flex-col">
@@ -131,7 +133,9 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
               Priority
             </label>
             <div>
-              <Badge type="priority" value={activeTicket.priority} />
+              <Badge variant="secondary" className="capitalize">
+                {activeTicket.priority}
+              </Badge>
             </div>
           </div>
         </div>

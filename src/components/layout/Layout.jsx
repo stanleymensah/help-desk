@@ -1,12 +1,13 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Modal from "../common/Modal";
 import TicketForm from "../tickets/TicketForm";
 import useCreateTicket from "../../hooks/useCreateTicket";
 import { SidebarProvider } from "../ui/sidebar";
+import { Button } from "../ui/button";
 
 export default function Layout() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -106,20 +107,16 @@ export default function Layout() {
           <div className="space-y-4 text-sm">
             <p>You have unsaved changes. Close without saving?</p>
             <div className="flex justify-end gap-2 pt-1">
-              <button
-                type="button"
-                onClick={handleKeepCreating}
-                className="text-xs bg-transparent text-secondary p-2 rounded-md m-1 border border-secondary cursor-pointer hover:bg-secondary hover:text-white"
-              >
+              <Button type="button" variant="outline" onClick={handleKeepCreating}>
                 Keep Creating
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
+                variant="destructive"
                 onClick={handleDiscardCreateChanges}
-                className="text-xs p-2 rounded-md m-1 border cursor-pointer danger-btn"
               >
                 Discard
-              </button>
+              </Button>
             </div>
           </div>
         </Modal>

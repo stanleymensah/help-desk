@@ -1,6 +1,6 @@
 import TicketSkeleton from "./TicketSkeleton";
 import ErrorBoundary from "../common/ErrorBoundary";
-import Badge from "../common/Badge";
+import { Badge } from "../ui/badge";
 import { Pencil, Trash2 } from "lucide-react";
 import {
   Table,
@@ -62,7 +62,7 @@ export default function TicketsList({
             <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[80px] px-2 py-1.5">
               Status
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell w-[150px] px-2 py-1.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-center w-[150px] px-2 py-1.5">
               Assigned To
             </TableHead>
             <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[88px] px-2 py-1.5">
@@ -94,12 +94,16 @@ export default function TicketsList({
                 {ticket.email}
               </TableCell>
               <TableCell className="hidden md:table-cell text-start px-2 py-2">
-                <Badge type="priority" value={ticket.priority} />
+                <Badge variant="secondary" className="capitalize text-xs">
+                  {ticket.priority}
+                </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell text-start py-2">
-                <Badge type="status" value={ticket.status} />
+                <Badge variant="outline" className="capitalize text-xs">
+                  {ticket.status}
+                </Badge>
               </TableCell>
-              <TableCell className="hidden md:table-cell text-gray-800 max-w-[150px] truncate px-2 py-2">
+              <TableCell className="hidden md:table-cell text-center text-gray-800 max-w-[150px] truncate px-2 py-2">
                 {ticket.assignedTo || "-"}
               </TableCell>
               <TableCell className="hidden md:table-cell text-start text-gray-500 px-2 py-2">

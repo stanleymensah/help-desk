@@ -1,10 +1,25 @@
 import { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import Input from "../common/InputField";
-import Textarea from "../common/Textarea";
-import Select from "../common/Select";
-import { SecondaryButton } from "../common/Button";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { useTickets } from "@/context/TicketContext";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+
+function FormLabel({ children, required = false }) {
+  return (
+    <label className="text-xs font-medium text-muted-foreground">
+      {children}
+      {required && <span className="ml-1 text-destructive">*</span>}
+    </label>
+  );
+}
 
 export default function TicketForm({
   ticket = null,
@@ -96,106 +111,138 @@ export default function TicketForm({
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className="w-full max-w-md mx-auto space-y-3"
+      className="mx-auto w-full max-w-md space-y-3"
     >
-      <div className="text-gray-500">
-        (<span className="text-red-500">*</span>) Fields are required
+      <div className="text-muted-foreground text-xs">
+        (<span className="text-destructive">*</span>) Fields are required
       </div>
 
-      <Input
-        label="Title"
-        name="title"
-        register={register}
-        error={errors.title}
-        placeholder="Title must be at least 5 characters"
-        required
-        validation={{
-          required: "Title is required",
-          minLength: {
-            value: 5,
-            message: "Title must be at least 5 characters",
-          },
-        }}
-      />
-
-      <div className="flex justify-between gap-2">
+      <div className="flex flex-col gap-1">
+        <FormLabel required>Title</FormLabel>
         <Input
-          label="User Email"
-          name="email"
-          type="email"
-          register={register}
-          error={errors.email}
-          placeholder="Enter a valid email"
-          required
-          validation={{
-            required: "Email is required",
-            pattern: {
-              value: /^\S+@\S+\.\S+$/,
-              message: "Enter a valid email",
+          {...register("title", {
+            required: "Title is required",
+            minLength: {
+              value: 5,
+              message: "Title must be at least 5 characters",
             },
-          }}
+          })}
+          placeholder="Title must be at least 5 characters"
+          aria-invalid={!!errors.title}
         />
+      </div>
 
-        <Select
-          label="Priority"
-          name="priority"
-          options={priorityOptions}
-          register={register}
-          error={errors.priority}
-          required
-          validation={{ required: "Priority is required" }}
-        />
-        <Select
-          label="Assign To"
-          name="assignedTo"
-          options={userOptions}
-          register={register}
-          error={errors.assignedTo}
-          validation={{}}
-        />
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
+        <div className="flex flex-col gap-1">
+          <FormLabel required>User Email</FormLabel>
+          <Input
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^\S+@\S+\.\S+$/,
+                message: "Enter a valid email",
+              },
+            })}
+            type="email"
+            placeholder="Enter a valid email"
+            aria-invalid={!!errors.email}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <FormLabel required>Priority</FormLabel>
+          <Controller
+            name="priority"
+            control={control}
+            rules={{ required: "Priority is required" }}
+            render={({ field }) => (
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full" aria-invalid={!!errors.priority}>
+                  <SelectValue placeholder="Select priority" />
+                </SelectTrigger>
+                <SelectContent>
+                  {priorityOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <FormLabel>Assign To</FormLabel>
+          <Controller
+            name="assignedTo"
+            control={control}
+            render={({ field }) => (
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select user" />
+                </SelectTrigger>
+                <SelectContent>
+                  {userOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
       </div>
 
       {isEdit && (
-        <Select
-          label="Status"
-          name="status"
-          options={statusOptionsForForm}
-          register={register}
-          error={errors.status}
-          required
-          validation={{ required: "Status is required" }}
-        />
+        <div className="flex flex-col gap-1">
+          <FormLabel required>Status</FormLabel>
+          <Controller
+            name="status"
+            control={control}
+            rules={{ required: "Status is required" }}
+            render={({ field }) => (
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full" aria-invalid={!!errors.status}>
+                  <SelectValue placeholder="Select status" />
+                </SelectTrigger>
+                <SelectContent>
+                  {statusOptionsForForm.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+        </div>
       )}
 
-      <Textarea
-        label="Description"
-        name="description"
-        register={register}
-        error={errors.description}
-        placeholder="Description must be at least 10 characters"
-        required
-        validation={{
-          required: "Description is required",
-          minLength: {
-            value: 10,
-            message: "Description must be at least 10 characters",
-          },
-        }}
-      />
+      <div className="flex flex-col gap-1">
+        <FormLabel required>Description</FormLabel>
+        <Textarea
+          {...register("description", {
+            required: "Description is required",
+            minLength: {
+              value: 10,
+              message: "Description must be at least 10 characters",
+            },
+          })}
+          placeholder="Description must be at least 10 characters"
+          rows={4}
+          aria-invalid={!!errors.description}
+        />
+      </div>
 
       <div className="flex justify-end gap-2 pt-1">
-        <SecondaryButton name="Cancel" doWhat={onCancel} />
-        <button
-          type="submit"
-          className={
-            isEdit && !isDirty
-              ? "opacity-50 cursor-not-allowed hover:bg-primary"
-              : "text-xs bg-primary text-white p-2 rounded-md m-1 cursor-pointer hover:bg-primary-dark"
-          }
-          disabled={isEdit && !isDirty}
-        >
+        <Button type="button" variant="outline" onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button type="submit" disabled={isEdit && !isDirty}>
           {isEdit ? "Save Changes" : "Create Ticket"}
-        </button>
+        </Button>
       </div>
     </form>
   );

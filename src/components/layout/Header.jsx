@@ -1,8 +1,8 @@
 // src/components/layout/Header.jsx
 import helpdeskLogo from "../../assets/icons/helpdesk.png";
 import { Link } from "react-router-dom";
-import { PrimaryButton } from "../common/Button";
 import { SidebarTrigger } from "../ui/sidebar";
+import { Button } from "../ui/button";
 
 export default function Header({creatingTicket}) {
   const handleCreateTicket = () => {
@@ -26,19 +26,26 @@ export default function Header({creatingTicket}) {
 
         <div className="flex items-center gap-2">
           <div>
-            <button
+            <Button
+              type="button"
               onClick={handleCreateTicket}
-              className="sm:hidden px-3 rounded bg-white text-primary cursor-pointer font-bold text-lg"
+              variant="secondary"
+              size="icon"
+              className="sm:hidden"
             >
               +
-            </button>
+            </Button>
 
             <div className="hidden md:block">
-              <PrimaryButton
-                name="Create Ticket"
-                doWhat={handleCreateTicket}
-                className="hidden sm:inline-block"
-              />
+              <Button
+                type="button"
+                onClick={handleCreateTicket}
+                variant="secondary"
+                size="sm"
+                className="hidden sm:inline-flex"
+              >
+                Create Ticket
+              </Button>
             </div>
           </div>
         </div>

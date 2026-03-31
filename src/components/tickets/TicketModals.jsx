@@ -1,6 +1,7 @@
 import Modal from "../common/Modal";
 import TicketDetailsModal from "./TicketDetailModal";
 import TicketForm from "./TicketForm";
+import { Button } from "../ui/button";
 
 export default function TicketModals({
   viewingTicket,
@@ -52,20 +53,12 @@ export default function TicketModals({
         <div className="space-y-4 text-sm">
           <p>You have unsaved changes. Close without saving?</p>
           <div className="flex justify-end gap-2 pt-1">
-            <button
-              type="button"
-              onClick={onKeepEditing}
-              className="text-xs bg-transparent text-secondary p-2 rounded-md m-1 border border-secondary cursor-pointer hover:bg-secondary hover:text-white"
-            >
+            <Button type="button" variant="outline" onClick={onKeepEditing}>
               Keep Editing
-            </button>
-            <button
-              type="button"
-              onClick={onDiscardChanges}
-              className="text-xs p-2 rounded-md m-1 border cursor-pointer danger-btn"
-            >
+            </Button>
+            <Button type="button" variant="destructive" onClick={onDiscardChanges}>
               Discard
-            </button>
+            </Button>
           </div>
         </div>
       </Modal>
@@ -83,20 +76,12 @@ export default function TicketModals({
               <span className="font-semibold">#{deletingTicket.id}</span>?
             </p>
             <div className="flex justify-end gap-2 pt-1">
-              <button
-                type="button"
-                onClick={onCancelDelete}
-                className="text-xs bg-transparent text-secondary p-2 rounded-md m-1 border border-secondary cursor-pointer hover:bg-secondary hover:text-white"
-              >
+              <Button type="button" variant="outline" onClick={onCancelDelete}>
                 Cancel
-              </button>
-              <button
-                type="button"
-                onClick={onConfirmDelete}
-                className="text-xs p-2 rounded-md m-1 border cursor-pointer danger-btn"
-              >
+              </Button>
+              <Button type="button" variant="destructive" onClick={onConfirmDelete}>
                 Delete
-              </button>
+              </Button>
             </div>
           </div>
         )}
