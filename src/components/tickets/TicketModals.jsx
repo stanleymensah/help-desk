@@ -2,6 +2,8 @@ import Modal from "../common/Modal";
 import TicketDetailsModal from "./TicketDetailModal";
 import TicketForm from "./TicketForm";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { useMemo, useState } from "react";
 
 export default function TicketModals({
   viewingTicket,
@@ -17,6 +19,27 @@ export default function TicketModals({
   onEditDirtyChange,
   onEditSubmit,
 }) {
+  const [deleteConfirmation, setDeleteConfirmation] = useState("");
+
+  const expectedDeleteValue = useMemo(
+    () => (deletingTicket ? `#${deletingTicket.id}` : ""),
+    [deletingTicket],
+  );
+
+  const isDeleteConfirmed = deleteConfirmation.trim() === expectedDeleteValue;
+
+  const handleCancelDeleteModal = () => {
+    setDeleteConfirmation("");
+    onCancelDelete();
+  };
+
+  const handleConfirmDeleteModal = () => {
+    if (!isDeleteConfirmed) return;
+
+    setDeleteConfirmation("");
+    onConfirmDelete();
+  };
+
   return (
     <>
       {/* View Details Modal */}
@@ -65,7 +88,7 @@ export default function TicketModals({
 
       <Modal
         isOpen={!!deletingTicket}
-        onClose={onCancelDelete}
+        onClose={handleCancelDeleteModal}
         title="Delete Ticket"
         size="sm"
       >
@@ -75,11 +98,27 @@ export default function TicketModals({
               Are you sure you want to delete{" "}
               <span className="font-semibold">#{deletingTicket.id}</span>?
             </p>
+            <div className="space-y-2">
+              <p className="text-xs text-muted-foreground">
+                Type <span className="font-semibold text-foreground">{expectedDeleteValue}</span> to confirm deletion.
+              </p>
+              <Input
+                value={deleteConfirmation}
+                onChange={(event) => setDeleteConfirmation(event.target.value)}
+                placeholder={`Type ${expectedDeleteValue}`}
+                aria-label="Type ticket reference to confirm delete"
+              />
+            </div>
             <div className="flex justify-end gap-2 pt-1">
-              <Button type="button" variant="outline" onClick={onCancelDelete}>
+              <Button type="button" variant="outline" onClick={handleCancelDeleteModal}>
                 Cancel
               </Button>
-              <Button type="button" variant="destructive" onClick={onConfirmDelete}>
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={handleConfirmDeleteModal}
+                disabled={!isDeleteConfirmed}
+              >
                 Delete
               </Button>
             </div>

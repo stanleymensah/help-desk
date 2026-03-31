@@ -11,12 +11,6 @@ import TicketStatCard from "../../pages/dashboard/TicketStatCard";
 
 const STAT_CONFIG = [
   {
-    key: "allTickets",
-    title: "All Tickets",
-    icon: <Layers />,
-    color: { bg: "bg-blue-100", text: "text-blue-600" },
-  },
-  {
     key: "openTickets",
     title: "Open",
     icon: <Ticket />,
@@ -74,7 +68,7 @@ const STAT_CONFIG = [
 
 export default function StatsCards({ stats }) {
   return (
-    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 lg:flex lg:flex-wrap">
+    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 lg:flex">
       {STAT_CONFIG.map((config) => (
         <TicketStatCard
           key={config.key}
