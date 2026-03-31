@@ -111,7 +111,7 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
             </p>
           </div>
           <div className="space-y-1">
-            <label className="text-[xs] font-semibold uppercase tracking-wide text-muted-foreground">
+            <label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               Assigned To
             </label>
             <p className="text-[13px] text-foreground">

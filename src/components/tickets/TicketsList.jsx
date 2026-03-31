@@ -44,31 +44,31 @@ export default function TicketsList({
       <Table className="table-fixed text-sm md:text-[11px]">
         <TableHeader className="bg-gray-50">
           <TableRow className="hover:bg-gray-50">
-            <TableHead className="text-gray-700 font-semibold px-2 py-3.5 md:py-2.5 w-[58px]">
+            <TableHead className="text-gray-700 font-semibold px-2 py-1.5 md:py-0.5 w-[58px]">
               ID
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold px-2 py-3.5 md:py-2.5 w-[150px]">
+            <TableHead className="text-gray-700 font-semibold px-2 py-1.5 md:py-0.5 w-[150px]">
               Title
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell px-2 py-1.5">
               Description
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell w-[180px] px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell w-[180px] px-2 py-1.5">
               Email
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[80px] px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[80px] px-2 py-1.5">
               Priority
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[80px] px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[80px] px-2 py-1.5">
               Status
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell w-[150px] px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell w-[150px] px-2 py-1.5">
               Assigned To
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[88px] px-2 py-2.5">
+            <TableHead className="text-gray-700 font-semibold hidden md:table-cell text-start w-[88px] px-2 py-1.5">
               Date
             </TableHead>
-            <TableHead className="text-gray-700 font-semibold text-start w-[74px] px-2 py-3.5 md:py-2.5">
+            <TableHead className="text-gray-700 font-semibold text-start w-[74px] px-2 py-1.5 md:py-0.5">
               Actions
             </TableHead>
           </TableRow>
@@ -79,12 +79,12 @@ export default function TicketsList({
             <TableRow
               key={ticket.id}
               onClick={() => onView(ticket)}
-              className="cursor-pointer min-h-[56px] md:min-h-[46px]"
+              className="cursor-pointer"
             >
-              <TableCell className="font-semibold text-gray-700 px-2 py-3.5 md:py-2">
+              <TableCell className="font-semibold text-gray-700 px-2 py-2.5 md:py-2">
                 #{ticket.id}
               </TableCell>
-              <TableCell className="font-medium text-gray-900 max-w-[100px] truncate px-2 py-3.5 md:py-2">
+              <TableCell className="font-medium text-gray-900 max-w-[100px] truncate px-2 py-2.5 md:py-2">
                 {ticket.title}
               </TableCell>
               <TableCell className="hidden md:table-cell text-gray-600 max-w-[220px] truncate px-2 py-2">
@@ -93,7 +93,7 @@ export default function TicketsList({
               <TableCell className="hidden md:table-cell text-gray-800 max-w-[180px] truncate px-2 py-2">
                 {ticket.email}
               </TableCell>
-              <TableCell className="hidden md:table-cell text-start px-2 py-[18px]">
+              <TableCell className="hidden md:table-cell text-start px-2 py-2">
                 <Badge type="priority" value={ticket.priority} />
               </TableCell>
               <TableCell className="hidden md:table-cell text-start py-2">
@@ -105,10 +105,10 @@ export default function TicketsList({
               <TableCell className="hidden md:table-cell text-start text-gray-500 px-2 py-2">
                 {formatDate(ticket.createdAt)}
               </TableCell>
-              <TableCell className="text-right px-2 py-3.5 md:py-2">
+              <TableCell className="text-right px-2 py-2.5 md:py-2">
                 <div className="inline-flex gap-1 md:gap-2">
                   <button
-                    className="bg-green-50 hover:bg-green-100 p-2.5 md:p-1.5 rounded-md text-green-600"
+                    className="bg-green-50 hover:bg-green-100 p-2 md:p-1.5 rounded-md text-green-600"
                     onClick={(e) => {
                       e.stopPropagation();
                       onEdit(ticket);
@@ -122,7 +122,7 @@ export default function TicketsList({
                       e.stopPropagation();
                       onDelete(ticket);
                     }}
-                    className="bg-red-50 hover:bg-red-100 p-2.5 md:p-1.5 rounded-md text-red-600"
+                    className="bg-red-50 hover:bg-red-100 p-2 md:p-1.5 rounded-md text-red-600"
                   >
                     <Trash2 className="size-4 md:size-3.5" />
                   </button>

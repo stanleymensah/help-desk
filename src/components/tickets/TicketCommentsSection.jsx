@@ -34,7 +34,7 @@ export default function TicketCommentsSection({
       <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
         <textarea
           rows={3}
-          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+          className="w-full rounded-md border border-input bg-background px-3 py-2 text-xs"
           placeholder="Add a comment..."
           value={commentMessage}
           onChange={(event) => onCommentMessageChange(event.target.value)}
