@@ -51,7 +51,7 @@ export default function FilterDropdown({ value, onChange, users = [] }) {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex rounded-full items-center gap-2 p-2 md:px-4 md:py-1.5 cursor-pointer border border-gray-300 md:rounded-lg bg-white hover:bg-muted/20 text-xs"
+        className="flex rounded-full items-center gap-2 p-2 md:px-4 md:py-0.5 cursor-pointer border border-gray-300 md:rounded-lg bg-white hover:bg-muted/20 text-xs"
       >
         <SlidersHorizontal size={18} className="md:hidden" />
         <span className="hidden md:inline">{selectedLabel}</span>

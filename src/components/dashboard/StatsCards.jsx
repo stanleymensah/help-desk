@@ -68,7 +68,7 @@ const STAT_CONFIG = [
 
 export default function StatsCards({ stats }) {
   return (
-    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 lg:flex">
+    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 lg:flex lg:flex-wrap">
       {STAT_CONFIG.map((config) => (
         <TicketStatCard
           key={config.key}

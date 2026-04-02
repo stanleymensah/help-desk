@@ -1,18 +1,24 @@
-import { Search } from "lucide-react";
+import { SearchIcon } from "lucide-react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
 
-export default function SearchBar({ value, onChange, placeholder="Search" }) {
+export default function SearchBar({ value, onChange, placeholder = "Search" }) {
   return (
-    <>
-      <div className="w-full justify-between flex border border-gray-300 bg-white py-2 px-4 items-center rounded-lg md:w-[400px]">
-        <input
-          value={value}
-          onChange={onChange}
-          type="text"
-          placeholder={placeholder}
-          className="outline-none ring-0 border-none focus:ring-0 focus:outline-none focus:border-transparent active:border-none w-full"
-        />
-        <Search size={16} />
-      </div>
-    </>
+    <InputGroup className="w-[220px] md:w-[300px]">
+      <InputGroupAddon align="inline-start">
+        <SearchIcon className="size-4 text-muted-foreground" />
+      </InputGroupAddon>
+      <InputGroupInput
+        id="ticket-search"
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        aria-label="Search tickets"
+        className="!text-[11px]"
+      />
+    </InputGroup>
   );
 }

@@ -14,13 +14,13 @@ export default function Header({creatingTicket}) {
       <div className="container flex justify-between items-center w-full">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <SidebarTrigger className="text-white hover:bg-primary-dark hover:text-white" />
           <Link to="/" className="flex items-center gap-2">
             <img src={helpdeskLogo} alt="logo" className="w-5 h-5" />
             <h1 className="hidden sm:block text-lg uppercase font-bold">
               HelpDesk
             </h1>
           </Link>
+          <SidebarTrigger className="text-white hover:bg-primary-dark hover:text-white" />
         </div>
 
 

@@ -5,7 +5,6 @@ import StatsCards from "../../components/dashboard/StatsCards";
 import ChartsSection from "../../components/dashboard/ChartsSection";
 
 export default function Dashboard() {
-
   const { data: tickets = [], isPending, error } = useTickets();
   const stats = useTicketStats(tickets);
 
@@ -22,15 +21,15 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="text-xs flex flex-col gap-4">
-      {/* <div className="flex flex-col">
-        <span className="text-lg font-semibold">Dashboard</span>
-        <span>
+    <div className="text-xs flex flex-col gap-8">
+      <div className="flex flex-col">
+        <span className="text-2xl font-semibold">Dashboard</span>
+        <span className="text-base">
           Welcome back! Here's what is going on with your ticketing so far.
         </span>
-      </div> */}
-      
-      <StatsCards stats={stats} />
+      </div>
+
+      {/* <StatsCards stats={stats} /> */}
       <ChartsSection stats={stats} />
     </div>
   );
