@@ -1,5 +1,16 @@
 import { useMemo } from "react";
-export default function Pagination({
+
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+export default function PaginationComp({
   currentPage,
   totalPages,
   onPageChange,
@@ -29,57 +40,93 @@ export default function Pagination({
     return pages;
   }, [currentPage, totalPages]);
 
+  const handlePageClick = (page) => (event) => {
+    event.preventDefault();
+    onPageChange(page);
+  };
+
+  const handlePrevClick = (event) => {
+    event.preventDefault();
+    if (hasPrevPage) onPrev();
+  };
+
+  const handleNextClick = (event) => {
+    event.preventDefault();
+    if (hasNextPage) onNext();
+  };
+
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-2 text-sm">
-      {/* Previous Button */}
-      <button
-        onClick={onPrev}
-        disabled={!hasPrevPage}
-        className={`px-3 py-1 rounded cursor-pointer ${
-          hasPrevPage
-            ? "text-primary hover:text-primary-dark"
-            : "text-gray-200 cursor-not-allowed"
-        }`}
-      >
-        <span className="me-1">&lsaquo;</span> Back
-      </button>
+    <div className="mt-2">
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              href="#"
+              onClick={handlePrevClick}
+              className={!hasPrevPage ? "pointer-events-none opacity-50" : ""}
+              aria-disabled={!hasPrevPage}
+            />
+          </PaginationItem>
 
-      {/* Page Numbers */}
-      <div className="flex gap-1">
-        {pages.map((page) => (
-          <button
-            key={page}
-            onClick={() => onPageChange(page)}
-            className={`px-2 py-1 rounded ${
-              page === currentPage
-                ? "bg-primary text-white"
-                : "bg-gray-100 hover:bg-gray-200"
-            }`}
-          >
-            {page}
-          </button>
-        ))}
-      </div>
+          {pages[0] > 1 && (
+            <>
+              <PaginationItem>
+                <PaginationLink href="#" onClick={handlePageClick(1)}>
+                  1
+                </PaginationLink>
+              </PaginationItem>
+              {pages[0] > 2 && (
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              )}
+            </>
+          )}
 
-      {/* Next Button */}
-      <button
-        onClick={onNext}
-        disabled={!hasNextPage}
-        className={`px-3 py-1 cursor-pointer rounded ${
-          hasNextPage
-            ? "text-primary hover:text-primary-dark"
-            : "bg-gray-200 text-gray-400 cursor-not-allowed"
-        }`}
-      >
-        Next <span className="ms-1">&rsaquo;</span>
-      </button>
+          {pages.map((page) => (
+            <PaginationItem key={page}>
+              <PaginationLink
+                href="#"
+                isActive={page === currentPage}
+                onClick={handlePageClick(page)}
+              >
+                {page}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
 
-      {/* Page Info */}
-      <span className="text-xs text-gray-600 ml-4">
-        Page <strong>{currentPage}</strong> of {totalPages}
-      </span>
+          {pages[pages.length - 1] < totalPages && (
+            <>
+              {pages[pages.length - 1] < totalPages - 1 && (
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              )}
+              <PaginationItem>
+                <PaginationLink href="#" onClick={handlePageClick(totalPages)}>
+                  {totalPages}
+                </PaginationLink>
+              </PaginationItem>
+            </>
+          )}
+
+          <PaginationItem>
+            <PaginationNext
+              href="#"
+              onClick={handleNextClick}
+              className={!hasNextPage ? "pointer-events-none opacity-50" : ""}
+              aria-disabled={!hasNextPage}
+            />
+          </PaginationItem>
+        </PaginationContent>
+        <div className="flex items-center text-center text-xs text-muted-foreground">
+          <pre>
+            Page <strong>{currentPage}</strong> of {totalPages}
+          </pre>
+        </div>
+      </Pagination>
     </div>
   );
 }

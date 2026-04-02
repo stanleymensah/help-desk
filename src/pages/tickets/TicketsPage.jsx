@@ -1,7 +1,7 @@
 import SearchBar from "../../components/common/SearchBar";
 import TicketsList from "../../components/tickets/TicketsList";
 import TicketModals from "../../components/tickets/TicketModals";
-import Pagination from "../../components/common/Pagination";
+import PaginationComp from "../../components/common/Pagination";
 import FilterDropdown from "../../components/common/FilterDropdown";
 import { useTickets } from "@/context/TicketContext";
 import DateRangeFilter from "../../components/common/DateRangeFilter";
@@ -11,6 +11,7 @@ import usePagination from "../../hooks/usePagination";
 import useFilterTickets from "../../hooks/useFilterTickets";
 import { useEffect, useState } from "react";
 import { useDateFilter } from "../../hooks/useDateFilter";
+import useSortTickets from "../../hooks/useSortTickets";
 import { Button } from "@/components/ui/button";
 
 const FILTER_STORAGE_KEY = "tickets:filters";
@@ -60,6 +61,7 @@ export default function TicketsPage() {
     endDate,
     startDate,
   );
+  const sortedTickets = useSortTickets(dateFiltered, "oldest");
   const hasActiveFilters =
     filterBy.status !== "all" ||
     filterBy.priority !== "all" ||
@@ -74,7 +76,7 @@ export default function TicketsPage() {
     prevPage,
     hasNextPage,
     hasPrevPage,
-  } = usePagination(dateFiltered, 7);
+  } = usePagination(sortedTickets, 8);
 
   const {
     editingTicket,
@@ -148,7 +150,7 @@ export default function TicketsPage() {
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
-      <Pagination
+      <PaginationComp
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={goToPage}

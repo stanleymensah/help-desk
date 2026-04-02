@@ -1,7 +1,7 @@
 import useTickets from "../../hooks/useTickets";
 import { useTicketStats } from "../../hooks/useTicketStats";
 import Loader from "../../components/common/Loader";
-import StatsCards from "../../components/dashboard/StatsCards";
+// import StatsCards from "../../components/dashboard/StatsCards";
 import ChartsSection from "../../components/dashboard/ChartsSection";
 
 export default function Dashboard() {

@@ -33,6 +33,11 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
   const effectiveCommentAuthor =
     commentAuthor || activeTicket?.assignedTo || users?.[0] || "";
 
+  const handleCloseDetails = () => {
+    setCommentMessage("");
+    onClose();
+  };
+
   if (!activeTicket) return null;
 
   const runAction = async (actionFn, successMessage) => {
@@ -68,7 +73,7 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Ticket Details" size="md">
+    <Modal isOpen={isOpen} onClose={handleCloseDetails} title="Ticket Details" size="md">
       <div className="space-y-5 text-sm">
         <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-3">
           <div className="grid grid-cols-2">
@@ -204,7 +209,7 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
         <Separator />
 
         <div className="flex items-center justify-center pt-1">
-          <Button type="button" variant="outline" size="lg" onClick={onClose}>
+          <Button type="button" variant="outline" size="lg" onClick={handleCloseDetails}>
             Close
           </Button>
         </div>
