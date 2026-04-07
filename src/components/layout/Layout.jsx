@@ -88,7 +88,7 @@ export default function Layout() {
           isOpen={isCreateModalOpen}
           onClose={handleRequestCloseCreate}
           title="Create Ticket"
-          size="lg"
+          size="sm"
         >
           <TicketForm
             mode="create"

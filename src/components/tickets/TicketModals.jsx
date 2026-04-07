@@ -54,7 +54,7 @@ export default function TicketModals({
         isOpen={!!editingTicket}
         onClose={onRequestCloseEdit}
         title="Edit Ticket"
-        size="lg"
+        size="sm"
       >
         {editingTicket && (
           <TicketForm
