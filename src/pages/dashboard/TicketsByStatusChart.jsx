@@ -24,7 +24,7 @@ export default function TicketsByStatusChart({ data }) {
     <div className="w-full flex flex-col items-start">
       <h2 className="text-lg font-medium mb-2">Tickets by Status</h2>
       <ResponsiveContainer height={300} width="100%">
-        <BarChart data={data} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
+        <BarChart data={data} margin={{ top: 5, right: 5, left: -10, bottom: 5 }}>
           <XAxis dataKey="status" tick={{ fontSize: 12 }} />
           <YAxis allowDecimals={false} tick={{ fontSize: 12 }} width={35} />
           <Tooltip formatter={(value) => [`${value}`, "Tickets"]} />

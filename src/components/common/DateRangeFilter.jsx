@@ -10,13 +10,13 @@ export default function DateRangeFilter({ startDate, endDate, onStartChange, onE
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 px-4 py-1 border rounded-lg text-xs transition ${
+        className={`flex items-center gap-2 px-4 py-1.5 border rounded-md text-xs transition ${
           hasDateRange 
             ? "border-primary bg-primary/10 text-primary" 
             : "border-gray-300 bg-white hover:bg-gray-50"
         }`}
       >
-        <Calendar size={18} />
+        <Calendar size={15} />
         <span className="hidden md:inline">
           {hasDateRange ? "Date Filtered" : "Filter by Date"}
         </span>
