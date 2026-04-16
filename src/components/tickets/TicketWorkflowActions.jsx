@@ -11,38 +11,38 @@ export default function TicketWorkflowActions({
   onCloseTicket,
   onReopenTicket,
 }) {
-  const getNextStepHint = () => {
-    switch (ticket.status) {
-      case "open":
-        return effectiveAssignee
-          ? `Next valid step: assign to ${effectiveAssignee} (status becomes assigned).`
-          : "Next valid step: assign this ticket to a user.";
-      case "assigned":
-        return "Next valid step: start work (moves to in-progress).";
-      case "reopened":
-        return "Next valid step: start work again (moves to in-progress).";
-      case "in-progress":
-        return "Next valid step: mark as resolved.";
-      case "resolved":
-        return "Next valid step: close ticket or reopen it.";
-      case "closed":
-        return "Workflow complete: closed tickets have no next action.";
-      default:
-        return "";
-    }
-  };
+  // const getNextStepHint = () => {
+  //   switch (ticket.status) {
+  //     case "open":
+  //       return effectiveAssignee
+  //         ? `Next valid step: assign to ${effectiveAssignee} (status becomes assigned).`
+  //         : "Next valid step: assign this ticket to a user.";
+  //     case "assigned":
+  //       return "Next valid step: start work (moves to in-progress).";
+  //     case "reopened":
+  //       return "Next valid step: start work again (moves to in-progress).";
+  //     case "in-progress":
+  //       return "Next valid step: mark as resolved.";
+  //     case "resolved":
+  //       return "Next valid step: close ticket or reopen it.";
+  //     case "closed":
+  //       return "Workflow complete: closed tickets have no next action.";
+  //     default:
+  //       return "";
+  //   }
+  // };
 
   const renderActions = () => {
     switch (ticket.status) {
       case "open":
         return (
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
-            <div className="flex-1">
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <div className="flex min-w-0 items-end gap-2 flex-nowrap">
+            <div className="min-w-0 flex-1">
+              <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Assign User
               </label>
               <select
-                className="h-9 w-full rounded-md border border-input bg-background px-3 text-xs"
+                className="h-8 w-full rounded-md border border-input bg-background px-2 text-[11px]"
                 value={effectiveAssignee}
                 onChange={(event) => onAssigneeChange(event.target.value)}
               >
@@ -57,6 +57,8 @@ export default function TicketWorkflowActions({
             <Button
               type="button"
               variant="default"
+              size="xs"
+              className="shrink-0 whitespace-nowrap"
               disabled={!effectiveAssignee}
               onClick={onAssign}
             >
@@ -67,43 +69,49 @@ export default function TicketWorkflowActions({
       case "assigned":
       case "reopened":
         return (
-          <Button type="button" onClick={onStartWork}>
+          <Button type="button" size="xs" className="whitespace-nowrap" onClick={onStartWork}>
             Start Work
           </Button>
         );
       case "in-progress":
         return (
-          <Button type="button" onClick={onMarkResolved}>
+          <Button type="button" size="xs" className="whitespace-nowrap" onClick={onMarkResolved}>
             Mark as Resolved
           </Button>
         );
       case "resolved":
         return (
-          <div className="flex gap-2">
-            <Button type="button" onClick={onCloseTicket}>
+          <div className="flex gap-2 flex-nowrap">
+            <Button type="button" size="xs" className="whitespace-nowrap" onClick={onCloseTicket}>
               Close Ticket
             </Button>
-            <Button type="button" variant="outline" onClick={onReopenTicket}>
+            <Button
+              type="button"
+              size="xs"
+              variant="outline"
+              className="whitespace-nowrap"
+              onClick={onReopenTicket}
+            >
               Reopen Ticket
             </Button>
           </div>
         );
       default:
         return (
-          <span className="text-xs text-muted-foreground">
-            No actions available for this status.
+          <span className="text-[11px] text-muted-foreground whitespace-nowrap">
+            Ticket Closed
           </span>
         );
     }
   };
 
   return (
-    <div className="space-y-2">
-      <label className="text-xs me-2 font-semibold uppercase tracking-wide text-muted-foreground">
+    <div className="flex w-full items-center py-1">
+      <label className="text-[10px] me-2 font-semibold uppercase text-muted-foreground">
         Ticket Actions
       </label>
-      {renderActions()}
-      <p className="text-xs text-muted-foreground">{getNextStepHint()}</p>
+        <div className="">{renderActions()}</div>
+      {/* <p className="text-xs text-muted-foreground">{getNextStepHint()}</p> */}
     </div>
   );
 }

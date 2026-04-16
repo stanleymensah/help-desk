@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 
+// eslint-disable-next-line no-unused-vars
 export default function FilterDropdown({ value, onChange, users = [] }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,13 +22,13 @@ export default function FilterDropdown({ value, onChange, users = [] }) {
     { label: "Low", value: "low" },
   ];
 
-  const assigneeOptions = [
-    { label: "All Users", value: "all" },
-    ...users.map((user) => ({
-      label: user,
-      value: user,
-    })),
-  ];
+  // const assigneeOptions = [
+  //   { label: "All Users", value: "all" },
+  //   ...users.map((user) => ({
+  //     label: user,
+  //     value: user,
+  //   })),
+  // ];
 
   const handleSelect = (key, optionValue) => {
     onChange({
@@ -65,8 +66,8 @@ export default function FilterDropdown({ value, onChange, users = [] }) {
         <>
           <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)}></div>
 
-          <div className="absolute top-full mt-1 right-0 bg-white border-mute rounded-lg shadow-lg z-20 w-[680px] max-w-[90vw] p-2">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <div className="absolute top-full mt-1 right-0 bg-white border-mute rounded-lg shadow-lg z-20 w-[480px] max-w-[90vw] p-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="md:border-r md:border-gray-100 md:pr-2">
                 <div className={sectionTitleClass}>Status</div>
                 {statusOptions.map((option) => (
@@ -80,7 +81,7 @@ export default function FilterDropdown({ value, onChange, users = [] }) {
                 ))}
               </div>
 
-              <div className="md:border-r md:border-gray-100 md:pr-2">
+              <div className="">
                 <div className={sectionTitleClass}>Priority</div>
                 {priorityOptions.map((option) => (
                   <button
@@ -93,7 +94,7 @@ export default function FilterDropdown({ value, onChange, users = [] }) {
                 ))}
               </div>
 
-              <div className="max-h-64 overflow-y-auto">
+              {/* <div className="max-h-64 overflow-y-auto">
                 <div className={sectionTitleClass}>User</div>
                 {assigneeOptions.map((option) => (
                   <button
@@ -104,7 +105,7 @@ export default function FilterDropdown({ value, onChange, users = [] }) {
                     {option.label}
                   </button>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </>

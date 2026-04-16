@@ -121,7 +121,11 @@ export default function TicketsPage() {
           />
         </div>
         <div className="flex items-center justify-end gap-2">
-          <FilterDropdown value={filterBy} onChange={setFilterBy} users={users} />
+          <FilterDropdown
+            value={filterBy}
+            onChange={setFilterBy}
+            users={users}
+          />
           <Button
             variant="outline"
             size="sm"
@@ -141,24 +145,26 @@ export default function TicketsPage() {
         </div>
       </div>
 
-      <TicketsList
-        tickets={currentItems}
-        isPending={isLoading}
-        // error={error}
-        searchTerm={searchTerm}
-        onView={handleView}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-      <PaginationComp
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={goToPage}
-        onNext={nextPage}
-        onPrev={prevPage}
-        hasNextPage={hasNextPage}
-        hasPrevPage={hasPrevPage}
-      />
+      <div className="w-full md:max-w-[1000px] md:mx-auto leading-tight">
+        <TicketsList
+          tickets={currentItems}
+          isPending={isLoading}
+          // error={error}
+          searchTerm={searchTerm}
+          onView={handleView}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+        <PaginationComp
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={goToPage}
+          onNext={nextPage}
+          onPrev={prevPage}
+          hasNextPage={hasNextPage}
+          hasPrevPage={hasPrevPage}
+        />
+      </div>
 
       {/* Modals */}
       <TicketModals

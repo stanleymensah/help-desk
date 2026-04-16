@@ -22,7 +22,7 @@ export default function TicketModals({
   const [deleteConfirmation, setDeleteConfirmation] = useState("");
 
   const expectedDeleteValue = useMemo(
-    () => (deletingTicket ? `#${deletingTicket.id}` : ""),
+    () => (deletingTicket ? `TIC-${deletingTicket.id}` : ""),
     [deletingTicket],
   );
 
@@ -96,7 +96,7 @@ export default function TicketModals({
           <div className="space-y-4 text-sm">
             <p>
               Are you sure you want to delete{" "}
-              <span className="font-semibold">#{deletingTicket.id}</span>?
+              <span className="font-semibold">TIC-{deletingTicket.id}</span>?
             </p>
             <div className="space-y-2">
               <p className="text-xs text-muted-foreground">

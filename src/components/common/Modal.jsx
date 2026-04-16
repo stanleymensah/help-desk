@@ -1,9 +1,12 @@
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import { Button } from "../ui/button";
+import { XIcon } from "lucide-react";
 
 export default function Modal({
   isOpen,
@@ -23,10 +26,17 @@ export default function Modal({
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose?.()}>
       <DialogContent
-        className={`max-h-[90vh] overflow-y-auto p-6 text-xs ${sizeClassMap[size] || sizeClassMap.md}`}
+        showCloseButton={false}
+        className={`max-h-[90vh] overflow-y-auto py-2 px-3 text-xs ${sizeClassMap[size] || sizeClassMap.md}`}
       >
-        <DialogHeader>
-          <DialogTitle className="text-xl">{title}</DialogTitle>
+        <DialogHeader className="flex-row items-center justify-between gap-3">
+          <DialogTitle className="text-sm">{title}</DialogTitle>
+          <DialogClose asChild>
+            <Button variant="ghost" size="icon-sm">
+              <XIcon />
+              <span className="sr-only">Close</span>
+            </Button>
+          </DialogClose>
         </DialogHeader>
         <div>{children}</div>
       </DialogContent>

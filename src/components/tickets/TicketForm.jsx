@@ -113,10 +113,6 @@ export default function TicketForm({
       onSubmit={handleSubmit(handleFormSubmit)}
       className="mx-auto w-full max-w-md space-y-3"
     >
-      <div className="text-muted-foreground text-xs">
-        (<span className="text-destructive">*</span>) Fields are required
-      </div>
-
       <div className="flex flex-col gap-1">
         <FormLabel required>Title</FormLabel>
         <Input
@@ -157,7 +153,10 @@ export default function TicketForm({
             rules={{ required: "Priority is required" }}
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="w-full" aria-invalid={!!errors.priority}>
+                <SelectTrigger
+                  className="w-full"
+                  aria-invalid={!!errors.priority}
+                >
                   <SelectValue placeholder="Select priority" />
                 </SelectTrigger>
                 <SelectContent>
@@ -204,7 +203,10 @@ export default function TicketForm({
             rules={{ required: "Status is required" }}
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="w-full" aria-invalid={!!errors.status}>
+                <SelectTrigger
+                  className="w-full"
+                  aria-invalid={!!errors.status}
+                >
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -231,18 +233,24 @@ export default function TicketForm({
             },
           })}
           placeholder="Description must be at least 10 characters"
-          rows={4}
+          rows={5}
           aria-invalid={!!errors.description}
+          className="resize-none"
         />
       </div>
 
-      <div className="flex justify-end gap-2 pt-1">
-        <Button type="button" variant="outline" onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button type="submit" disabled={isEdit && !isDirty}>
-          {isEdit ? "Save Changes" : "Create Ticket"}
-        </Button>
+      <div className="flex justify-between items-center">
+        <div className="text-muted-foreground text-xs">
+          (<span className="text-destructive">*</span>) Fields are required
+        </div>
+        <div className="flex gap-2 pt-1">
+          <Button size="sm" type="button" variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+          <Button type="submit" size="sm" disabled={isEdit && !isDirty}>
+            {isEdit ? "Save Changes" : "Create Ticket"}
+          </Button>
+        </div>
       </div>
     </form>
   );

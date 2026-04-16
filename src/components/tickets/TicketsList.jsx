@@ -12,6 +12,38 @@ import {
 } from "../ui/table";
 import { formatDate } from "@/lib/date";
 
+function getStatusBadgeStyle(status) {
+  switch (status) {
+    case "open":
+      return { backgroundColor: "#dbeafe", borderColor: "#93c5fd", color: "#1d4ed8" };
+    case "assigned":
+      return { backgroundColor: "#ffedd5", borderColor: "#fdba74", color: "#c2410c" };
+    case "in-progress":
+      return { backgroundColor: "#dcfce7", borderColor: "#86efac", color: "#15803d" };
+    case "resolved":
+      return { backgroundColor: "#e5e7eb", borderColor: "#9ca3af", color: "#374151" };
+    case "closed":
+      return { backgroundColor: "#f3e8ff", borderColor: "#d8b4fe", color: "#7e22ce" };
+    case "reopened":
+      return { backgroundColor: "#fef9c3", borderColor: "#fde047", color: "#a16207" };
+    default:
+      return { backgroundColor: "transparent", borderColor: "currentColor", color: "inherit" };
+  }
+}
+
+function getPriorityBadgeStyle(priority) {
+  switch (priority) {
+    case "low":
+      return { backgroundColor: "#ccfbf1", borderColor: "#5eead4", color: "#0f766e" };
+    case "medium":
+      return { backgroundColor: "#fef3c7", borderColor: "#fcd34d", color: "#b45309" };
+    case "high":
+      return { backgroundColor: "#fee2e2", borderColor: "#fca5a5", color: "#b91c1c" };
+    default:
+      return { backgroundColor: "transparent", borderColor: "currentColor", color: "inherit" };
+  }
+}
+
 export default function TicketsList({
   tickets,
   isPending,
@@ -40,7 +72,7 @@ export default function TicketsList({
   }
 
   return (
-    <div className="w-full md:max-w-[1000px] md:mx-auto rounded-lg border border-gray-300 bg-white overflow-hidden text-sm md:text-[11px] leading-tight">
+    <div className="rounded-lg border border-gray-300 bg-white overflow-hidden text-sm md:text-[11px]">
       <Table className="table-fixed text-sm md:text-[11px]">
         <TableHeader className="bg-gray-50">
           <TableRow className="hover:bg-gray-50">
@@ -82,7 +114,7 @@ export default function TicketsList({
               className="cursor-pointer"
             >
               <TableCell className="font-semibold text-gray-700 px-2 py-2.5 md:py-2">
-                #{ticket.id}
+                TIC-{ticket.id}
               </TableCell>
               <TableCell className="font-medium text-gray-900 max-w-[100px] truncate px-2 py-2.5 md:py-2">
                 {ticket.title}
@@ -94,12 +126,20 @@ export default function TicketsList({
                 {ticket.email}
               </TableCell>
               <TableCell className="hidden md:table-cell text-start px-2 py-2">
-                <Badge variant="secondary" className="capitalize text-xs">
+                <Badge
+                  variant="outline"
+                  className="capitalize text-xs"
+                  style={getPriorityBadgeStyle(ticket.priority)}
+                >
                   {ticket.priority}
                 </Badge>
               </TableCell>
               <TableCell className="hidden md:table-cell text-start py-2">
-                <Badge variant="outline" className="capitalize text-xs">
+                <Badge
+                  variant="outline"
+                  className="capitalize text-xs"
+                  style={getStatusBadgeStyle(ticket.status)}
+                >
                   {ticket.status}
                 </Badge>
               </TableCell>

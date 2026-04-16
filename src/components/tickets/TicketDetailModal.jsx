@@ -9,6 +9,82 @@ import TicketWorkflowActions from "./TicketWorkflowActions";
 import TicketCommentsSection from "./TicketCommentsSection";
 import { formatDateTime } from "@/lib/date";
 
+function getStatusBadgeStyle(status) {
+  switch (status) {
+    case "open":
+      return {
+        backgroundColor: "#dbeafe",
+        borderColor: "#93c5fd",
+        color: "#1d4ed8",
+      };
+    case "assigned":
+      return {
+        backgroundColor: "#ffedd5",
+        borderColor: "#fdba74",
+        color: "#c2410c",
+      };
+    case "in-progress":
+      return {
+        backgroundColor: "#dcfce7",
+        borderColor: "#86efac",
+        color: "#15803d",
+      };
+    case "resolved":
+      return {
+        backgroundColor: "#e5e7eb",
+        borderColor: "#9ca3af",
+        color: "#374151",
+      };
+    case "closed":
+      return {
+        backgroundColor: "#f3e8ff",
+        borderColor: "#d8b4fe",
+        color: "#7e22ce",
+      };
+    case "reopened":
+      return {
+        backgroundColor: "#fef9c3",
+        borderColor: "#fde047",
+        color: "#a16207",
+      };
+    default:
+      return {
+        backgroundColor: "transparent",
+        borderColor: "currentColor",
+        color: "inherit",
+      };
+  }
+}
+
+function getPriorityBadgeStyle(priority) {
+  switch (priority) {
+    case "low":
+      return {
+        backgroundColor: "#ccfbf1",
+        borderColor: "#5eead4",
+        color: "#0f766e",
+      };
+    case "medium":
+      return {
+        backgroundColor: "#fef3c7",
+        borderColor: "#fcd34d",
+        color: "#b45309",
+      };
+    case "high":
+      return {
+        backgroundColor: "#fee2e2",
+        borderColor: "#fca5a5",
+        color: "#b91c1c",
+      };
+    default:
+      return {
+        backgroundColor: "transparent",
+        borderColor: "currentColor",
+        color: "inherit",
+      };
+  }
+}
+
 export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
   const {
     users,
@@ -39,6 +115,8 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
   };
 
   if (!activeTicket) return null;
+
+  const modalTitle = `TIC-${activeTicket.id} ${activeTicket.title}`;
 
   const runAction = async (actionFn, successMessage) => {
     try {
@@ -73,146 +151,148 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleCloseDetails} title="Ticket Details" size="md">
-      <div className="space-y-5 text-sm">
-        <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-3">
-          <div className="grid grid-cols-2">
-            <div>
-              <label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Ticket ID
-              </label>
-              <p className="text-lg font-semibold text-foreground">
-                #{activeTicket.id}
-              </p>
-            </div>
-
-            <div>
-              <label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Title
-              </label>
-              <p className="text-base font-medium text-foreground">
-                {activeTicket.title}
-              </p>
-            </div>
-          </div>
-
+    <Modal
+      isOpen={isOpen}
+      onClose={handleCloseDetails}
+      title={modalTitle}
+      size="md"
+    >
+      <div className="flex flex-col gap-4 text-[11px]">
+        <div className="rounded-lg border border-border bg-muted/30 p-2 space-y-3">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
               Description
             </label>
-            <p className="text-sm leading-relaxed text-foreground/90">
+            <p className="text-[11px] leading-relaxed text-foreground/90">
               {activeTicket.description}
             </p>
           </div>
-        </div>
 
-        <div className="grid grid-cols-4 gap-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Created By
-            </label>
-            <p className="text-[13px] text-foreground">
-              {activeTicket.email || activeTicket.customerEmail}
-            </p>
-          </div>
-          <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Assigned To
-            </label>
-            <p className="text-[13px] text-foreground">
-              {activeTicket.assignedTo || "Unassigned"}
-            </p>
-          </div>
-          <div className="space-y-1 flex flex-col">
-            <label className="text-xs font-semibold uppercase me-1 tracking-wide text-muted-foreground">
-              Status
-            </label>
-            <div>
-              <Badge variant="outline" className="capitalize">
-                {activeTicket.status}
-              </Badge>
+          <Separator />
+
+          <div className="grid grid-cols-4 gap-4">
+            <div className="space-y-1 ">
+              <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Created By
+              </label>
+              <p className="text-[11px] text-foreground">
+                {activeTicket.email || activeTicket.customerEmail}
+              </p>
             </div>
-          </div>{" "}
-          <div className="space-y-1 flex flex-col">
-            <label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Priority
-            </label>
-            <div>
-              <Badge variant="secondary" className="capitalize">
-                {activeTicket.priority}
-              </Badge>
+            <div className="space-y-1">
+              <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Assigned To
+              </label>
+              <p className="text-[11px] text-foreground">
+                {activeTicket.assignedTo || "Unassigned"}
+              </p>
+            </div>
+            <div className="space-y-1 flex flex-col">
+              <label className="text-[10px] font-semibold uppercase me-1 tracking-wide text-muted-foreground">
+                Status
+              </label>
+              <div>
+                <Badge
+                  variant="outline"
+                  className="capitalize text-[10px]"
+                  style={getStatusBadgeStyle(activeTicket.status)}
+                >
+                  {activeTicket.status}
+                </Badge>
+              </div>
+            </div>{" "}
+            <div className="space-y-1 flex flex-col">
+              <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Priority
+              </label>
+              <div>
+                <Badge
+                  variant="outline"
+                  className="capitalize text-[10px]"
+                  style={getPriorityBadgeStyle(activeTicket.priority)}
+                >
+                  {activeTicket.priority}
+                </Badge>
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div className="grid grid-cols-4 gap-4 text-[11px]">
+            <div className="space-y-1">
+              <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Assigned At
+              </label>
+              <p className="text-foreground">
+                {formatDateTime(activeTicket.assignedAt)}
+              </p>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Created At
+              </label>
+              <p className="text-foreground">
+                {formatDateTime(activeTicket.createdAt)}
+              </p>
+            </div>
+            <div className="space-y-1">
+              <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Last Updated
+              </label>
+              <p className="text-foreground">
+                {formatDateTime(activeTicket.updatedAt)}
+              </p>
             </div>
           </div>
         </div>
 
-        <TicketWorkflowActions
-          ticket={activeTicket}
-          users={users}
-          effectiveAssignee={effectiveAssignee}
-          onAssigneeChange={setSelectedAssignee}
-          onAssign={handleAssign}
-          onStartWork={() =>
-            runAction(() => startWork(activeTicket.id), "Work started")
-          }
-          onMarkResolved={() =>
-            runAction(() => markResolved(activeTicket.id), "Ticket resolved")
-          }
-          onCloseTicket={() =>
-            runAction(() => closeTicket(activeTicket.id), "Ticket closed")
-          }
-          onReopenTicket={() =>
-            runAction(() => reopenTicket(activeTicket.id), "Ticket reopened")
-          }
-        />
+        <div className="flex flex-col gap-2 mb-2">
+          <TicketWorkflowActions
+            ticket={activeTicket}
+            users={users}
+            effectiveAssignee={effectiveAssignee}
+            onAssigneeChange={setSelectedAssignee}
+            onAssign={handleAssign}
+            onStartWork={() =>
+              runAction(() => startWork(activeTicket.id), "Work started")
+            }
+            onMarkResolved={() =>
+              runAction(() => markResolved(activeTicket.id), "Ticket resolved")
+            }
+            onCloseTicket={() =>
+              runAction(() => closeTicket(activeTicket.id), "Ticket closed")
+            }
+            onReopenTicket={() =>
+              runAction(() => reopenTicket(activeTicket.id), "Ticket reopened")
+            }
+          />
 
-        <div className="grid grid-cols-3 gap-4 text-[13px]">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Assigned At
-            </label>
-            <p className="text-foreground">
-              {formatDateTime(activeTicket.assignedAt)}
-            </p>
-          </div>
-
-          <div className="space-y-1">
-            <label className=" font-semibold uppercase tracking-wide text-muted-foreground">
-              Created At
-            </label>
-            <p className="text-foreground">
-              {formatDateTime(activeTicket.createdAt)}
-            </p>
-          </div>
-          <div className="space-y-1">
-            <label className="font-semibold uppercase tracking-wide text-muted-foreground">
-              Last Updated
-            </label>
-            <p className="text-foreground">
-              {formatDateTime(activeTicket.updatedAt)}
-            </p>
-          </div>
+          <TicketCommentsSection
+            comments={comments}
+            users={users}
+            commentMessage={commentMessage}
+            onCommentMessageChange={setCommentMessage}
+            effectiveCommentAuthor={effectiveCommentAuthor}
+            onCommentAuthorChange={setCommentAuthor}
+            onAddComment={handleAddComment}
+            formatDateTime={formatDateTime}
+          />
         </div>
 
-        <Separator />
-
-        <TicketCommentsSection
-          comments={comments}
-          users={users}
-          commentMessage={commentMessage}
-          onCommentMessageChange={setCommentMessage}
-          effectiveCommentAuthor={effectiveCommentAuthor}
-          onCommentAuthorChange={setCommentAuthor}
-          onAddComment={handleAddComment}
-          formatDateTime={formatDateTime}
-        />
-
-        <Separator />
+        {/* <Separator />
 
         <div className="flex items-center justify-center pt-1">
-          <Button type="button" variant="outline" size="lg" onClick={handleCloseDetails}>
+          <Button
+            type="button"
+            variant="outline"
+            size="default"
+            onClick={handleCloseDetails}
+          >
             Close
           </Button>
-        </div>
+        </div> */}
       </div>
     </Modal>
   );

@@ -58,8 +58,13 @@ export default function PaginationComp({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="mt-2">
-      <Pagination>
+    <div className="mt-2 w-full">
+      <Pagination className="flex justify-end gap-5">
+        <div className="flex items-center text-center text-xs text-muted-foreground">
+          <pre>
+            Page <strong>{currentPage}</strong> of {totalPages}
+          </pre>
+        </div>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
@@ -121,11 +126,6 @@ export default function PaginationComp({
             />
           </PaginationItem>
         </PaginationContent>
-        <div className="flex items-center text-center text-xs text-muted-foreground">
-          <pre>
-            Page <strong>{currentPage}</strong> of {totalPages}
-          </pre>
-        </div>
       </Pagination>
     </div>
   );
