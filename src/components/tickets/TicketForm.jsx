@@ -94,10 +94,24 @@ export default function TicketForm({
     }
   })();
 
-  const userOptions = (users ?? []).map((name) => ({
-    value: name,
-    label: name,
-  }));
+  const getUserDisplayName = (user) => {
+    if (typeof user === "string") return user.trim();
+    return (
+      user?.fullName?.trim() ??
+      user?.name?.trim() ??
+      user?.username?.trim() ??
+      user?.email?.trim() ??
+      ""
+    );
+  };
+
+  const userOptions = (users ?? [])
+    .map((user) => getUserDisplayName(user))
+    .filter(Boolean)
+    .map((name) => ({
+      value: name,
+      label: name,
+    }));
 
   useEffect(() => {
     onDirtyChange?.(isDirty);

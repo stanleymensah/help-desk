@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { TooltipProvider } from "./components/ui/tooltip";
 import { SidebarProvider } from "./components/ui/sidebar";
 import { TicketProvider } from "./context/TicketContext";
+import { UserProvider } from "./context/UsersContext";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -12,14 +13,16 @@ export default function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <TicketProvider>
-          <SidebarProvider>
-            <TooltipProvider>
-              <Toaster richColors position="bottom-right" />
-              <RouterProvider router={router} />
-            </TooltipProvider>
-          </SidebarProvider>
-        </TicketProvider>
+        <UserProvider>
+          <TicketProvider>
+            <SidebarProvider>
+              <TooltipProvider>
+                <Toaster richColors position="bottom-right" />
+                <RouterProvider router={router} />
+              </TooltipProvider>
+            </SidebarProvider>
+          </TicketProvider>
+        </UserProvider>
       </QueryClientProvider>
     </>
   );

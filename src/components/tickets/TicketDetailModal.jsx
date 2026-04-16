@@ -102,12 +102,25 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
   const [commentAuthor, setCommentAuthor] = useState("");
   const [commentMessage, setCommentMessage] = useState("");
 
+  const getUserDisplayName = (user) => {
+    if (typeof user === "string") return user.trim();
+    return (
+      user?.fullName?.trim() ??
+      user?.name?.trim() ??
+      user?.username?.trim() ??
+      user?.email?.trim() ??
+      ""
+    );
+  };
+
+  const defaultCommentAuthor = getUserDisplayName(users?.[0]);
+
   const comments = Array.isArray(activeTicket?.comments)
     ? activeTicket.comments
     : [];
   const effectiveAssignee = selectedAssignee || activeTicket?.assignedTo || "";
   const effectiveCommentAuthor =
-    commentAuthor || activeTicket?.assignedTo || users?.[0] || "";
+    commentAuthor || activeTicket?.assignedTo || defaultCommentAuthor || "";
 
   const handleCloseDetails = () => {
     setCommentMessage("");
@@ -175,14 +188,16 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
               <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Created By
               </label>
+              <div></div>
               <p className="text-[11px] text-foreground">
                 {activeTicket.email || activeTicket.customerEmail}
               </p>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-1 ">
               <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Assigned To
               </label>
+              <div></div>
               <p className="text-[11px] text-foreground">
                 {activeTicket.assignedTo || "Unassigned"}
               </p>

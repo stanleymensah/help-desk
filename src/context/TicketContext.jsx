@@ -5,16 +5,11 @@ import {
   useEffect,
   useCallback,
 } from "react";
+import { useUsers } from "./UsersContext";
 
 const TicketContext = createContext();
 const STORAGE_KEY = "helpdesk_tickets";
-const USERS = [
-  "Henry Saaka",
-  "Abu Gerald",
-  "Anthony Adtek",
-  "Bright Andoh",
-  "Elvis Mussah",
-];
+
 const STATUS_TRANSITIONS = {
   open: ["assigned"],
   assigned: ["in-progress"],
@@ -27,6 +22,7 @@ const STATUS_TRANSITIONS = {
 export const TicketProvider = ({ children }) => {
   const [tickets, setTickets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const {users} = useUsers();
 
   const normalizeId = (id) => String(id);
   const canTransition = (fromStatus, toStatus) => {
@@ -174,8 +170,15 @@ export const TicketProvider = ({ children }) => {
       return { success: true };
     };
 
-  const assignTicket = async (ticketId, userName) => {
-    const assignee = userName?.trim() ?? "";
+  const assignTicket = async (ticketId, user) => {
+    const assignee =
+      typeof user === "string"
+        ? user.trim()
+        : user?.fullName?.trim() ??
+          user?.name?.trim() ??
+          user?.username?.trim() ??
+          user?.email?.trim() ??
+          "";
     if (!assignee) {
       throw new Error("Assignee is required.");
     }
@@ -280,7 +283,7 @@ export const TicketProvider = ({ children }) => {
     getTicketById,
     isLoading,
     tickets,
-    users: USERS,
+    users,
     assignTicket,
     transitionTicket,
     startWork,

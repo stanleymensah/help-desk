@@ -5,15 +5,16 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 export default function Auth() {
-  const [activeForm, setActiveForm] = useState("signup");
+  const [activeForm, setActiveForm] = useState("login");
+
 
   const switchPage = (formName) => {
     setActiveForm(formName);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-5">
-      <div className="flex w-[70rem] max-h-[90vh] bg-white shadow-lg overflow-hidden">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-5 w-full bg-muted">
+      <div className="flex w-[70rem] max-h-[90vh] bg-white overflow-hidden">
         {/* LEFT SIDE: Content */}
         <div className="flex flex-col w-1/2 py-8 px-10 overflow-y-auto">
           {/* Tab Selection */}
@@ -46,7 +47,7 @@ export default function Auth() {
 
           {/* --FORM-- */}
           <div
-            className={"flex flex-col gap-6"}
+            className="flex flex-col gap-6"
           >
             {activeForm === "login" ? <LoginForm /> : <RegisterForm />}
           </div>

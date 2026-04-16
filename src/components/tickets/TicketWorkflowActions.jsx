@@ -11,6 +11,19 @@ export default function TicketWorkflowActions({
   onCloseTicket,
   onReopenTicket,
 }) {
+  const getUserDisplayName = (user) => {
+    if (typeof user === "string") return user.trim();
+    return (
+      user?.fullName?.trim() ??
+      user?.name?.trim() ??
+      user?.username?.trim() ??
+      user?.email?.trim() ??
+      ""
+    );
+  };
+
+  const userNames = (users ?? []).map(getUserDisplayName).filter(Boolean);
+
   // const getNextStepHint = () => {
   //   switch (ticket.status) {
   //     case "open":
@@ -47,9 +60,9 @@ export default function TicketWorkflowActions({
                 onChange={(event) => onAssigneeChange(event.target.value)}
               >
                 <option value="">Select user</option>
-                {(users ?? []).map((user) => (
-                  <option key={user} value={user}>
-                    {user}
+                {userNames.map((userName) => (
+                  <option key={userName} value={userName}>
+                    {userName}
                   </option>
                 ))}
               </select>

@@ -10,6 +10,19 @@ export default function TicketCommentsSection({
   onAddComment,
   formatDateTime,
 }) {
+  const getUserDisplayName = (user) => {
+    if (typeof user === "string") return user.trim();
+    return (
+      user?.fullName?.trim() ??
+      user?.name?.trim() ??
+      user?.username?.trim() ??
+      user?.email?.trim() ??
+      ""
+    );
+  };
+
+  const userNames = (users ?? []).map(getUserDisplayName).filter(Boolean);
+
   return (
     <div className="space-y-3">
       <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -45,9 +58,9 @@ export default function TicketCommentsSection({
             value={effectiveCommentAuthor}
             onChange={(event) => onCommentAuthorChange(event.target.value)}
           >
-            {(users ?? []).map((user) => (
-              <option key={user} value={user}>
-                {user}
+            {userNames.map((userName) => (
+              <option key={userName} value={userName}>
+                {userName}
               </option>
             ))}
           </select>
