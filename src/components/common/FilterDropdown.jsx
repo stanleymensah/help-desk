@@ -44,15 +44,15 @@ export default function FilterDropdown({ value, onChange, users = [] }) {
 
   const sectionTitleClass = "px-3 py-1 text-[11px] font-semibold text-muted-foreground";
   const optionClass = (isActive) =>
-    `w-full text-left px-4 py-2 text-xs hover:bg-gray-100 ${
-      isActive ? "bg-primary/10 text-primary font-semibold" : ""
+    `w-full text-left px-4 py-2 text-xs text-foreground hover:bg-muted ${
+      isActive ? "bg-muted font-semibold" : ""
     }`;
 
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex rounded-full items-center gap-2 p-2 md:px-4 md:py-1.5 cursor-pointer border border-gray-300 md:rounded-md bg-white hover:bg-muted/20 text-xs"
+        className="flex rounded-full items-center gap-2 p-2 md:px-4 md:py-1.5 cursor-pointer border border-black dark:border-[#e6e6e6] md:rounded-md bg-transparent hover:bg-transparent text-black dark:text-white text-xs"
       >
         <SlidersHorizontal size={18} className="md:hidden" />
         <span className="hidden md:inline">{selectedLabel}</span>
@@ -66,9 +66,9 @@ export default function FilterDropdown({ value, onChange, users = [] }) {
         <>
           <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)}></div>
 
-          <div className="absolute top-full mt-1 right-0 bg-white border-mute rounded-lg shadow-lg z-20 w-[480px] max-w-[90vw] p-2">
+          <div className="absolute top-full mt-1 right-0 bg-card border border-border rounded-lg shadow-lg z-20 w-[480px] max-w-[90vw] p-2">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div className="md:border-r md:border-gray-100 md:pr-2">
+              <div className="md:border-r md:border-border md:pr-2">
                 <div className={sectionTitleClass}>Status</div>
                 {statusOptions.map((option) => (
                   <button

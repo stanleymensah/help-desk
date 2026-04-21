@@ -74,6 +74,7 @@ export default function TicketCommentsSection({
           </select> */}
           <Button
             type="button"
+            variant="secondary"
             size="xs"
             onClick={onAddComment}
             disabled={!commentMessage.trim()}

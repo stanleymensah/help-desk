@@ -3,7 +3,7 @@ import TicketsByPriorityChart from "../../pages/dashboard/TicketsByPriorityChart
 
 export default function ChartsSection({ stats }) {
   const statusData = [
-    {status: "Total", count: stats.allTickets},
+    // {status: "Total", count: stats.allTickets},
     { status: "Open", count: stats.openTickets },
     { status: "Assigned", count: stats.assignedTickets },
     { status: "In Progress", count: stats.inProgressTickets },

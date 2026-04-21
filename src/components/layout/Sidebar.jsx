@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Gauge, LogOut, Ticket, Users } from "lucide-react";
+import { Gauge, LogOut, Ticket, UsersRound } from "lucide-react";
 import { useUsers } from "@/context/UsersContext";
 import {
   Sidebar as AppSidebar,
@@ -27,7 +27,7 @@ const NAV_ITEMS = [
   {
     to: "/users",
     label: "Users",
-    icon: Users,
+    icon: UsersRound,
   }
 ];
 
@@ -45,10 +45,10 @@ export default function Sidebar() {
     <>
     <AppSidebar
       collapsible="icon"
-      className="top-12 h-[calc(100svh-3rem)] border-r border-primary"
+      className="top-12 h-[calc(100svh-3rem)] border-r border-border"
     >
-      <SidebarContent className="bg-[#212529]">
-        <SidebarGroup className="pt-3">
+      <SidebarContent className="bg-sidebar">
+        <SidebarGroup className="p-0">
           <SidebarMenu>
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
@@ -61,18 +61,20 @@ export default function Sidebar() {
                   <SidebarMenuButton
                     asChild
                     tooltip={item.label}
-                    className={`text-sm mb-1 py-5 ${
+                    className={`text-sm py-6 pl-4 ${
                       isActive
-                        ? "bg-[#fff] hover:bg-gray-200"
-                        : "bg-[#212529] hover:bg-gray-700"
+                        ? "border-e-2 border-black bg-gray-300 hover:bg-gray-400 dark:border-white dark:bg-[#2b2b2b] dark:hover:bg-[#343434] dark:text-white"
+                        : "bg-transparent hover:bg-gray-400 dark:hover:bg-[#343434] dark:text-[#e6e6e6]"
                     }`}
                   >
                     <NavLink to={item.to} end={item.end}>
                       <Icon
                         size={18}
-                        className={`shrink-0 ${isActive ? "text-black" : "text-white"}`}
+                        className={`shrink-0 ${isActive ? "text-black dark:text-white" : "text-gray-700 dark:text-[#e6e6e6]"}`}
                       />
-                      <span className={isActive ? "text-black" : "text-white"}>
+                      <span
+                        className={`${isActive ? "font-medium text-black dark:text-white" : "font-light text-gray-700 dark:text-[#e6e6e6]"}`}
+                      >
                         {item.label}
                       </span>
                     </NavLink>
@@ -84,16 +86,16 @@ export default function Sidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="bg-[#212529] p-2 pt-0">
+      <SidebarFooter className="bg-transparent p-0 border-t border-border">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={onLogout}
               tooltip="Logout"
-              className="text-sm mb-1 py-5 bg-[#212529] hover:bg-gray-700"
+              className="text-sm py-6 pl-4 bg-transparent hover:bg-gray-400 text-gray-700 dark:text-[#e6e6e6] dark:hover:bg-[#343434]"
             >
-              <LogOut size={18} className="shrink-0 text-white" />
-              <span className="text-white">Logout</span>
+              <LogOut size={18} className="shrink-0 text-gray-700 dark:text-[#e6e6e6]" />
+              <span className="font-light text-gray-700 dark:text-[#e6e6e6]">Logout</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -9,7 +9,14 @@ import {
 } from "recharts";
 
 export default function TicketsByStatusChart({ data }) {
-  const COLORS = ["#eab308", "#3b82f6", "#f97316", "#22c55e", "#6b7280", "#a855f7"];
+  const COLORS = [
+    "#eab308",
+    "#3b82f6",
+    "#f97316",
+    "#22c55e",
+    "#6b7280",
+    "#a855f7",
+  ];
   const hasData = data.some((item) => item.count > 0);
 
   if (!hasData) {
@@ -21,14 +28,49 @@ export default function TicketsByStatusChart({ data }) {
   }
 
   return (
-    <div className="w-full flex flex-col items-start">
-      <h2 className="text-lg font-medium mb-2">Tickets by Status</h2>
-      <ResponsiveContainer height={300} width="100%">
-        <BarChart data={data} margin={{ top: 5, right: 5, left: -10, bottom: 5 }}>
-          <XAxis dataKey="status" tick={{ fontSize: 12 }} />
-          <YAxis allowDecimals={false} tick={{ fontSize: 12 }} width={35} />
-          <Tooltip formatter={(value) => [`${value}`, "Tickets"]} />
-          <Bar dataKey="count" radius={[6, 6, 0, 0]}>
+    <div className="w-full flex flex-col gap-4 items-center">
+      <h2 className="font-medium w-full px-2">Status</h2>
+      <ResponsiveContainer height={300} width="80%">
+        <BarChart
+          data={data}
+          margin={{ top: 5, right: 5, left: -10, bottom: 5 }}
+        >
+          <XAxis
+            dataKey="status"
+            tick={{ fontSize: 11, dy: 10 }}
+            tickLine={false}
+            axisLine={false}
+          />
+          <YAxis
+            allowDecimals={false}
+            tick={{ fontSize: 11, dy: -5, dx: -5 }}
+            width={35}
+            tickLine={false}
+            axisLine={false}
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#007a55",
+              border: "none",
+              fontSize: 11,
+              fontWeight: "light",
+              color: "white"
+            }}
+            labelStyle={{
+              color: "white",
+            }}
+            itemStyle={{
+              color: "white",
+            }}
+            formatter={(value) => [`${value}`, "Tickets"]}
+            cursor={false}
+          />
+          <Bar
+            dataKey="count"
+            background={{ fill: "#e6e6e6", radius: [6, 6, 6, 6] }}
+            radius={[6, 6, 6, 6]}
+            barSize={35}
+          >
             {data.map((entry, index) => (
               <Cell key={entry.status} fill={COLORS[index % COLORS.length]} />
             ))}

@@ -88,7 +88,7 @@ export default function Layout() {
         <main className="flex flex-1 overflow-hidden">
           <Sidebar />
 
-          <div ref={mainContentRef} className="flex-1 bg-dim overflow-y-auto p-3">
+          <div ref={mainContentRef} className="flex-1 bg-background overflow-y-auto p-3">
             <Outlet />
           </div>
         </main>

@@ -82,7 +82,7 @@ export default function TicketWorkflowActions({
             </div>
             <Button
               type="button"
-              variant="default"
+              variant="secondary"
               size="xs"
               className="whitespace-nowrap py-4"
               disabled={!effectiveAssignee}
@@ -97,6 +97,7 @@ export default function TicketWorkflowActions({
         return (
           <Button
             type="button"
+            variant="secondary"
             size="xs"
             className="whitespace-nowrap py-4"
             onClick={onStartWork}
@@ -108,6 +109,7 @@ export default function TicketWorkflowActions({
         return (
           <Button
             type="button"
+            variant="secondary"
             size="xs"
             className="whitespace-nowrap py-4"
             onClick={onMarkResolved}
@@ -120,6 +122,7 @@ export default function TicketWorkflowActions({
           <div className="flex gap-2 flex-nowrap">
             <Button
               type="button"
+              variant="secondary"
               size="xs"
               className="whitespace-nowrap py-4"
               onClick={onCloseTicket}
@@ -129,7 +132,7 @@ export default function TicketWorkflowActions({
             <Button
               type="button"
               size="xs"
-              variant="outline"
+              variant="secondary"
               className="whitespace-nowrap py-4"
               onClick={onReopenTicket}
             >

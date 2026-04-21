@@ -134,6 +134,7 @@ export default function TicketsPage() {
             size="sm"
             onClick={handleClearFilters}
             disabled={!hasActiveFilters}
+            className="bg-transparent text-black border-black hover:bg-transparent hover:text-black dark:bg-transparent dark:text-white dark:border-[#e6e6e6] dark:hover:bg-transparent dark:hover:text-white"
           >
             Clear Filters
           </Button>

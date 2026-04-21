@@ -20,8 +20,8 @@ export default function TicketsByPriorityChart({ data }) {
   }
 
   return (
-    <div className="w-full flex flex-col items-start">
-      <h2 className="text-lg font-medium mb-2">Tickets by Priority</h2>
+    <div className="w-full flex flex-col items-start gap-4">
+      <h2 className="text-lg font-medium w-full px-2">Priority</h2>
       <ResponsiveContainer width="100%" height={260}>
         <PieChart>
           <Pie
@@ -38,7 +38,21 @@ export default function TicketsByPriorityChart({ data }) {
               <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-          <Tooltip formatter={(value) => [`${value}`, "Tickets"]} />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#007a55",
+              border: "none",
+              fontSize: 11,
+              fontWeight: "light",
+            }}
+            labelStyle={{
+              color: "white",
+            }}
+            itemStyle={{
+              color: "white",
+            }}
+            formatter={(value) => [`${value}`, "Tickets"]}
+          />
           <Legend />
         </PieChart>
       </ResponsiveContainer>
