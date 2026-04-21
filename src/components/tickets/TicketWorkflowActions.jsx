@@ -4,6 +4,7 @@ export default function TicketWorkflowActions({
   ticket,
   users,
   effectiveAssignee,
+  canManageTickets = true,
   onAssigneeChange,
   onAssign,
   onStartWork,
@@ -23,6 +24,21 @@ export default function TicketWorkflowActions({
   };
 
   const userNames = (users ?? []).map(getUserDisplayName).filter(Boolean);
+
+  if (!canManageTickets) {
+    return (
+      <div className="flex flex-col w-full items-center py-1">
+        <div className="w-full mb-1">
+          <label className="text-[10px] me-2 font-semibold uppercase text-muted-foreground">
+            Ticket Actions
+          </label>
+        </div>
+        <p className="w-full text-[11px] text-muted-foreground">
+          Only admins can change ticket workflow.
+        </p>
+      </div>
+    );
+  }
 
   // const getNextStepHint = () => {
   //   switch (ticket.status) {
@@ -51,9 +67,6 @@ export default function TicketWorkflowActions({
         return (
           <div className="flex min-w-0 items-end gap-2 flex-nowrap">
             <div className="min-w-0 flex-1">
-              <label className="mb-1 block text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                Assign User
-              </label>
               <select
                 className="h-8 w-full rounded-md border border-input bg-background px-2 text-[11px]"
                 value={effectiveAssignee}
@@ -71,38 +84,53 @@ export default function TicketWorkflowActions({
               type="button"
               variant="default"
               size="xs"
-              className="shrink-0 whitespace-nowrap"
+              className="whitespace-nowrap py-4"
               disabled={!effectiveAssignee}
               onClick={onAssign}
             >
-              Assign Ticket
+              Assign User
             </Button>
           </div>
         );
       case "assigned":
       case "reopened":
         return (
-          <Button type="button" size="xs" className="whitespace-nowrap" onClick={onStartWork}>
+          <Button
+            type="button"
+            size="xs"
+            className="whitespace-nowrap py-4"
+            onClick={onStartWork}
+          >
             Start Work
           </Button>
         );
       case "in-progress":
         return (
-          <Button type="button" size="xs" className="whitespace-nowrap" onClick={onMarkResolved}>
+          <Button
+            type="button"
+            size="xs"
+            className="whitespace-nowrap py-4"
+            onClick={onMarkResolved}
+          >
             Mark as Resolved
           </Button>
         );
       case "resolved":
         return (
           <div className="flex gap-2 flex-nowrap">
-            <Button type="button" size="xs" className="whitespace-nowrap" onClick={onCloseTicket}>
+            <Button
+              type="button"
+              size="xs"
+              className="whitespace-nowrap py-4"
+              onClick={onCloseTicket}
+            >
               Close Ticket
             </Button>
             <Button
               type="button"
               size="xs"
               variant="outline"
-              className="whitespace-nowrap"
+              className="whitespace-nowrap py-4"
               onClick={onReopenTicket}
             >
               Reopen Ticket
@@ -119,11 +147,14 @@ export default function TicketWorkflowActions({
   };
 
   return (
-    <div className="flex w-full items-center py-1">
-      <label className="text-[10px] me-2 font-semibold uppercase text-muted-foreground">
-        Ticket Actions
-      </label>
-        <div className="">{renderActions()}</div>
+    <div className="flex flex-col w-full items-center py-1">
+      <div className="w-full mb-1">
+        <label className="text-[10px] me-2 font-semibold uppercase text-muted-foreground">
+          Ticket Actions
+        </label>
+      </div>
+
+      <div className="w-full">{renderActions()}</div>
       {/* <p className="text-xs text-muted-foreground">{getNextStepHint()}</p> */}
     </div>
   );

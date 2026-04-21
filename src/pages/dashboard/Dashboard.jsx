@@ -2,10 +2,12 @@ import useTickets from "../../hooks/useTickets";
 import { useTicketStats } from "../../hooks/useTicketStats";
 import Loader from "../../components/common/Loader";
 // import StatsCards from "../../components/dashboard/StatsCards";
+import { useUsers } from "@/context/UsersContext";
 import ChartsSection from "../../components/dashboard/ChartsSection";
 
 export default function Dashboard() {
   const { data: tickets = [], isPending, error } = useTickets();
+  const { currentUser } = useUsers();
   const stats = useTicketStats(tickets);
 
   if (error) {
@@ -25,7 +27,7 @@ export default function Dashboard() {
       <div className="flex flex-col">
         <span className="text-2xl font-semibold">Dashboard</span>
         <span className="text-base">
-          Welcome back! Here's what is going on with your ticketing so far.
+          Welcome {currentUser?.fullName ?? "User"}! Here's what is going on with your ticketing so far.
         </span>
       </div>
 

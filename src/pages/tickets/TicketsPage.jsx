@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { useDateFilter } from "../../hooks/useDateFilter";
 import useSortTickets from "../../hooks/useSortTickets";
 import { Button } from "@/components/ui/button";
+import { useUsers } from "@/context/UsersContext";
 
 const FILTER_STORAGE_KEY = "tickets:filters";
 
@@ -49,6 +50,8 @@ const getInitialFilters = () => {
 
 export default function TicketsPage() {
   const { tickets, isLoading, users } = useTickets();
+  const { currentUser } = useUsers();
+  const canManageTickets = currentUser?.role === "admin";
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
@@ -154,6 +157,7 @@ export default function TicketsPage() {
           onView={handleView}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          canManageTickets={canManageTickets}
         />
         <PaginationComp
           currentPage={currentPage}
@@ -180,6 +184,7 @@ export default function TicketsPage() {
         onConfirmDelete={handleConfirmDelete}
         onEditDirtyChange={handleEditDirtyChange}
         onEditSubmit={handleSubmit}
+        canManageTickets={canManageTickets}
       />
     </div>
   );

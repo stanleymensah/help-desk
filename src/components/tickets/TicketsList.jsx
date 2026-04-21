@@ -52,6 +52,7 @@ export default function TicketsList({
   onView,
   onEdit,
   onDelete,
+  canManageTickets = true,
 }) {
   if (isPending) {
     return <TicketSkeleton count={5} />;
@@ -155,8 +156,10 @@ export default function TicketsList({
                     className="bg-green-50 hover:bg-green-100 p-2 md:p-1.5 rounded-md text-green-600"
                     onClick={(e) => {
                       e.stopPropagation();
+                      if (!canManageTickets) return;
                       onEdit(ticket);
                     }}
+                    disabled={!canManageTickets}
                   >
                     <Pencil className="size-4 md:size-3.5" />
                   </button>
@@ -164,9 +167,11 @@ export default function TicketsList({
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
+                      if (!canManageTickets) return;
                       onDelete(ticket);
                     }}
                     className="bg-red-50 hover:bg-red-100 p-2 md:p-1.5 rounded-md text-red-600"
+                    disabled={!canManageTickets}
                   >
                     <Trash2 className="size-4 md:size-3.5" />
                   </button>

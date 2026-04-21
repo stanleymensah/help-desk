@@ -18,6 +18,7 @@ export default function TicketModals({
   onConfirmDelete,
   onEditDirtyChange,
   onEditSubmit,
+  canManageTickets = true,
 }) {
   const [deleteConfirmation, setDeleteConfirmation] = useState("");
 
@@ -51,12 +52,12 @@ export default function TicketModals({
 
       {/* Edit Modal */}
       <Modal
-        isOpen={!!editingTicket}
+        isOpen={canManageTickets && !!editingTicket}
         onClose={onRequestCloseEdit}
         title="Edit Ticket"
         size="sm"
       >
-        {editingTicket && (
+        {canManageTickets && editingTicket && (
           <TicketForm
             ticket={editingTicket}
             mode="edit"
@@ -87,12 +88,12 @@ export default function TicketModals({
       </Modal>
 
       <Modal
-        isOpen={!!deletingTicket}
+        isOpen={canManageTickets && !!deletingTicket}
         onClose={handleCancelDeleteModal}
         title="Delete Ticket"
         size="sm"
       >
-        {deletingTicket && (
+        {canManageTickets && deletingTicket && (
           <div className="space-y-4 text-sm">
             <p>
               Are you sure you want to delete{" "}

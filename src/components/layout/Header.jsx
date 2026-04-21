@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { SidebarTrigger } from "../ui/sidebar";
 import { Button } from "../ui/button";
 
-export default function Header({creatingTicket}) {
+export default function Header({ creatingTicket, canCreateTicket }) {
   const handleCreateTicket = () => {
+    if (!canCreateTicket) return;
     creatingTicket?.();
   };
 
@@ -32,6 +33,7 @@ export default function Header({creatingTicket}) {
               variant="secondary"
               size="icon"
               className="sm:hidden"
+              disabled={!canCreateTicket}
             >
               +
             </Button>
@@ -43,6 +45,7 @@ export default function Header({creatingTicket}) {
                 variant="secondary"
                 size="sm"
                 className="hidden sm:inline-flex"
+                disabled={!canCreateTicket}
               >
                 Create Ticket
               </Button>

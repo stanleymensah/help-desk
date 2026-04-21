@@ -1,9 +1,9 @@
 import Modal from "../common/Modal";
 import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useState } from "react";
 import { useTickets } from "@/context/TicketContext";
+import { useUsers } from "@/context/UsersContext";
 import { toast } from "sonner";
 import TicketWorkflowActions from "./TicketWorkflowActions";
 import TicketCommentsSection from "./TicketCommentsSection";
@@ -96,10 +96,11 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
     reopenTicket,
     addComment,
   } = useTickets();
+  const { currentUser } = useUsers();
+  const canManageTickets = currentUser?.role === "admin";
 
   const activeTicket = ticket ? getTicketById(ticket.id) || ticket : null;
   const [selectedAssignee, setSelectedAssignee] = useState("");
-  const [commentAuthor, setCommentAuthor] = useState("");
   const [commentMessage, setCommentMessage] = useState("");
 
   const getUserDisplayName = (user) => {
@@ -113,14 +114,13 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
     );
   };
 
-  const defaultCommentAuthor = getUserDisplayName(users?.[0]);
+  const defaultCommentAuthor = getUserDisplayName(currentUser) || "Unknown User";
 
   const comments = Array.isArray(activeTicket?.comments)
     ? activeTicket.comments
     : [];
   const effectiveAssignee = selectedAssignee || activeTicket?.assignedTo || "";
-  const effectiveCommentAuthor =
-    commentAuthor || activeTicket?.assignedTo || defaultCommentAuthor || "";
+  const effectiveCommentAuthor = defaultCommentAuthor;
 
   const handleCloseDetails = () => {
     setCommentMessage("");
@@ -170,7 +170,7 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
       title={modalTitle}
       size="md"
     >
-      <div className="flex flex-col gap-4 text-[11px]">
+      <div className="flex flex-col gap-2 text-[11px]">
         <div className="rounded-lg border border-border bg-muted/30 p-2 space-y-3">
           <div>
             <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -183,27 +183,17 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
 
           <Separator />
 
-          <div className="grid grid-cols-4 gap-4">
-            <div className="space-y-1 ">
+          <div className="grid grid-cols-4 gap-4 items-start">
+            <div className="flex flex-col gap-2 col-span-2">
               <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Created By
               </label>
-              <div></div>
               <p className="text-[11px] text-foreground">
                 {activeTicket.email || activeTicket.customerEmail}
               </p>
             </div>
-            <div className="space-y-1 ">
+            <div className="flex flex-col gap-1 col-span-1">
               <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-                Assigned To
-              </label>
-              <div></div>
-              <p className="text-[11px] text-foreground">
-                {activeTicket.assignedTo || "Unassigned"}
-              </p>
-            </div>
-            <div className="space-y-1 flex flex-col">
-              <label className="text-[10px] font-semibold uppercase me-1 tracking-wide text-muted-foreground">
                 Status
               </label>
               <div>
@@ -215,8 +205,8 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
                   {activeTicket.status}
                 </Badge>
               </div>
-            </div>{" "}
-            <div className="space-y-1 flex flex-col">
+            </div>
+            <div className="flex flex-col gap-1 col-span-1">
               <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Priority
               </label>
@@ -234,8 +224,17 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
 
           <Separator />
 
-          <div className="grid grid-cols-4 gap-4 text-[11px]">
-            <div className="space-y-1">
+          <div className="grid grid-cols-4 gap-2 text-[11px]">
+            <div className="col-span-1 border-e">
+              <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Assigned To
+              </label>
+              <div></div>
+              <p className="text-[11px] text-foreground">
+                {activeTicket.assignedTo || "Unassigned"}
+              </p>
+            </div>
+            <div className="col-span-1 border-e">
               <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Assigned At
               </label>
@@ -244,7 +243,7 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
               </p>
             </div>
 
-            <div className="space-y-1">
+            <div className="col-span-1 border-e">
               <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Created At
               </label>
@@ -252,7 +251,7 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
                 {formatDateTime(activeTicket.createdAt)}
               </p>
             </div>
-            <div className="space-y-1">
+            <div className="col-span-1">
               <label className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Last Updated
               </label>
@@ -268,6 +267,7 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
             ticket={activeTicket}
             users={users}
             effectiveAssignee={effectiveAssignee}
+            canManageTickets={canManageTickets}
             onAssigneeChange={setSelectedAssignee}
             onAssign={handleAssign}
             onStartWork={() =>
@@ -290,8 +290,9 @@ export default function TicketDetailsModal({ ticket, isOpen, onClose }) {
             commentMessage={commentMessage}
             onCommentMessageChange={setCommentMessage}
             effectiveCommentAuthor={effectiveCommentAuthor}
-            onCommentAuthorChange={setCommentAuthor}
+            onCommentAuthorChange={() => {}}
             onAddComment={handleAddComment}
+            canChooseAuthor={false}
             formatDateTime={formatDateTime}
           />
         </div>

@@ -8,16 +8,20 @@ import TicketForm from "../tickets/TicketForm";
 import useCreateTicket from "../../hooks/useCreateTicket";
 import { SidebarProvider } from "../ui/sidebar";
 import { Button } from "../ui/button";
+import { useUsers } from "@/context/UsersContext";
 
 export default function Layout() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isCreateDirty, setIsCreateDirty] = useState(false);
   const [confirmDiscardCreateOpen, setConfirmDiscardCreateOpen] = useState(false);
   const { mutate: createTicket } = useCreateTicket();
+  const { currentUser } = useUsers();
+  const canManageTickets = currentUser?.role === "admin";
   const navigate = useNavigate();
   const mainContentRef = useRef(null);
 
   const openCreateTicket = () => {
+    if (!canManageTickets) return;
     setIsCreateModalOpen(true);
   };
 
@@ -50,6 +54,11 @@ export default function Layout() {
   };
 
   const handleCreateSubmit = (formData) => {
+    if (!canManageTickets) {
+      toast.error("Only admins can create tickets.");
+      return;
+    }
+
     createTicket(
       {
         ...formData,
@@ -74,7 +83,7 @@ export default function Layout() {
   return (
     <SidebarProvider defaultOpen>
       <div className="w-full h-screen overflow-hidden flex flex-col">
-        <Header creatingTicket={openCreateTicket} />
+        <Header creatingTicket={openCreateTicket} canCreateTicket={canManageTickets} />
 
         <main className="flex flex-1 overflow-hidden">
           <Sidebar />
