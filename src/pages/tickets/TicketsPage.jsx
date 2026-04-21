@@ -115,7 +115,7 @@ export default function TicketsPage() {
 
   return (
     <div className="container flex flex-col gap-3 justify-center items-center">
-      <div className="flex w-full justify-between text-xs items-center lg:w-[1000px]">
+      <div className="flex w-full justify-between text-xs items-center lg:w-250">
         <div className="flex items-center">
           <SearchBar
             value={searchTerm}
@@ -149,7 +149,7 @@ export default function TicketsPage() {
         </div>
       </div>
 
-      <div className="w-full md:max-w-[1000px] md:mx-auto leading-tight">
+      <div className="w-full md:max-w-250 md:mx-auto leading-tight">
         <TicketsList
           tickets={currentItems}
           isPending={isLoading}

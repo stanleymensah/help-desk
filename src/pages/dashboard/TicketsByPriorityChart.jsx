@@ -13,7 +13,7 @@ export default function TicketsByPriorityChart({ data }) {
 
   if (!hasData) {
     return (
-      <div className="min-w-[300px] h-[300px] flex items-center justify-center text-gray-500 text-sm">
+      <div className="min-w-75 h-75 flex items-center justify-center text-gray-500 text-sm">
         No priority data yet.
       </div>
     );

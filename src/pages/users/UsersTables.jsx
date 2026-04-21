@@ -18,19 +18,19 @@ export default function UsersTables() {
         <Table className="table-fixed text-sm md:text-[11px]">
           <TableHeader className="bg-muted">
             <TableRow className="hover:bg-muted">
-              <TableHead className="text-foreground font-semibold px-2 py-1.5 md:py-0.5 w-[100px]">
+              <TableHead className="text-foreground font-semibold px-2 py-1.5 md:py-0.5 w-25">
                 ID
               </TableHead>
-              <TableHead className="text-foreground font-semibold px-2 py-1.5 md:py-0.5 w-[220px] md:w-[500px]">
+              <TableHead className="text-foreground font-semibold px-2 py-1.5 md:py-0.5 w-55 md:w-125">
                 User
               </TableHead>
               <TableHead className="text-foreground font-semibold hidden md:table-cell px-2 py-1.5">
                 Username
               </TableHead>
-              <TableHead className="text-foreground font-semibold text-start w-[80px] md:w-[100px] px-2 py-1.5 md:py-0.5">
+              <TableHead className="text-foreground font-semibold text-start w-20 md:w-25 px-2 py-1.5 md:py-0.5">
                 Role
               </TableHead>
-              <TableHead className="text-foreground font-semibold text-start w-[100px] px-2 py-1.5 md:py-0.5 hidden md:table-cell">
+              <TableHead className="text-foreground font-semibold text-start w-25 px-2 py-1.5 md:py-0.5 hidden md:table-cell">
                 Actions
               </TableHead>
             </TableRow>

@@ -24,7 +24,7 @@ export default function Auth() {
                 onClick={() => switchPage("login")}
                 className={`font-semibold transition-colors ${
                   activeForm === "login"
-                    ? "text-primary border-b-2 border-primary"
+                    ? "text-secondary border-b-2 border-secondary"
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -34,7 +34,7 @@ export default function Auth() {
                 onClick={() => switchPage("signup")}
                 className={`font-semibold transition-colors ${
                   activeForm === "signup"
-                    ? "text-primary border-b-2 border-primary"
+                    ? "text-secondary border-b-2 border-secondary"
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -54,7 +54,7 @@ export default function Auth() {
         </div>
 
         {/* RIGHT SIDE: Pattern */}
-        <div className="w-1/2 bg-primary/5 flex items-center justify-center">
+        <div className="w-1/2 bg-secondary/5 flex items-center justify-center">
           <PatternImg />
         </div>
       </div>
