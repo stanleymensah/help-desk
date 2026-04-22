@@ -4,7 +4,7 @@ export default function Loader({name = "Loading"}) {
     <div>
       <button
         type="button"
-        className="bg-primary text-white flex items-center justify-center px-4 py-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed"
+        className="flex items-center justify-center rounded-md border-none bg-transparent px-4 py-2 text-black dark:text-foreground/70 disabled:cursor-not-allowed disabled:opacity-70"
         disabled
       >
         <svg

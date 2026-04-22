@@ -66,9 +66,12 @@ export default function TicketsPage() {
   );
   const sortedTickets = useSortTickets(dateFiltered, "oldest");
   const hasActiveFilters =
+    searchTerm.trim() !== "" ||
     filterBy.status !== "all" ||
     filterBy.priority !== "all" ||
-    filterBy.assignee !== "all";
+    filterBy.assignee !== "all" ||
+    startDate !== null ||
+    endDate !== null;
 
   const {
     currentPage,
@@ -109,7 +112,9 @@ export default function TicketsPage() {
   }, [filterBy]);
 
   const handleClearFilters = () => {
+    setSearchTerm("");
     setFilterBy(DEFAULT_FILTERS);
+    handleClearDateRange();
     localStorage.removeItem(FILTER_STORAGE_KEY);
   };
 
@@ -129,6 +134,14 @@ export default function TicketsPage() {
             onChange={setFilterBy}
             users={users}
           />
+
+          <DateRangeFilter
+            startDate={startDate}
+            endDate={endDate}
+            onStartChange={setStartDate}
+            onEndChange={setEndDate}
+            onClear={handleClearDateRange}
+          />
           <Button
             variant="outline"
             size="sm"
@@ -138,14 +151,6 @@ export default function TicketsPage() {
           >
             Clear Filters
           </Button>
-
-          <DateRangeFilter
-            startDate={startDate}
-            endDate={endDate}
-            onStartChange={setStartDate}
-            onEndChange={setEndDate}
-            onClear={handleClearDateRange}
-          />
         </div>
       </div>
 

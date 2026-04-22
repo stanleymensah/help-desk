@@ -21,7 +21,7 @@ const NAV_ITEMS = [
   },
   {
     to: "/tickets",
-    label: "All Tickets",
+    label: "Tickets",
     icon: Ticket,
   },
   {

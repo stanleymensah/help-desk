@@ -27,11 +27,15 @@ export default function TicketsByPriorityChart({ data }) {
           <Pie
             data={data}
             cx="50%"
-            cy="50%"
+            cy="70%"
             labelLine={false}
+            startAngle={180}
+            endAngle={0}
             label={({ name, value }) => `${name}: ${value}`}
-            outerRadius={80}
-            innerRadius={45}
+            outerRadius={100}
+            innerRadius={80}
+            cornerRadius="50%"
+            paddingAngle={5}
             dataKey="value"
           >
             {data.map((entry, index) => (

@@ -27,7 +27,7 @@ export default function Modal({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose?.()}>
       <DialogContent
         showCloseButton={false}
-        className={`max-h-[90vh] overflow-y-auto py-2 px-3 text-xs ${sizeClassMap[size] || sizeClassMap.md}`}
+        className={`max-h-[90vh] overflow-y-auto gap-2 px-3 py-2 text-xs ${sizeClassMap[size] || sizeClassMap.md}`}
       >
         <DialogHeader className="flex-row items-center justify-between gap-3">
           <DialogTitle className="text-sm">{title}</DialogTitle>

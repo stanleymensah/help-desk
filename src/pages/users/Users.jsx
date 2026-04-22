@@ -9,7 +9,7 @@ export default function Users() {
     <>
       <div className="container flex flex-col gap-3 items-center h-full">
         <div className="flex w-full justify-between items-center lg:w-250">
-          <h3 className="font-semibold ">Users ( {users.length} )</h3>
+          <h3 className="font-semibold ">Users ({users.length})</h3>
           {/* Add User Here */}
         </div>
 

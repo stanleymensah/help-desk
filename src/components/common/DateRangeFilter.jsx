@@ -21,7 +21,7 @@ export default function DateRangeFilter({ startDate, endDate, onStartChange, onE
         </button>
       </PopoverTrigger>
 
-      <PopoverContent align="end" sideOffset={6} className="w-auto p-4 min-w-[280px]">
+      <PopoverContent align="end" sideOffset={6} className="w-auto p-4 min-w-70">
         <div className="flex justify-between items-center mb-3">
           <span className="text-sm font-semibold text-foreground">Filter by Date Range</span>
           <button

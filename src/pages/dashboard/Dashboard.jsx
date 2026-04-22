@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   if (isPending) {
     return (
-      <div className="w-full flex justify-center items-center">
+      <div className="w-full h-full flex justify-center items-center">
         <Loader name="Loading dashboard" />
       </div>
     );

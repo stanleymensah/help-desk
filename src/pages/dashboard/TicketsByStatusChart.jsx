@@ -6,6 +6,7 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  CartesianGrid
 } from "recharts";
 
 export default function TicketsByStatusChart({ data }) {
@@ -35,6 +36,7 @@ export default function TicketsByStatusChart({ data }) {
           data={data}
           margin={{ top: 5, right: 5, left: -10, bottom: 5 }}
         >
+          <CartesianGrid strokeDasharray="3 3" vertical={false} strokeWidth={0.5} />
           <XAxis
             dataKey="status"
             tick={{ fontSize: 11, dy: 10 }}
