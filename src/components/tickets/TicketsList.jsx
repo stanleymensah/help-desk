@@ -101,7 +101,7 @@ export default function TicketsList({
             <TableHead className="text-foreground font-semibold hidden md:table-cell text-start w-[88px] px-2 py-1.5">
               Date
             </TableHead>
-            <TableHead className="text-foreground font-semibold text-start w-[74px] px-2 py-1.5 md:py-0.5">
+            <TableHead className="text-foreground font-semibold text-start w-18.5 px-2 py-1.5 md:py-0.5">
               Actions
             </TableHead>
           </TableRow>
@@ -117,13 +117,13 @@ export default function TicketsList({
               <TableCell className="font-semibold text-foreground px-2 py-2.5 md:py-2">
                 TIC-{ticket.id}
               </TableCell>
-              <TableCell className="font-medium text-foreground max-w-[100px] truncate px-2 py-2.5 md:py-2">
+              <TableCell className="font-medium text-foreground max-w-25 truncate px-2 py-2.5 md:py-2">
                 {ticket.title}
               </TableCell>
-              <TableCell className="hidden md:table-cell text-muted-foreground max-w-[220px] truncate px-2 py-2">
+              <TableCell className="hidden md:table-cell text-muted-foreground max-w-55 truncate px-2 py-2">
                 {ticket.description}
               </TableCell>
-              <TableCell className="hidden md:table-cell text-foreground max-w-[180px] truncate px-2 py-2">
+              <TableCell className="hidden md:table-cell text-foreground max-w-45 truncate px-2 py-2">
                 {ticket.email}
               </TableCell>
               <TableCell className="hidden md:table-cell text-start px-2 py-2">
@@ -144,7 +144,7 @@ export default function TicketsList({
                   {ticket.status}
                 </Badge>
               </TableCell>
-              <TableCell className="hidden md:table-cell text-center text-foreground max-w-[150px] truncate px-2 py-2">
+              <TableCell className="hidden md:table-cell text-center text-foreground max-w-37.5 truncate px-2 py-2">
                 {ticket.assignedTo || "-"}
               </TableCell>
               <TableCell className="hidden md:table-cell text-start text-muted-foreground px-2 py-2">
