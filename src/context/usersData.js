@@ -6,7 +6,7 @@ export const usersData = [
         email: "admin@helpdesk.com",
         password: "looklook",
         role: "admin",
-        avatar: "https://i.pravatar.cc/300?img=47",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Admin&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1002",
@@ -15,7 +15,7 @@ export const usersData = [
         email: "david.mensah@yahoo.com",
         password: "looklook1",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=12",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=David%20Mensah&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1003",
@@ -24,7 +24,7 @@ export const usersData = [
         email: "chiamaka.eze@hotmail.com",
         password: "123456789",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=32",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Chiamaka%20Eze&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1004",
@@ -33,7 +33,7 @@ export const usersData = [
         email: "kwame.boateng@example.com",
         password: "Kwame#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=68",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Kwame%20Boateng&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1005",
@@ -42,7 +42,7 @@ export const usersData = [
         email: "lina.hassan@example.com",
         password: "Lina#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=5",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Lina%20Hassan&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1006",
@@ -51,7 +51,7 @@ export const usersData = [
         email: "samuel.adeyemi@example.com",
         password: "Sam#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=15",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Samuel%20Adeyemi&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1007",
@@ -60,7 +60,7 @@ export const usersData = [
         email: "grace.okonkwo@example.com",
         password: "Grace#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=22",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Grace%20Okonkwo&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1008",
@@ -69,7 +69,7 @@ export const usersData = [
         email: "john.smith@example.com",
         password: "John#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=33",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=John%20Smith&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1009",
@@ -78,7 +78,7 @@ export const usersData = [
         email: "amara.williams@example.com",
         password: "Amara#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=41",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Amara%20Williams&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1010",
@@ -87,7 +87,7 @@ export const usersData = [
         email: "michael.johnson@example.com",
         password: "Michael#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=19",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Michael%20Johnson&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1011",
@@ -96,7 +96,7 @@ export const usersData = [
         email: "sophia.brown@example.com",
         password: "Sophia#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=26",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Sophia%20Brown&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1012",
@@ -105,7 +105,7 @@ export const usersData = [
         email: "ethan.davis@example.com",
         password: "Ethan#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=8",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Ethan%20Davis&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1013",
@@ -114,7 +114,7 @@ export const usersData = [
         email: "isabella.martinez@example.com",
         password: "Isabella#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=44",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Isabella%20Martinez&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1014",
@@ -123,7 +123,7 @@ export const usersData = [
         email: "daniel.garcia@example.com",
         password: "Daniel#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=29",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Daniel%20Garcia&backgroundColor=transparent&size=512",
     },
     {
         id: "USR-1015",
@@ -132,6 +132,6 @@ export const usersData = [
         email: "natasha.patel@example.com",
         password: "Natasha#2026Help",
         role: "user",
-        avatar: "https://i.pravatar.cc/300?img=37",
+        avatar: "https://api.dicebear.com/9.x/avataaars/png?seed=Natasha%20Patel&backgroundColor=transparent&size=512",
     },
 ];

@@ -83,7 +83,7 @@ export default function TicketsList({
             <TableHead className="text-foreground font-semibold px-2 py-1.5 md:py-0.5 w-[150px]">
               Title
             </TableHead>
-            <TableHead className="text-foreground font-semibold hidden md:table-cell px-2 py-1.5">
+            <TableHead className="text-foreground font-semibold hidden lg:table-cell px-2 py-1.5">
               Description
             </TableHead>
             <TableHead className="text-foreground font-semibold hidden md:table-cell w-[180px] px-2 py-1.5">

@@ -19,7 +19,7 @@ export const UserCard = ({ id, img, name, role }) => {
             <span className="relative inline-flex size-3 rounded-full bg-green-600"></span>
           </span>
         )}
-        <div className="card-details absolute z-10 bottom-1 left-1 w-[95%] flex flex-col items-center bg-secondary/95 dark:bg-slate-900/95 rounded-sm">
+        <div className="card-details absolute z-10 bottom-1 left-1 w-[95%] flex flex-col items-center bg-secondary/95 dark:bg-slate-900/95 rounded-sm py-1">
           <span className="font-medium text-[12px] text-white dark:text-gray-100">
             {name}
           </span>

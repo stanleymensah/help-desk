@@ -13,10 +13,10 @@ export default function Auth() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-5 w-full bg-muted">
-      <div className="flex w-[70rem] max-h-[90vh] bg-white overflow-hidden">
+    <div className="flex items-center justify-center min-h-screen p-5 w-full bg-muted">
+      <div className="flex w-280 max-h-[90vh] bg-white overflow-hidden">
         {/* LEFT SIDE: Content */}
-        <div className="flex flex-col w-1/2 py-8 px-10 overflow-y-auto">
+        <div className="flex flex-col md:w-1/2 py-8 px-10 overflow-y-auto">
           {/* Tab Selection */}
           <div className="border-b border-gray-300 text-sm flex justify-between mb-6">
             <div className="flex gap-5">
@@ -54,7 +54,7 @@ export default function Auth() {
         </div>
 
         {/* RIGHT SIDE: Pattern */}
-        <div className="w-1/2 bg-secondary/5 flex items-center justify-center">
+        <div className="hidden w-1/2 bg-secondary/5 md:flex items-center justify-center">
           <PatternImg />
         </div>
       </div>

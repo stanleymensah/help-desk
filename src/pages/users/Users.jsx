@@ -13,7 +13,7 @@ export default function Users() {
           {/* Add User Here */}
         </div>
 
-        <div className="w-full md:max-w-250 flex items-center justify-center">
+        <div className="w-full md:max-w-250 flex items-center justify-center pb-5">
           <UsersCards />
         </div>
       </div>
